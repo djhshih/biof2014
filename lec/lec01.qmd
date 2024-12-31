@@ -1,0 +1,283 @@
+---
+title: "BIOF2014 - Lecture 1"
+author: "David J. H. Shih"
+format: beamer
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
+```
+
+## Intended learning outcomes
+
+- Describe the motivations for establishing and applying statistical models
+
+
+## Why do we need statistics?
+
+- We want to model the real world
+- Many quantities of interest have uncertainty
+- Deterministic models can lead to unrealistic predictions
+- Stochastic models account for randomness in real-world phenomenons
+
+
+## A world with absolute certainty: Newtonian physics
+
+All variables are measurable to arbitrary precision.
+
+### Newton's laws of motion
+$$
+\begin{aligned}
+F = 0 \; \Rightarrow \; \frac{dv}{dt} &= 0 \\
+\frac{dv}{dt} m &= F \\
+F_{1 \rightarrow 2} &= F_{2 \rightarrow 1}
+\end{aligned}
+$$
+
+
+## A world with uncertainty: quantum mechanics
+
+At the atomic scale, some quantum variables cannot be measured 
+precisely at the same time.
+
+### Heisenberg's Uncertainty Principle
+For uncertainty in momentum $\Delta p$ and uncertainty in position $\Delta x$,
+$$
+\Delta p \, \Delta x \ge \frac{h}{4 \pi}, 
+$$
+where $h$ is Planck's constant.
+
+<!--
+
+## Iterated function application -- Definition
+
+For $n > 1$, let $f_{n+1}(x) = f( f_n(x) )$. Let $f_1(x) = f(x)$.
+
+For example,
+
+$$
+\begin{aligned}
+f_2(x) &= f( f(x) )          \\
+f_3(x) &= f( f( f(x) ) )     \\
+f_4(x) &= f( f( f( f(x)  ) ) \\
+&\ldots
+\end{aligned}
+$$
+
+-->
+
+## A simple deterministic model
+
+Let $x \in (0, 1)$ be a quantity of interest
+(e.g. position of a particle).
+
+Define a function $f$ as
+$$
+f(x) \triangleq r x (1 - x) - x
+$$
+We model the dynamics of $x$ under continuous time $t \ge 0$ by
+$$
+\frac{dx}{dt} = f(x) .
+$$
+---
+
+We simplify the model to discrete time $t \in \{0, 1, 2, \ldots \}$ by
+$$
+\frac{\Delta x}{\Delta t} = f(x) .
+$$
+We can simplify further by setting $\Delta t = 1$, giving
+$$
+x_{t + 1} = g(x_t) \triangleq x_t + f(x_t).
+$$
+
+Also,
+$$
+x_\infty \triangleq \lim_{t \rightarrow \infty} x_t
+$$
+
+
+## Simulation under deterministic model
+
+```{r}
+library(ggplot2)
+
+# x \in (0, 1)
+logistic_map <- function(x, r) {
+  r * x * (1 - x)
+}
+
+trace_plot <- function(g, x0, n=100) {
+  xs <- numeric(n);
+  xs[1] <- x0;
+  for (i in 2:n) {
+    xs[i] <- g(xs[i-1]);
+  }
+  qplot(1:n, xs, geom="line") + theme_classic() +
+    xlab("t") + ylab(expression(x[t])) + ylim(0, 1)
+}
+```
+
+---
+
+```{r, fig.width=6, fig.height=1.5}
+g <- function(x) logistic_map(x, r=1.0);
+trace_plot(g, x0=0.3)
+```
+
+```{r, fig.width=6, fig.height=1.5}
+trace_plot(g, x0=0.6)
+```
+
+---
+
+```{r, fig.width=6, fig.height=1.5}
+g <- function(x) logistic_map(x, r=2.0);
+trace_plot(g, x0=0.3)
+```
+
+```{r, fig.width=6, fig.height=1.5}
+trace_plot(g, x0=0.6)
+```
+
+---
+
+```{r, fig.width=6, fig.height=1.5}
+g <- function(x) logistic_map(x, r=3.0);
+trace_plot(g, x0=0.3)
+```
+
+```{r, fig.width=6, fig.height=1.5}
+trace_plot(g, x0=0.6)
+```
+
+---
+
+```{r, fig.width=6, fig.height=1.5}
+g <- function(x) logistic_map(x, r=4.0);
+trace_plot(g, x0=0.3)
+```
+
+```{r, fig.width=6, fig.height=1.5}
+trace_plot(g, x0=0.6)
+```
+
+---
+
+```{r, echo=TRUE}
+iterate <- function(g, x0, n=100) {
+  x <- x0;
+  for (i in 1:n) {
+    x <- g(x);
+  }
+  x
+}
+
+simulate <- function(g, x0) {
+  data.frame(
+    x.0 = x0,
+    x.inf = vapply(x0,
+      function(x0) iterate(g, x0), 0
+    )
+  )
+}
+
+```
+
+---
+
+```{r, echo=TRUE}
+predict_plot <- function(g, x0, x.inf) {
+  d <- simulate(g, x0);
+  qplot(d$x.0, d$x.inf, geom="point") + 
+    theme_classic() +
+    xlab(expression(x[0])) +
+    ylab(expression(x[infinity])) +
+    xlim(0, 1) + ylim(0, 1) + coord_fixed()
+}
+
+x0 <- seq(0.05, 0.95, by=0.05);
+```
+
+---
+
+```{r, fig.width=3, fig.height=3, out.width="60%"}
+g <- function(x) logistic_map(x, r=2.0);
+predict_plot(g, x0)
+```
+
+---
+
+```{r, fig.width=3, fig.height=3, out.width="60%"}
+g <- function(x) logistic_map(x, r=4.0);
+predict_plot(g, x0)
+```
+
+## Chaos
+
+Depending on setting of the parameters, dynamical systems can converge or
+exhibit
+
+- periodic behaviour
+- *chaotic* behaviour
+
+In the field of differential equations, periodic and chaotic systems 
+are *pathological*.
+
+
+## Statistics
+
+Study of uncertainty
+
+- establish statistical models
+- estimate parameters of the models
+- quantify uncertainty in parameter estimates
+- predict new quantities with uncertainty
+
+
+## Equations
+
+### Deterministic
+
+$$
+y = m x + b ,
+$$
+where $x$ and $y$ are variables; $m$ and $b$ are constants.
+
+\bigskip
+
+### Probabilistic
+
+$$
+p \left(y \mid \mu, \tau \right) =
+ (2 \pi)^{-\frac{1}{2}} \tau^{-\frac{1}{2}} \,
+ \exp \left( -\frac{1}{2} \tau^{-1} (y - \mu)^2 \right)
+$$
+where $y$ is a *random* variable; $\mu$ and $\tau$ are parameters.
+
+
+## Atomic models
+
+### Bohr model
+
+Electrons travel in different *circular* orbitals around a nucleus.
+
+\bigskip
+
+### Quantum mechanical model
+
+Electron are distributed in different *cloud* orbitals around a nucleus.
+
+
+## Summary
+
+Newton physics: equations of particles  
+Quantum mechanics: equations of wavefunctions  
+
+Algebra: equations of variables  
+Statistics: equations of probability distributions  
+
+\bigskip
+
+### Intended learning outcomes
+
+- Describe the motivations for establishing and applying statistical models
