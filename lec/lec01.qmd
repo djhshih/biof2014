@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 - Describe the motivations for establishing and applying statistical models
 
 
-## Why do we need statistics?
+## How is statistical modeling useful?
 
 - We want to model the real world
 - Many quantities of interest have uncertainty
