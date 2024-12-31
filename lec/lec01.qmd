@@ -106,13 +106,13 @@ logistic_map <- function(x, r) {
   r * x * (1 - x)
 }
 
-trace_plot <- function(g, x0, n=100) {
-  xs <- numeric(n);
+trace_plot <- function(g, x0, T=100) {
+  xs <- numeric(T);
   xs[1] <- x0;
-  for (i in 2:n) {
+  for (i in 2:T) {
     xs[i] <- g(xs[i-1]);
   }
-  qplot(1:n, xs, geom="line") + theme_classic() +
+  qplot(1:T, xs, geom="line") + theme_classic() +
     xlab("t") + ylab(expression(x[t])) + ylim(0, 1)
 }
 ```
@@ -164,9 +164,9 @@ trace_plot(g, x0=0.6)
 ---
 
 ```{r, echo=TRUE}
-iterate <- function(g, x0, n=100) {
+iterate <- function(g, x0, T=100) {
   x <- x0;
-  for (i in 1:n) {
+  for (i in 1:T) {
     x <- g(x);
   }
   x
@@ -186,7 +186,7 @@ simulate <- function(g, x0) {
 ---
 
 ```{r, echo=TRUE}
-predict_plot <- function(g, x0, x.inf) {
+predict_plot <- function(g, x0) {
   d <- simulate(g, x0);
   qplot(d$x.0, d$x.inf, geom="point") + 
     theme_classic() +
@@ -195,7 +195,8 @@ predict_plot <- function(g, x0, x.inf) {
     xlim(0, 1) + ylim(0, 1) + coord_fixed()
 }
 
-x0 <- seq(0.05, 0.95, by=0.05);
+step <- 0.02;
+x0 <- seq(0 + step, 1 - step, by=step);
 ```
 
 ---
@@ -222,6 +223,21 @@ exhibit
 
 In the field of differential equations, periodic and chaotic systems 
 are *pathological*.
+
+
+## A simple stochastic model
+
+
+```{r, fig.width=6, fig.height=1.5, out.width="80%"}
+set.seed(1337); N <- 1000;
+g <- function(x) logistic_map(x, r=4.0);
+x.0 <- rbeta(N, 20, 10); x.inf <- iterate(g, x.0);
+qplot(x.0, ylab="count") + theme_classic()
+```
+
+```{r, fig.width=6, fig.height=1.5, out.width="80%"}
+qplot(x.inf, ylab="count") + theme_classic()
+```
 
 
 ## Statistics

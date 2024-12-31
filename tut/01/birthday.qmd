@@ -1,0 +1,84 @@
+---
+title: "Birthday Problem"
+author: "BIOF2014"
+format: pdf
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, fig.align="center", warning=FALSE);
+```
+
+## Problem
+
+What is the probability that at least two people in this classroom share
+the same birthday?
+
+## Model
+
+### Assumptions
+
+- 365 days in a year
+- Every birthday is equally likely
+
+### Variables
+
+Let $N$ be the number of people in this class.  
+Let $x$ be the number of people with the same birthday.
+
+### Task
+
+1. Derive a mathematical equation for $P( x \ge 2 )$.
+2. Implement this equation and compute $P( x \ge 2 )$.
+
+
+## Hint
+
+$$
+P( x \ge 2 ) \; = \; P( x > 1 ) \; = \; 1 - P(x = 1) .
+$$
+
+\pagebreak
+
+## Simulation
+
+```{r}
+set.seed(1234);
+
+# Simulate birthdays and return the number of people who share the same birthday
+# N  number of people
+# J  number of possible birthdays
+simulate <- function(N, J) {
+  birthdays <- sample.int(J, N, replace=TRUE);
+  counts <- table(birthdays);
+  max(counts)
+}
+
+N <- 30;
+J <- 365;
+S <- 1000;  # number of simulation rounds
+x <- vapply(1:S, function(s) simulate(N, J), 0);
+event <- as.integer(x > 1);
+estimate <- mean(event);
+se <- sd(event) / sqrt(S);
+z <- qnorm(1 - 0.05 / 2);
+```
+
+estimate: `r estimate`  
+standard error: `r se`  
+95% confidence interval: (`r estimate - z * se`, `r estimate + z * se`)  
+
+```{r, echo=FALSE}
+p1 <- 1;
+for (n in 0:(N-1)) {
+  p1 <- p1 * (J - n) / J;
+}
+```
+
+ground truth: `r 1 - p1`
+
+```{r, fig.width=2, fig.height=2, out.width="25%"}
+library(ggplot2)
+ggplot(data.frame(x=x), aes(x)) + theme_classic() +
+  geom_histogram(binwidth=1) + ylab("count") + ylim(0, S)
+```
+
