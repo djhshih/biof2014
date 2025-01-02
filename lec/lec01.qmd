@@ -284,6 +284,22 @@ Electrons travel in different *circular* orbitals around a nucleus.
 Electron are distributed in different *cloud* orbitals around a nucleus.
 
 
+## Applications of statistical models
+
+- Demography
+- Gambling
+- Quantum mechanics
+- Biology
+- Epidemiology
+- Medicine
+- Psychology
+- Genetics
+- Machine learning
+- Data science
+- Bioinformatics
+- ...
+
+
 ## Summary
 
 Newton physics: equations of particles  
