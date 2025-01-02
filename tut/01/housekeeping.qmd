@@ -1,0 +1,37 @@
+---
+title: "Housekeeping"
+author: "BIOF2014"
+format: beamer
+---
+
+## Schedule
+
+Tuesdays & Thursdays 4:30 pm - 6:20 pm
+
+Locations: MB217 or CPD-3.41
+
+
+## Text books
+
+Statistical Inference for Everyone. Brian Blais. 2014.
+https://open.umn.edu/opentextbooks/formats/619
+
+Statistical Inference. George Casella, Roger L. Berger. 2002.
+
+
+## Assessments
+
+15 quizzes (10%)  
+8 assignments (60%)  
+1 exam (30%)  
+
+One double-sided A4 sheet of hand-written notes is permitted during the exam.
+
+
+## Comparison
+
+STAT2601: Probability theory  
+Extensive theory, derivation, and calculation
+
+BIOF2014: Bayesian statistical modeling and inference  
+Extensive theory, derivation, and programming
