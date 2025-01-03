@@ -1,0 +1,106 @@
+---
+title: "Random variable"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+          \newcommand{\mat}[1]{\mathbf{#1}}
+          \renewcommand{\vec}[1]{\mathbold{#1}}
+classoption: t  
+---
+
+## Event
+
+Given a sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$,
+an event $\mathcal{E}$ is a subset of the sample space $\mathcal{S}$: 
+$\mathcal{E} \subseteq \mathcal{S}$.
+
+$E$ occurs if any $e_j \in \mathcal{E}$ is observed.
+
+Given a probability function $P$,
+$$
+\begin{aligned}
+P\left(\mathcal{E} \right)
+\; &= \; P\left( \bigcup_j^\infty e_j \right) \quad (\text{definition}) \\
+\; &= \; \sum_j^\infty P\left( e_j \right) \quad (\sigma\text{-additivity})
+\end{aligned}
+$$
+
+## Event
+
+Further, if $P\left(s_i\right) = P\left(s_j\right)$ 
+for all $s_i, s_j \in \mathcal{S}$, then
+$$
+P\left(\mathcal{E}\right) = \frac{|\mathcal{E}|}{|\mathcal{S}|} ,
+$$
+where $|\mathcal{A}|$ is the number of elements in a set $\mathcal{A}$.
+
+
+## Example
+
+Trial: Toss a coin 2 times.
+
+Define event $\mathcal{E}$ as the occurrence of one head:
+$$
+\mathcal{E} = \{ HT, TH \}
+$$
+Derive $P\left( \mathcal{E} \right)$.
+
+
+## Random variable
+
+### Definition
+Given a sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$ and 
+a probability function $P$,
+a **random variable** $X$ is a function that maps from $\mathcal{S}$ into 
+real numbers with range $\mathcal{X} = \{x_1, \ldots, x_N\}$.
+
+
+## Random variable
+
+Each realization $x_i \in \mathcal{X}$ corresponds to an event 
+$\mathcal{E} \subseteq \mathcal{S}$
+such that
+$$
+P_X \left( X = x_i \right) \; = \; P \left( \mathcal{E} \right),
+$$
+where $\mathcal{E} = \{ s_j \in S : X(s_j) = x_i \}$ and 
+$P_X$ is the *induced* probability function on $\mathcal{X}$.
+
+\bigskip
+
+Remark: We often abbreviate $P_X\left(X = x_i\right)$ as 
+$P_X\left(x_i\right)$ or $P\left(x_i\right)$.
+
+
+## Example
+
+Trial: Toss a coin 2 times.
+
+Define random variable $X$ as the number of heads.
+
+What event does each possible value of $X$ correspond to?
+
+| $x_i$ | $\{ s_j \in S : X(s_j) = x_i \}$ |
+|-------|----------------------------------|
+|       |                                  |
+|       |                                  |
+|       |                                  |
+|       |                                  |
+|       |                                  |
+|       |                                  |
+
+: {tbl-colwidths="[30,60]"}
+
+
