@@ -25,7 +25,8 @@ The bioinformatics curriculum needed a new statistics course, and I could
 have just declined to teach this course.
 
 Statistical modelling is *very* useful in bioinformatics, but 
-many bioinformaticists don't have a solid foundation in statistics.
+many bioinformaticists don't have a solid foundation in statistics and
+statistics can take a long time to learn.
 
 My goal: Provide a solid foundation for you to develop and use statistical 
 models effectively.
