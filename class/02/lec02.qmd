@@ -59,7 +59,7 @@ where $|\mathcal{A}|$ is the number of elements in a set $\mathcal{A}$.
 
 ## Example
 
-Trial: Toss a coin 2 times.
+Sequence: Toss a coin 2 times.
 
 Define event $\mathcal{E}$ as the occurrence of one head:
 $$
@@ -116,7 +116,7 @@ $P_X\left(x_i\right)$ or $P\left(x_i\right)$.
 
 ## Example 1
 
-Trial: Toss a coin 1 time.
+Sequence: Toss a coin 1 time.
 
 Define random variable $X$ as the number of heads.
 
@@ -136,7 +136,7 @@ What event does each possible value of $X$ correspond to?
 
 ## Example 2
 
-Trial: Toss a coin 2 times.
+Sequence: Toss a coin 2 times.
 
 Define random variable $X$ as the number of heads.
 
@@ -215,7 +215,7 @@ $$
 
 ## Example
 
-Trial: Toss a fair coin 3 independent times.
+Sequence: Toss a fair coin 3 independent times.
 
 Define random variable $X$ as the number of heads.
 
