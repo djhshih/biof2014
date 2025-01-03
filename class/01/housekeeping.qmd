@@ -11,14 +11,32 @@ Tuesdays & Thursdays 4:30 pm - 6:20 pm
 Locations: MB217 or CPD-3.41
 
 
+## Motivations
+
+I have had little formal training in math at the university level
+(1 year calculus + 0.5 year linear algebra) and no statistics.
+
+In graduate school, I wanted to take statistics but the course instructor did
+not grant permission.
+
+Learning mathematical statistics by yourself is very difficult.
+
+The bioinformatics curriculum needed a new statistics course, and I could 
+have just declined to teach this course.
+
+Statistical modelling is *very* useful in bioinformatics, but 
+many bioinformaticists don't have a solid foundation in statistics.
+
+My goal: Provide a solid foundation for you to develop and use statistical 
+models effectively.
+
+
 ## Comparison
 
 |  course  | theory  | calculation | derivation | programming |
 |----------|-----------|-----------|-----------|-----------|
 | STAT2601 | extensive | extensive | extensive | none      |
 | BIOF2014 | extensive | minimal   | extensive | extensive |
-
-Objective: Prepare students for future studies in statistics.
 
 
 ## Text books
@@ -51,7 +69,6 @@ Lecturers' jobs are to teach.
 Professors' jobs are to win grants and produce research outputs.
 
 *No one* wants to do any marking.  
-We get 0 credit for doing marking.  
 
 \bigskip
 
