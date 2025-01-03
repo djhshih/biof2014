@@ -235,46 +235,77 @@ Calculate $f_X(x_i) = P_X\left(X = x_i\right)$ for all $x_i \in X$.
 : {tbl-colwidths="[15,60,15]"}
 
 
-## Probability mass function for continuous variable?
+## $f_X(x)$ for continuous random variable?
 
 For a continuous random variable $X$, we might try to define
 $$
 f_X(x) \; = \; P_X\left( X = x \right) .
 $$
 
-However, $P_X(X = x_i) \; = \; 0$ for all $x_i \in \mathcal{X}$ here.
+However, $P_X(X = x) \; = \; 0$ for all $x \in \mathcal{X}$ here.
 
 \bigskip
 
+So, we need to define $f_X(x)$ differently for continuous random variables.
+
+
+## $P_X(x = x)$ for continuous random variable
+
+For a continuous RV $X$, $P_X(X = x) \; = \; 0$ 
+for all $x \in \mathcal{X}$.
+
+
+## $P_X(x = x)$ for continuous random variable
+
+For a continuous RV $X$, $P_X(X = x) \; = \; 0$ 
+for all $x \in \mathcal{X}$.
+
+### Proof
+
 Recall from set theory that
 $$
-A \subset B \; \Rightarrow \; P(A) \le P(B)  \quad (1)
+\begin{aligned}
+(1) &\quad A \subset B \; \Rightarrow \; P(A) \le P(B)  \\
+(2) &\quad P(A \cap B) = P(B) - P(B \cap A^c)
+\end{aligned}
 $$
+
+For any $\epsilon \ge 0$, we have
 $$
-P(A \cap B) = P(B) - P(B \cap A^c)  \quad (2)
+\{r \in \mathcal{X} : r = x\} \subset \{r \in \mathcal{X} : x - \epsilon < r \le x \} .
+$$
+As short-hand, we will write
+$$
+\{ X = x \} \; \subset \; \{ x - \epsilon < X \le x \} .
+$$
+
+By (1), 
+$$
+P\left( X = x \right) \; \le \; P \left(x - \epsilon < X \le x \right) .
 $$
 
 ---
 
-\bigskip
-
-For a continuous variable $X$, $P_X(X = x_i) \; = \; 0$ 
-for all $x_i \in \mathcal{X}$.
-
-### Proof
-
-By (1), since $\{X = x\} \subset \{x - \epsilon < X \le x \}$ 
-for any $\epsilon > 0,$
+By definition,
 $$
 \begin{aligned}
-P\left( X = x \right) \; &\le \; P \left(x - \epsilon < X \le x \right) \\
-\; &= \; P \left( \{ r \in \mathcal{X}: x - \epsilon < r \} \, \cap \, \{ r \in \mathcal{X} : r \le x \} \right) \\
-\; &= \; P \left( \{ r \in \mathcal{X} : r \le x \} \right)  \\
-& \quad - P \left( \{ r \in \mathcal{X} : r \le x \} \, \cap \, \{ r \in \mathcal{X} : r \le x - e \}  \right) \\
-\; &= \; P \left( \{ r \in \mathcal{X} : r \le x \} \right) 
- - P \left( \{ r \in \mathcal{X} : r \le x - e \}  \right) \\
-\; &= \; P \left( X \le x \right) - P \left( X \le x - \epsilon \right) \\
-\; &= \; F_X (x) - F_X(x - \epsilon)
+P \left(x - \epsilon < X \le x \right) 
+ \; &= \; P \left( \{ r \in \mathcal{X}: x - \epsilon < r \}
+  \, \cap \, \{ r \in \mathcal{X} : r \le x \} \right) \\
+ &= P \left( \{ x - \epsilon < X \} \, \cap \, \{ X \le x \} \right)
+\end{aligned}
+$$
+
+By (2),
+$$
+\begin{aligned}
+&P \left( \{ x - \epsilon < X \} \, \cap \, \{ X \le x \} \right) \\
+ \; &= \; P \left( \{ X \le x \} \right)
+  - P \left( \{ X \le x \} \, \cap \, \{ X \le x - \epsilon \}  \right) \\
+ \; &= \; P \left( \{ X \le x \} \right) 
+  - P \left( \{ X \le x - \epsilon \}  \right) \\
+ \; &= \; P \left( X \le x \right) - P \left( X \le x - \epsilon \right) \\
+ \; &= \; F_X (x) - F_X(x - \epsilon)
 \end{aligned}
 $$
 
@@ -283,6 +314,45 @@ $$
 0 \le P(X = x) \; \le \; \lim_{\epsilon \rightarrow 0+} F_X(x) - F_X(x - \epsilon) 
   \; = \; 0 .  \quad \blacksquare
 $$
+
+
+## Probability density function
+
+### Definition
+
+The probability density function (pdf) of a continuous random variable is 
+a function $f_X(x)$ that satisfies
+$$
+F_X(x) = \int_{-\infty}^x f_X(t) \, dt \quad \text{ for all } x .
+$$
+
+Further, if $f_X(x)$ is continuous, by the Fundamental Theorem of Calculus,
+$$
+\frac{d}{dx} F_X(x) = f_X(x) .
+$$
+
+
+## Notation for sampling
+
+If a random variable $X$ has a cdf $F_X(x)$, we write
+$$
+X \sim F_X(x) ,
+$$
+where the $\sim$ (tilde) symbol means "is distributed according to".
+
+The right-hand-side of the $\sim$ operator can be anything that help defines
+a probability distribution.
+
+For instance, if $X$ has a pmf or pdf $f_X(x)$, we can also write
+$$
+X \sim f_X(x) .
+$$
+
+If randomv variables $X$ and $Y$ have the same distribution, we write
+$$
+X \sim Y .
+$$
+
 
 
 ## Summary
