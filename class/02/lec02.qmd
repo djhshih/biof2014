@@ -1,5 +1,5 @@
 ---
-title: "Random variable"
+title: "Random variables"
 author: "David J. H. Shih"
 format:
   beamer:
@@ -20,19 +20,29 @@ format:
 classoption: t  
 ---
 
+## Intended learning outcomes {.c}
+
+- Recognize and define events and random variables
+- Implement code to sample values for a random variable
+
+
 ## Event
+
+### Definition
 
 Given a sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$,
 an event $\mathcal{E}$ is a subset of the sample space $\mathcal{S}$: 
 $\mathcal{E} \subseteq \mathcal{S}$.
 
-$E$ occurs if any $e_j \in \mathcal{E}$ is observed.
+\bigskip
+
+$\mathcal{E}$ occurs if any $e_j \in \mathcal{E}$ is observed.
 
 Given a probability function $P$,
 $$
 \begin{aligned}
 P\left(\mathcal{E} \right)
-\; &= \; P\left( \bigcup_j^\infty e_j \right) \quad (\text{definition}) \\
+\; &= \; P\left( \bigcup_j^\infty e_j \right) \quad (\text{expansion}) \\
 \; &= \; \sum_j^\infty P\left( e_j \right) \quad (\sigma\text{-additivity})
 \end{aligned}
 $$
@@ -58,24 +68,44 @@ $$
 Derive $P\left( \mathcal{E} \right)$.
 
 
+## Randomness
+
+Apparent or actual lack of definite pattern in information.
+
+Compatible with a deterministic or stochastic process.
+
+
+### Examples
+
+- flipping a coin
+- drawing cards from a shuffled deck
+- atmospheric noise ([random.org][1])
+- somatic mutations
+
+[1]: www.random.org
+
+
 ## Random variable
 
 ### Definition
+
 Given a sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$ and 
 a probability function $P$,
-a **random variable** $X$ is a function that maps from $\mathcal{S}$ into 
-real numbers with range $\mathcal{X} = \{x_1, \ldots, x_N\}$.
+a **random variable** $X$ is a function that maps from $\mathcal{S}$ onto 
+real numbers with domain $\mathcal{X} = \{x_1, \ldots, x_N\}$.
+
+### Illustration
 
 
 ## Random variable
 
 Each realization $x_i \in \mathcal{X}$ corresponds to an event 
-$\mathcal{E} \subseteq \mathcal{S}$
+$\mathcal{E}_i \subseteq \mathcal{S}$
 such that
 $$
-P_X \left( X = x_i \right) \; = \; P \left( \mathcal{E} \right),
+P_X \left( X = x_i \right) \; = \; P \left( \mathcal{E_i} \right),
 $$
-where $\mathcal{E} = \{ s_j \in S : X(s_j) = x_i \}$ and 
+where $\mathcal{E_i} = \{ s_j \in S : X(s_j) = x_i \}$ and 
 $P_X$ is the *induced* probability function on $\mathcal{X}$.
 
 \bigskip
@@ -84,7 +114,27 @@ Remark: We often abbreviate $P_X\left(X = x_i\right)$ as
 $P_X\left(x_i\right)$ or $P\left(x_i\right)$.
 
 
-## Example
+## Example 1
+
+Trial: Toss a coin 1 time.
+
+Define random variable $X$ as the number of heads.
+
+What event does each possible value of $X$ correspond to?
+
+| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$ |
+|-------|----------------------------------------------------|
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+
+: {tbl-colwidths="[30,60]"}
+
+
+## Example 2
 
 Trial: Toss a coin 2 times.
 
@@ -92,15 +142,156 @@ Define random variable $X$ as the number of heads.
 
 What event does each possible value of $X$ correspond to?
 
-| $x_i$ | $\{ s_j \in S : X(s_j) = x_i \}$ |
-|-------|----------------------------------|
-|       |                                  |
-|       |                                  |
-|       |                                  |
-|       |                                  |
-|       |                                  |
-|       |                                  |
+| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$ |
+|-------|----------------------------------------------------|
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
+|       |                                                    |
 
 : {tbl-colwidths="[30,60]"}
 
 
+## Random variable
+
+Previously, we assumed that sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$,   
+i.e. $\mathcal{S}$ is (countable and) finite.
+
+We also assumed that $\mathcal{X} = \{x_1, \ldots, x_N\}$ is finite.
+
+If $\mathcal{X}$ is uncountable, we can define the induced probability
+function for some set $\mathcal{A} \subset \mathcal{X}$ as
+$$
+P_X \left( X \in \mathcal{A} \right)
+\; = \; P \left( \{s \in \mathcal{S} : X(s) \in \mathcal{A} \} \right) .
+$$
+
+## Cumulative distribution function
+
+### Definition
+
+The cumulative distribution function (cdf) of a random variable $X$ is defined
+by
+$$
+F_X(x) \triangleq P_X(X \le x), \quad \text{ for all } x.
+$$
+
+### Theorem
+
+A function $F(x)$ is a cdf if and only if
+
+$$
+\begin{aligned}
+&\text{a.} \; \lim_{x \rightarrow - \infty} \, F(x) = 0 \quad \text{and} \quad
+   \lim_{x \rightarrow \infty} \, F(x) = 1 . \\
+&\text{b.} \; F(x_1) \le F(x_2) \; \text{ for all } \; x_1 \le x_2  
+\quad  (\text{non-decreasing}) . \\
+&\text{c.} \; \lim_{x \rightarrow x_0^+} F(x) = F(x_0) \quad (\text{right-continuous}) .
+\end{aligned}
+$$
+
+## Examples of cdf
+
+### continuous function
+
+\vspace{80pt}
+
+### step function
+
+\vspace{80pt}
+
+
+## Probability mass function
+
+### Definition
+
+The probability mass function (pmf) of a discrete random variable $X$ is given
+by
+$$
+f_X(x) \; \triangleq \; P_X\left( X = x \right) \quad \text{ for all } x.
+$$
+
+## Example
+
+Trial: Toss a fair coin 3 independent times.
+
+Define random variable $X$ as the number of heads.
+
+Calculate $f_X(x_i) = P_X\left(X = x_i\right)$ for all $x_i \in X$.
+
+| $x_i$ | $\mathcal{E}_i$  | $f_X(x_i)$                      |
+|-------|------------------|---------------------------------|
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+|       |                  |                                 |
+
+: {tbl-colwidths="[15,60,15]"}
+
+
+## Probability mass function for continuous variable?
+
+For a continuous random variable $X$, we might try to define
+$$
+f_X(x) \; = \; P_X\left( X = x \right) .
+$$
+
+However, $P_X(X = x_i) \; = \; 0$ for all $x_i \in \mathcal{X}$ here.
+
+\bigskip
+
+Recall from set theory that
+$$
+A \subset B \; \Rightarrow \; P(A) \le P(B)  \quad (1)
+$$
+$$
+P(A \cap B) = P(B) - P(B \cap A^c)  \quad (2)
+$$
+
+---
+
+\bigskip
+
+For a continuous variable $X$, $P_X(X = x_i) \; = \; 0$ 
+for all $x_i \in \mathcal{X}$.
+
+### Proof
+
+By (1), since $\{X = x\} \subset \{x - \epsilon < X \le x \}$ 
+for any $\epsilon > 0,$
+$$
+\begin{aligned}
+P\left( X = x \right) \; &\le \; P \left(x - \epsilon < X \le x \right) \\
+\; &= \; P \left( \{ r \in \mathcal{X}: x - \epsilon < r \} \, \cap \, \{ r \in \mathcal{X} : r \le x \} \right) \\
+\; &= \; P \left( \{ r \in \mathcal{X} : r \le x \} \right)  \\
+& \quad - P \left( \{ r \in \mathcal{X} : r \le x \} \, \cap \, \{ r \in \mathcal{X} : r \le x - e \}  \right) \\
+\; &= \; P \left( \{ r \in \mathcal{X} : r \le x \} \right) 
+ - P \left( \{ r \in \mathcal{X} : r \le x - e \}  \right) \\
+\; &= \; P \left( X \le x \right) - P \left( X \le x - \epsilon \right) \\
+\; &= \; F_X (x) - F_X(x - \epsilon)
+\end{aligned}
+$$
+
+Therefore,
+$$
+0 \le P(X = x) \; \le \; \lim_{\epsilon \rightarrow 0+} F_X(x) - F_X(x - \epsilon) 
+  \; = \; 0 .  \quad \blacksquare
+$$
+
+
+## Summary
+
+Casella & Berger 2002, sections 1.4, 1.5, 1.6
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and define events and random variables
+- Implement code to sample values for a random variable
