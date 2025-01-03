@@ -104,3 +104,12 @@ as a second opinion.
 
 ChatGPT does poorly (40-70%) on my questions for other courses.
 
+
+## Notations
+
+Learning and using the correct mathematical notation are critical!
+
+Notations are invented to make expressions less ambiguous and more concise!
+
+In the bioinformatics field, method descriptions are atrocious because few 
+people learned the proper notations, which make communications very difficult.
