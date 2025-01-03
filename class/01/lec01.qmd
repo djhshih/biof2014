@@ -300,13 +300,20 @@ Electron are distributed in different *cloud* orbitals around a nucleus.
 - ...
 
 
-## Summary
+## Analogy
 
 Newton physics: equations of particles  
 Quantum mechanics: equations of wavefunctions  
 
 Algebra: equations of variables  
 Statistics: equations of probability distributions  
+
+
+## Summary
+
+Albert Einstein: "God does not play dice with the universe."
+
+Niels Bohr: "Stop telling God what to do."
 
 \bigskip
 
