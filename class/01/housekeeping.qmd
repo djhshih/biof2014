@@ -11,6 +11,16 @@ Tuesdays & Thursdays 4:30 pm - 6:20 pm
 Locations: MB217 or CPD-3.41
 
 
+## Comparison
+
+|  course  | theory  | calculation | derivation | programming |
+|----------|-----------|-----------|-----------|-----------|
+| STAT2601 | extensive | extensive | extensive | none      |
+| BIOF2014 | extensive | minimal   | extensive | extensive |
+
+Objective: Prepare students for future studies in statistics.
+
+
 ## Text books
 
 Statistical Inference for Everyone. Brian Blais. 2014.
@@ -21,17 +31,76 @@ Statistical Inference. George Casella, Roger L. Berger. 2002.
 
 ## Assessments
 
-15 quizzes (10%)  
-8 assignments (60%)  
-1 exam (30%)  
+| type          | weight | derivation | programming |
+|---------------|--------|------------|-------------|
+| 15 quizzes    |  10%   |     Y      |             |
+| 8 assignments |  60%   |     Y      |      Y      |
+| 1 exam        |  30%   |     Y      |             |
 
-One double-sided A4 sheet of hand-written notes is permitted during the exam.
+Quizzes are your opportunity to practice for the exam.
+
+You will be permitted to bring one double-sided A4 sheet of *hand-written* notes
+to the exam. No calculator, computer, phone, or other electronic devices
+are allowed in the exam.
 
 
-## Comparison
+## Marking
 
-STAT2601: Probability theory  
-Extensive theory, derivation, and calculation
+Lecturers' jobs are to teach.
 
-BIOF2014: Bayesian statistical modeling and inference  
-Extensive theory, derivation, and programming
+Professors' jobs are to win grants and produce research outputs.
+
+*No one* wants to do any marking.  
+We get 0 credit for doing marking.  
+
+\bigskip
+
+Traditionally, exams are worth 50-100% of the final grade.
+
+Grades *almost surely* (i.e. with probability = 1) will stay unchanged after
+remarking, except in cases of adding error.
+
+You are always welcome to ask questions about the *course content* or related
+topics!
+
+
+## Marking
+
+Math is as objective as it gets.
+
+Getting the final answer correct is *not* sufficient for full mark.
+
+Rigor and clarity are just as important as the final answer.
+
+\bigskip
+
+Correct process $\Rightarrow$ correct final answer  (truth)
+
+Incorrect final answer $\Rightarrow$ incorrect process  (contrapositive)
+
+Correct final answer $\Rightarrow$ correct process (converse error)
+
+
+## Marking
+
+Why can't we just give everyone an A+?
+
+
+## Lecture recording
+
+Probably not feasible.
+
+
+## ChatGPT
+
+As per university policy, instructors should make assessments
+'ChatGPT-proof'.
+
+ChatGPT is excellent at writing meaningless fluff, and it is mediocre at logic.
+It is often overfitted to the questions in the training set.
+
+ChatGPT can be useful for correcting grammar, improving writing, and perhaps
+as a second opinion.
+
+ChatGPT does poorly (40-70%) on my questions for other courses.
+
