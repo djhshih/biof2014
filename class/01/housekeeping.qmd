@@ -48,6 +48,11 @@ https://open.umn.edu/opentextbooks/formats/619
 Statistical Inference. George Casella, Roger L. Berger. 2002.
 
 
+## Lecture recording
+
+Probably not feasible.
+
+
 ## Assessments
 
 | type          | weight | derivation | programming |
@@ -63,13 +68,27 @@ to the exam. No calculator, computer, phone, or other electronic devices
 are allowed in the exam.
 
 
+## ChatGPT
+
+As per university policy, instructors should make assessments
+'ChatGPT-proof'.
+
+ChatGPT is excellent at writing meaningless fluff, and it is mediocre at logic.
+It is often overfitted to the questions in the training set.
+
+ChatGPT can be useful for correcting grammar, improving writing, and perhaps
+as a second opinion.
+
+ChatGPT does poorly (40-70%) on my questions for other courses.
+
+
 ## Marking
 
 Lecturers' jobs are to teach.
 
 Professors' jobs are to win grants and produce research outputs.
 
-*No one* wants to do any marking.  
+*No one* wants to do any marking.
 
 \bigskip
 
@@ -104,23 +123,28 @@ Correct final answer $\Rightarrow$ correct process (converse error)
 Why can't we just give everyone an A+?
 
 
-## Lecture recording
+## Marking
 
-Probably not feasible.
+"It ain’t what you don't know that gets you into trouble. It's what you know
+for sure that just ain't so."  – Mark Twain
+
+For each assignment question, you can get 1 mark for writing 
+"I don't know", provided that all the following conditions hold:
+
+a. "I don't know" is the entirety of your answer
+b. the question is worth more than 1 mark
+c. the question is *not* a bonus question
+d. your assignment is submitted on time
+
+The same applies to the exam.
 
 
-## ChatGPT
+## Late submissions
 
-As per university policy, instructors should make assessments
-'ChatGPT-proof'.
+The penalty for late submission is 10% per day.
 
-ChatGPT is excellent at writing meaningless fluff, and it is mediocre at logic.
-It is often overfitted to the questions in the training set.
-
-ChatGPT can be useful for correcting grammar, improving writing, and perhaps
-as a second opinion.
-
-ChatGPT does poorly (40-70%) on my questions for other courses.
+Quizzes or assignments will *not* be graded after any answer is discussed or
+released.
 
 
 ## Notations
@@ -131,3 +155,4 @@ Notations are invented to make expressions less ambiguous and more concise!
 
 In the bioinformatics field, method descriptions are atrocious because few 
 people learned the proper notations, which make communications very difficult.
+
