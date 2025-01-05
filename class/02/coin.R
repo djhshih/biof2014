@@ -72,3 +72,18 @@ print(prob.x)
 ggplot(data.frame(x=domain.x, y=prob.x), aes(x, y)) + theme_classic() +
   geom_col()
 
+
+# Remarks
+# 1. Uniform probability in the sample space induced a non-uniform probability
+#    distribution on X (number of heads)
+
+# Questions
+# 1. Why do we sample with replacement?
+# 2. How does changing the probability function on the sample space change
+#    the induced probability function on X?
+
+# Bonus questions
+# 1. As the number of trials increases, can we still calculate `prob.x`
+#    accurately? If not, modify the code to make the calculation of
+#    `prob.x` more accurate.
+
