@@ -4,10 +4,11 @@ library(ggplot2)
 outcomes <- c("T", "H");
 
 # probabilities of each outcome
-prob <- c(0.3, 0.7);
+outcomes.prob <- c(0.3, 0.7);
+#outcomes.prob <- c(0.5, 0.5);
 
 # ensure that probs sum to 1
-prob <- prob / sum(prob);
+outcomes.prob <- outcomes.prob / sum(outcomes.prob);
 
 # number of coin flips in a sequence
 n.trials <- 10;
@@ -33,21 +34,41 @@ enumerate <- function(outcomes, n) {
 
 sample.space <- enumerate(outcomes, n.trials);
 
+# probability of each element in the sample space
+sample.space.prob <- unlist(lapply(
+  enumerate(outcomes.prob, n.trials),
+  function(probs) {
+    # probs contain the probability of each trial
+    # obtain the probability for the sequence by multiplying probs together
+    prod(probs)
+  }
+));
+
+sum(sample.space.prob)
+
 # draw a sample s
-s <- sample(outcomes, n.trials, replace=TRUE, prob=prob);
+s <- sample(outcomes, n.trials, replace=TRUE, prob=outcomes.prob);
 
 sum(unlist(lapply(sample.space, function(r) all(r == s))))
 
 # we define random variable X as the number of heads
 
-# all values of X in the sample space
-x.values <- unlist(lapply(sample.space, function(r) sum(r == "H")));
+# map each element of the sample space onto the domain of X
+sample.space.x <- unlist(lapply(sample.space, function(r) sum(r == "H")));
 
 # domain of random variable X
-X.domain <- unique(x.values);
+domain.x <- unique(sample.space.x);
 
 # induced probability function on random variable X
-ind.prob <- table(x.values) / length(x.values);
+prob.x <- unlist(lapply(x.domain,
+  function(x) {
+    idx <- space.space.x == x;
+    sum(sample.space.prob[idx])
+  }
+));
 
-hist(x.values)
+print(prob.x)
+
+ggplot(data.frame(x=domain.x, y=prob.x), aes(x, y)) + theme_classic() +
+  geom_col()
 
