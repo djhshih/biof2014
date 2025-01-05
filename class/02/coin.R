@@ -3,7 +3,7 @@ library(ggplot2)
 # outcome is tail or head
 outcomes <- c("T", "H");
 
-# probabilities of the outcomes
+# probabilities of each outcome
 prob <- c(0.3, 0.7);
 
 # ensure that probs sum to 1
@@ -33,8 +33,8 @@ enumerate <- function(outcomes, n) {
 
 sample.space <- enumerate(outcomes, n.trials);
 
-# draw a sample
-s <- sample(S, n.trials, replace=TRUE, prob=prob);
+# draw a sample s
+s <- sample(outcomes, n.trials, replace=TRUE, prob=prob);
 
 sum(unlist(lapply(sample.space, function(r) all(r == s))))
 
@@ -43,9 +43,11 @@ sum(unlist(lapply(sample.space, function(r) all(r == s))))
 # all values of X in the sample space
 x.values <- unlist(lapply(sample.space, function(r) sum(r == "H")));
 
-# domain
-unique(x.values)
+# domain of random variable X
+X.domain <- unique(x.values);
 
 # induced probability function on random variable X
-prob.f <- table(x.values) / length(x.values);
+ind.prob <- table(x.values) / length(x.values);
+
+hist(x.values)
 
