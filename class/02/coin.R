@@ -4,8 +4,8 @@ library(ggplot2)
 outcomes <- c("T", "H");
 
 # probabilities of each outcome
-outcomes.prob <- c(0.3, 0.7);
-#outcomes.prob <- c(0.5, 0.5);
+#outcomes.prob <- c(0.3, 0.7);
+outcomes.prob <- c(0.5, 0.5);
 
 # ensure that probs sum to 1
 outcomes.prob <- outcomes.prob / sum(outcomes.prob);
@@ -60,9 +60,9 @@ sample.space.x <- unlist(lapply(sample.space, function(r) sum(r == "H")));
 domain.x <- unique(sample.space.x);
 
 # induced probability function on random variable X
-prob.x <- unlist(lapply(x.domain,
+prob.x <- unlist(lapply(domain.x,
   function(x) {
-    idx <- space.space.x == x;
+    idx <- sample.space.x == x;
     sum(sample.space.prob[idx])
   }
 ));
