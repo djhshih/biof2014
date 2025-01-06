@@ -1,5 +1,7 @@
 # Direct implementation for sampling a sequence of coin flips
 
+# number of coin flips in a sequence
+n.trials <- 10;
 
 # outcome is tail or head
 outcomes <- c("T", "H");
@@ -9,9 +11,6 @@ probs.outcome <- c(0.3, 0.7);
 
 # ensure that probs sum to 1
 probs.outcome <- probs.outcome / sum(probs.outcome);
-
-# number of coin flips in a sequence
-n.trials <- 10;
 
 # Enumerate the sample space of a sequence of n trials,
 # given the outcomes of individual trials,
@@ -79,35 +78,10 @@ ggplot(data.frame(x=domain.x, y=probs.x), aes(x, y)) + theme_classic() +
 # draw a sample s
 s <- sample(outcomes, n.trials, replace=TRUE, prob=probs.outcome);
 
-# find the index of sample s in the sample space
-s.idx <- which(unlist(lapply(S, function(s.i) all(s.i == s))));
-probs.S[s.idx]
-
 # map sample s of sample space to realization x
 X(s)
 
-
-
-# Remarks
-# 1. Uniform probability in the sample space induced a non-uniform probability
-#    distribution on X (number of heads).
-# 2. Mathematical functions can be represented as vectors.
-
-
-# Questions
-# 1. When we are drawing coin flips, why do we sample with replacement?
-# 2. Check that the induced probability function on X satisfy Kolmogorov's
-#    axioms of proability.
-# 2. How does changing the probability function on the sample space change
-#    the induced probability function on X?
-# 3. How can we sample the random variable X directly? This can be implemented
-#    in one-line of code using `probs.x`.
-
-
-# Bonus questions
-# 1. As the number of trials increases, can we still calculate `prob.x`
-#    accurately? If not, modify the code to make the calculation of
-#    `prob.x` more accurate.
-# 2. How can we implement the induced probability function on X in a more
-#    computationally efficient manner?
+# find the index of sample s in the sample space
+s.idx <- which(unlist(lapply(S, function(s.i) all(s.i == s))));
+probs.S[s.idx]
 
