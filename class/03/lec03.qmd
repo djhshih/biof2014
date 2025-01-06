@@ -192,6 +192,26 @@ P_X \left( \bigcup_{i=1}^\infty \mathcal{A} \right) =
  \quad \blacksquare
 $$
 
+Further, using almost the same derivation as above, given that
+the probability function $P$ on sample space $\mathcal{S}$ satisfies
+the addivity axiom, we can show that $P_X(x)$ also satisfies the 
+additivity axiom.
+
+
+## Probability distribution
+
+Since the additvity axiom holds for any $P_X(x)$, to show that 
+a given $P_X(x)$ correspond to a *proper* probability distribution, 
+we just need to show that $P_X(x)$ satisfies the first 
+two Komomgorov's axioms. Specifically,
+$$
+\begin{aligned}
+1.\; & P_X(x) \ge 0 \quad \forall x \in \mathcal{X} . & \\
+2.\; & \sum_{x \in \mathcal{X}} P_X(x) = 1  & \quad \text{if }X\text{ is discrete}, \\
+     & \int_{\mathcal{X}} f_X(x) \, dx = 1  & \quad \text{if }X\text{ is continuous} .
+\end{aligned}
+$$
+
 
 ## Continuous uniform distribution
 
@@ -203,9 +223,90 @@ $$
 f_X(x \mid a, b) = 
 \begin{cases}
 \frac{1}{b - a} & \text{ if } x \in [a, b] \\
-0 & \text{otherwise}.
+0 & \text{otherwise} ,
 \end{cases}
 $$
+where $b > a$.
+
+
+## Proof: Uniform$(x \mid a, b)$ is probability distribution
+
+Prove that $f_X(x) = \text{Uniform}(x \mid a, b)$ is a probability distribution
+
+### Non-negativity
+
+If $x \notin [a, b]$, $f_X(x) = 0$.
+
+If $x \in [a, b]$, $f_X(a) = \frac{1}{b - a} \ge 0$ since $b > a$.
+
+### Unit measure
+
+$$
+\begin{aligned}
+\int_{-\infty}^{\infty} f_X(x) \, dx
+ &= \int_{a}^{b} f_X(x) \, dx
+  = \int_{a}^{b} \frac{1}{b - a} \, dx \\
+ &= \left[ \frac{x}{b - a} \right]_{x = b}
+  - \left[ \frac{x}{b - a} \right]_{x = a} \\
+ &= \frac{b}{b - a} - \frac{a}{b - a}
+  = 1
+\end{aligned}
+$$
+
+
+## Continuous uniform distribution
+
+If model parameters $a$ and $b$ are spread further apart (at the same rate)
+to cover a larger interval $[a, b]$, we have
+$$
+f_X(x \mid -a, a) = \frac{1}{2a}, 
+$$
+where $b = -a$.
+
+Since $\lim_{a \rightarrow \infty} f_X(x \mid -a, a) = 0$,
+a uniform distribution spanning $(-\infty, \infty)$ is *not*
+a proper probability distribution, due to violation of the 
+unit measure axiom.
+
+Instead, we sometimes define an improper uniform distribution by
+$$
+p_X(x) \propto 1 ,
+$$
+where is also not a proper distribution.
+
+
+## Empirical probability mass function
+
+Uniform distributions are convenient starting points if we have no prior
+knowledge about the random variable.
+
+We should always ask if a distribution in a model is appropriate for the
+problem.
+
+We can also estimate the pmf from the observed data.
+
+Given *independent and identically distributed* (iid) samples $\{x_1, \ldots, x_N\}$,
+an **empirical pmf** for random variable $X$ is given by
+$$
+\hat{f}_N(x) = \frac{1}{N} \sum_{i=1}^N I(x_i = x) ,
+$$
+where $I$ is the indicator function.
+
+
+## Empirical cumulative distribution function
+
+Given iid samples $\{x_1, \ldots, x_N\}$,
+an **empirical cdf** for random variable $X$ is given by
+$$
+\hat{F}_N(x) = \frac{1}{N} \sum_{i=1}^N I(x_i \le x) .
+$$
+
+The Glivenko-Cantelli theorem states that $\hat{F}_N(x)$ converges
+to $F(x)$. That is, as $N \rightarrow 0$, with probability 1,
+$$
+\sup_{x \in \mathcal{X}} \left| \hat{F}_N(x) - F(x) \right| = 0 ,
+$$
+where $\sup$ is the supremum.
 
 
 ## Summary
