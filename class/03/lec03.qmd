@@ -1,0 +1,220 @@
+---
+title: "Uniform distributions"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+          \newcommand{\mat}[1]{\mathbf{#1}}
+          \renewcommand{\vec}[1]{\mathbold{#1}}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Prove that Kolmogorov's axioms hold (or not) for given functions
+- Recognize and apply uniform distributions in statistical models
+
+
+## Discrete vs. continuous random variables
+
+### Definitions
+
+A random variable $X$ is *continuous* if its cdf $F_X(x)$ is a continuous
+function of $x$.
+
+A random variable $X$ is *discrete* if $F_X(x)$ is a step funtion of $x$.
+
+
+## Discrete uniform distribution
+
+### Definition
+
+A random variable $X$ has a discrete uniform distribution if
+$$
+P \left( X = x \mid N \right) \; = \; \frac{1}{N}, \quad 
+ x = 1, 2, \ldots, N,
+$$
+where $N > 0$ is an integer parameter.
+
+Most useful as a baseline or reference model.
+
+
+## Examples
+
+- outcome of a fair coin flip
+- outcome of a fair dice roll
+- number on a drawn card from a well-shuffled deck
+- biological sex of humans
+
+
+## Kolmogorov's axioms of probability
+
+Given a sample space $\mathcal{S}$, a probability function $P$
+satisfies
+$$
+\begin{aligned}
+1. \; & P\left( \mathcal{A} \right) \ge 0 \quad \forall \mathcal{A} \subseteq S. 
+      \quad & (\text{non-negativity})   
+      \\
+2. \; & P\left( \mathcal{S} \right) = 1 . 
+      \quad & (\text{unit measure}) \\
+3. \; & \text{For any } \mathcal{A}_1, \mathcal{A}_2, \ldots \subseteq S \\
+      & \text{ s.t. } \mathcal{A}_i \cap \mathcal{A}_j = \emptyset \; \forall i \neq j, \\
+      & P \left( \bigcup_{i = 1}^\infty \mathcal{A}_i \right) 
+      \; = \; \sum_{i = 1}^\infty P\left(\mathcal{A}_i\right) .
+      \quad & (\text{additivity}) \\
+\end{aligned}
+$$
+
+
+## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+
+Prove that $P_X(x) = \text{Discrete}(x \mid N)$ satisifies Kolmogorov's axioms 
+of probability.
+
+### Non-negativity
+
+For any $\mathcal{A} \subseteq \mathcal{X}$ where $A = \{ a_1, \ldots a_K \}$,
+$P_X(\mathcal{A}) = \sum_k P_X(a_k)$ by the additivity axiom.
+
+Further, $\sum_k P_X(a_k) = \sum_{k=1}^K \frac{1}{N} = \frac{K}{N}$.
+
+Finally, $\frac{K}{N} > 0$ since $N > 0$ and $K > 0$.
+
+Therefore, $P_X(\mathcal{A}) \ge 0$ for any $\mathcal{A} \subseteq \mathcal{X}$.
+
+
+## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+
+### Unit measure
+
+Given $\mathcal{X} = \{x_1, \ldots, x_N\}$,
+$$
+\begin{aligned}
+P_X\left( \mathcal{X} \right) 
+ &= P_X\left( \{s_1, \ldots, s_N\} \right) \\
+ &= \sum_{i=1}^N P(s_i) \quad (\text{additivity}) \\
+ &= \sum_{i=1}^N \frac{1}{N} = \frac{N}{N} = 1
+\end{aligned}
+$$
+
+
+## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+
+Recall that
+$$
+P_X(x) = P\left( \{ s \in \mathcal{S} : X(s) = x \} \right).
+$$
+
+It is a given that $P(s)$ is a probability function.
+
+
+### Additivity
+
+Consider any $\mathcal{A}, \mathcal{B} \subseteq \mathcal{X}$ s.t. 
+$\mathcal{A} \cap \mathcal{B} = \emptyset$.
+
+Note that $\mathcal{A} = {a_1, \ldots, a_K}$ and $\mathcal{B} = {b_1, \ldots, b_L}$.
+
+Define $c_1 = a_1, \ldots, c_K = a_K, c_{K+1} = b_1, \ldots, c_{K+L} = b_L$.
+
+---
+
+$$
+\begin{aligned}
+P_X(\mathcal{A}) 
+ &= P_X\left( \bigcup_{k=1}^K a_k \right) \\
+ &= P\left( \bigcup_{k=1}^K \{ s_k \in \mathcal{S} : X(s_k) == a_k \} \right) 
+  \quad (\text{definition of }P_X) \\
+ &= \sum_{k=1}^K P\left( \{s_k \in \mathcal{S} : X(s_k) == a_k \} \right)
+  \quad (\text{additivity of }P) \\
+ &= \sum_{k=1}^K P_X( a_k )
+  \quad (\text{definition of }P_X) \\
+ &= \sum {k=1}^K \frac{1}{N}
+  \quad (\text{definition of Discrete}(x \mid N)) \\
+ &= \frac{K}{N}
+\end{aligned}
+$$
+
+Similarly as above, we can also show $P_X(\mathcal{B}) = \frac{L}{N}$.
+
+---
+
+$$
+\begin{aligned}
+P_X \left( \mathcal{A} \cup \mathcal{B} \right)
+ &= P_X \left( \left(\bigcup_{k=1}^K a_k\right) \cup \left(\bigcup_{l=1}^L b_k\right) \right)
+ &= P\left(
+   \bigcup_{k=1}^K \{s_k \in \mathcal{S} : X(s_k) == a_k \} \cup 
+   \bigcup_{l=1}^L \{s_k \in \mathcal{S} : X(s_k) == b_l \}
+  \right) 
+  \quad (\text{definition of }P_X) \\
+ &= P\left(
+   \bigcup_{k=1}^{K+L} \{s_k \in \mathcal{S} : X(s_k) == c_k \}
+  \right)
+  \quad (\text{definition of }c_k) \\
+ &= \sum_{k=1}^{K+L} P\left( \{s_k \in \mathcal{S} : X(s_k) == c_k \} \right)
+  \quad (\text{additivity of }P) \\
+ &= \sum_{k=1}^{K+L} P_X( c_k )
+  \quad (\text{definition of }P_X) \\
+ &= \sum_{k=1}^{K+L} \frac{1}{N}
+  \quad (\text{definition of Discrete}(x \mid N)) \\
+ &= \frac{K}{N} + \frac{L}{N} 
+  = P_X(\mathcal{A}) + P_X(\mathcal{B}) .
+\end{aligned}
+$$
+
+---
+
+Therefore, for any $\mathcal{A}, \mathcal{B} \subseteq \mathcal{X}$
+s.t. $\mathcal{A} \cap \mathcal{B} = \emptyset$,
+$$
+P_X \left( \mathcal{A} \cup \mathcal{B} \right) = 
+ P_X \left(\mathcal{A}\right) + P_X \left(\mathcal{A}\right) .
+$$
+
+Using similar steps as above, we can show for any pairwise disjoint 
+subsets $\mathcal{A}_1, \mathcal{A}_2, \ldots$ of $\mathcal{X}$ that
+$$
+P_X \left( \bigcup_{i=1}^\infty \mathcal{A} \right) = 
+ \sum_{i=1}^\infty P_X \left(\mathcal{A_i}\right) .
+ \quad \blacksquare
+$$
+
+
+## Continuous uniform distribution
+
+### Definition
+
+A random variable has a continuous uniform distribution over an 
+interval $[a, b]$ if 
+$$
+f_X(x \mid a, b) = 
+\begin{cases}
+\frac{1}{b - a} & \text{ if } x \in [a, b] \\
+0 & \text{otherwise}.
+\end{cases}
+$$
+
+
+## Summary
+
+Casella & Berger 2002, sections 3.2, pages 85-86, 98-99
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Prove that Kolmogorov's axioms hold (or not) for given functions
+- Recognize and apply uniform distributions in statistical models
