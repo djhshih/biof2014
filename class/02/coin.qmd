@@ -6,7 +6,10 @@ format: pdf
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, fig.align="center", warning=FALSE);
-set.seed(1337);
+```
+
+```{r}
+set.seed(1234);
 ```
 
 ## Objective
