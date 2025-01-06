@@ -1,5 +1,7 @@
 # Direct implementation for sampling a sequence of coin flips
 
+set.seed(1337);
+
 # number of coin flips in a sequence
 n.trials <- 10;
 
@@ -72,7 +74,7 @@ probs.x
 
 library(ggplot2)
 ggplot(data.frame(x=domain.x, y=probs.x), aes(x, y)) + theme_classic() +
-  geom_col()
+  geom_col() + ylab("probability")
 
 
 # draw a sample s

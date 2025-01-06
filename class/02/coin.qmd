@@ -6,6 +6,7 @@ format: pdf
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, fig.align="center", warning=FALSE);
+set.seed(1337);
 ```
 
 ## Objective
@@ -133,10 +134,10 @@ probs.x <- unlist(lapply(domain.x,
 Let's visualize our induced probability function $P_X$.
 (Since our random variable is discrete, $P_X(X = x)$ is equivalent to our
 probability mass function $f_X(x)$.)
-```{r}
+```{r, fig.width=3, fig.height=2, out.width="30%"}
 library(ggplot2)
 ggplot(data.frame(x=domain.x, y=probs.x), aes(x, y)) + theme_classic() +
-  geom_col()
+  geom_col() + ylab("probability")
 ```
 
 
