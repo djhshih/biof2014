@@ -1,6 +1,5 @@
 # Direct implementation for sampling a sequence of coin flips
 
-library(ggplot2)
 
 # outcome is tail or head
 outcomes <- c("T", "H");
@@ -70,8 +69,9 @@ probs.x <- unlist(lapply(domain.x,
   }
 ));
 
-print(probs.x)
+probs.x
 
+library(ggplot2)
 ggplot(data.frame(x=domain.x, y=probs.x), aes(x, y)) + theme_classic() +
   geom_col()
 
@@ -96,14 +96,18 @@ X(s)
 
 # Questions
 # 1. When we are drawing coin flips, why do we sample with replacement?
+# 2. Check that the induced probability function on X satisfy Kolmogorov's
+#    axioms of proability.
 # 2. How does changing the probability function on the sample space change
 #    the induced probability function on X?
 # 3. How can we sample the random variable X directly? This can be implemented
-#    in one-line of code.
+#    in one-line of code using `probs.x`.
 
 
 # Bonus questions
 # 1. As the number of trials increases, can we still calculate `prob.x`
 #    accurately? If not, modify the code to make the calculation of
 #    `prob.x` more accurate.
+# 2. How can we implement the induced probability function on X in a more
+#    computationally efficient manner?
 
