@@ -1,3 +1,5 @@
+# Direct implementation for sampling a sequence of coin flips
+
 library(ggplot2)
 
 # outcome is tail or head
@@ -46,7 +48,7 @@ probs.S <- unlist(lapply(
 
 sum(probs.S)
 
-# we define random variable X as the number of heads
+# define random variable X as the number of heads
 X <- function(s) {
   sum(s == "H")
 }
