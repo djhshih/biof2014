@@ -49,7 +49,16 @@ P \left( X = x \mid N \right) \; = \; \frac{1}{N}, \quad
 $$
 where $N > 0$ is an integer parameter.
 
-Most useful as a baseline or null model.
+Useful as a baseline or null model.
+
+Other possible notations are
+$$
+\begin{aligned}
+p\left(X = x \mid N\right) &= \text{Uniform}\left( N\right) \\
+X &\sim \text{Uniform}\left(N\right) \\
+\end{aligned}
+$$
+
 
 
 ## Examples
@@ -87,9 +96,9 @@ the induced probability function $P_X$ must be defined properly so that
 it satisifies Kolmogorov's axioms.
 
 
-## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+## Proof: $\text{Uniform}(N)$ is a probability distribution
 
-Prove that $P_X(x) = \text{Discrete}(x \mid N)$ satisifies Kolmogorov's axioms 
+Prove that $P_X(x) = \text{Uniform}(N)$ satisifies Kolmogorov's axioms 
 of probability.
 
 ### Non-negativity
@@ -104,7 +113,7 @@ Finally, $\frac{K}{N} > 0$ since $N > 0$ and $K > 0$.
 Therefore, $P_X(\mathcal{A}) \ge 0$ for any $\mathcal{A} \subseteq \mathcal{X}$.
 
 
-## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+## Proof: $\text{Uniform}(N)$ is a probability distribution
 
 ### Unit measure
 
@@ -119,7 +128,7 @@ P_X\left( \mathcal{X} \right)
 $$
 
 
-## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
+## Proof: $\text{Uniform}(N)$ is a probability distribution
 
 Recall that, for a discrete random variable $X$,
 $$
@@ -252,8 +261,16 @@ f_X(x \mid a, b) =
 $$
 where $b > a$.
 
+We can also write
+$$
+\begin{aligned}
+p\left( X = x \mid a, b\right) &= \text{Uniform}\left(x \mid a, b\right) \\
+X &\sim \text{Uniform}\left(a, b\right)
+\end{aligned}
+$$
 
-## Proof: Uniform$(x \mid a, b)$ is probability distribution
+
+## Proof: Uniform$(a, b)$ is probability distribution
 
 Prove that $f_X(x) = \text{Uniform}(x \mid a, b)$ is a probability distribution
 
