@@ -57,11 +57,6 @@ https://open.umn.edu/opentextbooks/formats/619
 Statistical Inference. George Casella, Roger L. Berger. 2002.
 
 
-## Lecture recording
-
-Probably not feasible.
-
-
 ## Assessments
 
 | type          | weight | derivation | programming |
@@ -75,6 +70,11 @@ Quizzes are your opportunity to practice for the exam.
 You will be permitted to bring one double-sided A4 sheet of *hand-written* notes
 to the exam. No calculator, computer, phone, or other electronic devices
 are allowed in the exam.
+
+
+## Lecture recording
+
+Probably not feasible.
 
 
 ## ChatGPT
@@ -112,29 +112,55 @@ topics!
 
 ## Marking
 
+Why can't we just give everyone an A+?
+
+What are the consequences when competency and reward are de-coupled?
+
+
+## Marking scheme
+
 Math is as objective as it gets.
 
-Getting the final answer correct is *not* sufficient for full mark.
+Getting the final answer right is *not* sufficient for full mark.
 
 Rigor and clarity are just as important as the final answer.
 
 \bigskip
 
-Correct process $\Rightarrow$ correct final answer  (truth)
+Correct process $\Rightarrow$ correct results  (fact)
 
-Incorrect final answer $\Rightarrow$ incorrect process  (contrapositive)
+Incorrect results $\Rightarrow$ incorrect process  (contrapositive)
 
-Correct final answer $\Rightarrow$ correct process (converse error)
-
-
-## Marking
-
-Why can't we just give everyone an A+?
+Correct results $\Rightarrow$ correct process (converse error)
 
 
-## Marking
+## Marking scheme
 
-"It ain’t what you don't know that gets you into trouble. It's what you know
+### Derivation and programming questions
+
+| Process                     | Result    |  Mark  |
+|-----------------------------|-----------|--------|
+| Correct                     | Correct   | 100%   |
+| Correct but incomplete      | Null      | 10-90% |
+| Mostly correct with errors  | Correct   | 40-80% |
+| Mostly correct with errors  | Incorrect | 20-60% |
+| Incorrect                   | Correct   | 0-20%  |
+| Incorrect                   | Incorrect | 0%     |
+
+### Proofs
+
+| Process                                   | Result |  Mark  |
+|-------------------------------------------|--------|--------|
+| Correct and well-justified                | Given  | 100%   |
+| Correct and well-justified but incomplete | Given  | 10-90% |
+| Correct without sufficient justification  | Given  | 10-60% |
+| Correct with wrong justification          | Given  | 0-30%  |
+| Incorrect                                 | Given  | 0%     |
+
+
+## Marks for humility
+
+"It ain't what you don't know that gets you into trouble. It's what you know
 for sure that just ain't so."  – Mark Twain
 
 For each assignment question, you can get 1 mark for writing 
