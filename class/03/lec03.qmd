@@ -47,15 +47,18 @@ P \left( X = x \mid N \right) \; = \; \frac{1}{N}, \quad
 $$
 where $N > 0$ is an integer parameter.
 
-Most useful as a baseline or reference model.
+Most useful as a baseline or null model.
 
 
 ## Examples
 
-- outcome of a fair coin flip
-- outcome of a fair dice roll
-- number on a drawn card from a well-shuffled deck
-- biological sex of humans
+\begin{itemize}
+\setlength\itemsep{2em}
+\item outcome of a fair coin flip
+\item outcome of a fair dice roll
+\item number on a drawn card from a well-shuffled deck
+\item biological sex of humans
+\end{itemize}
 
 
 ## Kolmogorov's axioms of probability
@@ -76,6 +79,10 @@ $$
       \quad & (\text{additivity}) \\
 \end{aligned}
 $$
+
+Remark: Given the sample space $\mathcal{X}$ of the random variable $X$,
+the induced probability function $P_X$ must be defined properly so that
+it satisifies Kolmogorov's axioms.
 
 
 ## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
@@ -112,7 +119,7 @@ $$
 
 ## Proof: $\text{Discrete}(x \mid N)$ is a probability distribution
 
-Recall that
+Recall that, for a discrete random variable $X$,
 $$
 P_X(x) = P\left( \{ s \in \mathcal{S} : X(s) = x \} \right).
 $$
@@ -128,6 +135,20 @@ $\mathcal{A} \cap \mathcal{B} = \emptyset$.
 Note that $\mathcal{A} = {a_1, \ldots, a_K}$ and $\mathcal{B} = {b_1, \ldots, b_L}$.
 
 Define $c_1 = a_1, \ldots, c_K = a_K, c_{K+1} = b_1, \ldots, c_{K+L} = b_L$.
+
+#### Proof outline
+
+We will show that $P_X(\mathcal{A}) = \frac{K}{N}$, 
+and similarly, $P_X(\mathcal{B}) = \frac{L}{N}$.
+
+We will then show
+$P_X(\mathcal{A} \cup \mathcal{B}) = \frac{K}{N} + \frac{L}{N}.$
+
+Therefore, $P_X(\mathcal{A} \cup \mathcal{B}) = P_X(\mathcal{A}) + P_X(\mathcal{B})$.
+
+Our derivation can be extended to any number of subsets
+$\mathcal{A}, \mathcal{B}, \mathcal{C}, \ldots$ of $\mathcal{X}$, which
+completes the proof.
 
 ---
 
@@ -194,8 +215,8 @@ $$
 
 Further, using almost the same derivation as above, given that
 the probability function $P$ on sample space $\mathcal{S}$ satisfies
-the addivity axiom, we can show that $P_X(x)$ also satisfies the 
-additivity axiom.
+the addivity axiom, we can show that the previously defined $P_X(x)$ 
+also satisfies the additivity axiom.
 
 
 ## Probability distribution
@@ -207,6 +228,7 @@ two Komomgorov's axioms. Specifically,
 $$
 \begin{aligned}
 1.\; & P_X(x) \ge 0 \quad \forall x \in \mathcal{X} . & \\
+\\
 2.\; & \sum_{x \in \mathcal{X}} P_X(x) = 1  & \quad \text{if }X\text{ is discrete}, \\
      & \int_{\mathcal{X}} f_X(x) \, dx = 1  & \quad \text{if }X\text{ is continuous} .
 \end{aligned}
