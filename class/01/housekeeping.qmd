@@ -39,6 +39,15 @@ models effectively.
 | STAT2601 | extensive | extensive | extensive | none      |
 | BIOF2014 | extensive | minimal   | extensive | extensive |
 
+### Course philosophy
+
+We will cover the most useful mathematical concepts
+that are useful for statistical modeling of real-world data.
+
+Mathematics is how we communicate with one another about our models.
+
+Programming is how we communicate with machines to do calculations.
+
 
 ## Text books
 
