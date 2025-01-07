@@ -22,8 +22,10 @@ classoption: t
 
 ## Intended learning outcomes {.c}
 
-- Prove that Kolmogorov's axioms hold (or not) for given functions
 - Recognize and apply uniform distributions in statistical models
+- Prove that Kolmogorov's axioms hold (or not) for given functions
+- Derive expected values of random variables
+- Apply empirical probability mass functions in models
 
 
 ## Discrete vs. continuous random variables
@@ -229,7 +231,7 @@ $$
 \begin{aligned}
 1.\; & P_X(x) \ge 0 \quad \forall x \in \mathcal{X} . & \\
 \\
-2.\; & \sum_{x \in \mathcal{X}} P_X(x) = 1  & \quad \text{if }X\text{ is discrete}, \\
+2.\; & \sum_{x \in \mathcal{X}} P_X(x) = 1  & \quad \text{if }X\text{ is discrete}; \\
      & \int_{\mathcal{X}} f_X(x) \, dx = 1  & \quad \text{if }X\text{ is continuous} .
 \end{aligned}
 $$
@@ -297,6 +299,53 @@ $$
 where is also not a proper distribution.
 
 
+## Expectation
+
+### Definition
+
+The *expected value* or *mean* of a random variable $g(X)$ is
+$$
+\text{E} \left( g(X) \right) \triangleq
+\begin{cases}
+\int_{-\infty}^{\infty} g(x) f_X(x) dx
+ \quad & \text{if }X\text{ is continuous} \\
+\sum_{x \in \mathcal{X}} g(x) f_X(x)
+ \quad & \text{if }X\text{ is discrete},
+\end{cases}
+$$
+provided that the integral or sum exists.
+
+If $\text{E} \left( g(X) \right) = \infty$,
+we say that $\text{E} \left( g(X) \right)$ does not exist.
+
+
+## Example
+
+Given $X \sim \text{Uniform}(a, b)$, find $\text{E} \left(X^2\right)$.
+
+
+## Variance
+
+### Definition
+
+The *variance* of a random variable $g(X)$ is
+$$
+\text{Var} \left( X \right) \triangleq
+ \text{E} \left[ \left( X - \text{E}\left(X\right) \right)^2 \right] .
+$$
+
+
+### Alternative formula
+
+Variance can be expressed as
+$$
+\text{Var} \left( X \right) =
+ \text{E} \left( X^2 \right) - \left( \text{E}(X) \right)^2 .
+$$
+This formula is useful in derivations, but calculating variance 
+with this formula will lead to numerical instability.
+
+
 ## Empirical probability mass function
 
 Uniform distributions are convenient starting points if we have no prior
@@ -341,3 +390,5 @@ Casella & Berger 2002, sections 3.2, pages 85-86, 98-99
 
 - Prove that Kolmogorov's axioms hold (or not) for given functions
 - Recognize and apply uniform distributions in statistical models
+- Derive expected values of random variables
+- Apply empirical probability mass functions in models
