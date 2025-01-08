@@ -54,12 +54,14 @@ X &\sim \text{Bernoulli}(\theta)
 $$
 
 
-## Many Bernoulli trials
+## Bernoulli trials
 
-Suppose we have $N$ iid trials, resulting in random variables $X_1, \ldots, X_N$ such that
+Suppose we have $N$ iid trials with success probability $\theta$,
+resulting in random variables $X_1, \ldots, X_N$ such that
 $$
 X_i \sim \text{Bernoulli}(\theta) .
 $$
+This sequence of iid trials are called *Bernoulli* trials.
 
 Define $\mathbold{X} = [X_1, \ldots, X_N]$.
 
@@ -94,7 +96,7 @@ Recall from previously,
 |  2  | $\{ 110, 101, 011 \}$                                    |
 |  3  | $\{ 111 \}$                                              |
 
-: {tbl-colwidths="[20,60]"}
+: {tbl-colwidths="[10,60]"}
 
 We have thus derived the **binomial distribution**.
 
@@ -220,7 +222,104 @@ $$
 $$
 
 
+## Negative binomial distribution
+
+The binomial distribution arises from a sequence of Bernoulli trials
+where the number of trials $N$ is fixed.
+
+A different distribution can also arise from a sequence of Bernoulli trials
+if we pre-specify and fix the number of successes $R$ that we wish to
+observe before we stop.
+
+A random variable $X$ has a negative binomial distribution if
+$$
+P\left( X = x \mid R, \theta \right) \; = \;
+ \binom{x - 1}{R - 1} \theta^R (1 - \theta)^{x - R},
+ \quad x \in \{R, R + 1, \ldots\} ,
+$$
+where $X$ represents the total number of trials required to achieve a fixed number of successes, $R > 0$.
+
+
+## Illustration
+
+
+
+## Derivation of the negative binomial distribution
+
+We have $X$ iid trials of success probability $\theta$ that contains
+$R$ successes. $X$ is a random integer variable, whereas $R > 0$ is a 
+fixed integer, and $X \le R$.
+
+Denote the outcome of each trial by $Z_i$, so $R = \sum_{i=1}^X Z_i$.
+
+Let $\mathbold{Z} = [Z_1, Z_2, \ldots, Z_X]$ represent the sequence of
+outcomes. Similarly as before,
+$$
+P_\mathbold{Z} \left( \mathbold{z} \right) 
+ = \prod_{i = 1}^{X} \theta^{z_i} (1 - \theta)^{1 - z_i}
+ = \theta^{\sum_i z_i} (1 - \theta)^{X - \sum_i z_i}
+ = \theta^R (1 - \theta)^{X - R}
+$$
+
+---
+
+\bigskip
+
+Denote the number of times that each event $\{X = x\}$ occurs as
+$b(x, R)$, we have
+$$
+P_X(x) = P\left( \{\mathbold{z} : \sum_i^x z_i = R \} \right)
+ = b(x, R) \, P_\mathbold{Z} \left( \mathbold{z} \right)  .
+$$
+
+For example, if $R = 2$,
+
+| $x$ | $E = \{ \mathbold{z} \in \{0, 1\}^x : \sum_i z_i = R \}$ |
+|-----|----------------------------------------------------------|
+|  2  | $\{ 11 \}$                                               |
+|  3  | $\{ 011, 101 \}$                                         |
+|  4  | $\{ 0011, 0101, 1001 \}$                                 |
+|  5  | $\{ 00011, 00101, 01001, 10001 \}$                       |
+| $\ldots$ | $\ldots$                                            |
+
+: {tbl-colwidths="[10,60]"}
+
+---
+
+\bigskip
+
+Now, we need to find $b(x, R)$. We know that the $x$th trial must be a
+success because we stop when we reach $R$ successes.
+At trial $x - 1$, we have $R - 1$ successes, and there
+are $\binom{x - 1}{R - 1}$ combinations.
+Therefore, $b(x, R) = \binom{x - 1}{R - 1}$, and
+$$
+P_X\left(x \mid R, \theta \right) \; = \;
+\binom{x - 1}{R - 1} \theta^R (1 - \theta)^{x - R} . \quad \blacksquare
+$$
+
+
+## Geometric distribution
+
+A geometric distribution special case of the negative binomial
+distribution where $R = 1$.
+
+A random variable $X$ has a geometric distribution if
+$$
+P\left( X = x \mid \theta \right) \; = \;
+ \theta (1 - \theta)^{x - 1},
+ \quad x \in \{1, 2, \ldots\} ,
+$$
+where $\theta$ is the probability of success, and $X$ represents the
+total number trials required for one success.
+
+
 ## Summary
+
+"A Bayesian is skeptical about everything except that he's a Bayesian."
+- Unknown
+  
+\bigskip
 
 Casella & Berger 2002, sections 3.2, pages 86-91, 95-98
 
