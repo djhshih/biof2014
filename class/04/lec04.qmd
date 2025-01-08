@@ -1,0 +1,232 @@
+---
+title: "Bernoulli and binomial distributions"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply Bernoulli and binomial distributions in statistical models
+- Derive the binomial and negative binomial distributions
+
+
+## Bernoulli distribution
+
+### Definition
+
+A random variable $X$ with domain $\mathcal{X} = \{0, 1\}$ has a Bernoulli distribution if
+$$
+\begin{aligned}
+P \left( X = 0 \mid \theta \right) &\; = \; \theta \\
+P \left( X = 1 \mid \theta \right) &\; = \; 1 - \theta
+\end{aligned}
+$$
+where $\theta \in [0, 1]$ is the probability of success.
+
+\bigskip
+
+A more compact representation is
+$$
+P \left( X = x \mid \theta \right) \; = \;
+ \theta^x \, (1 - \theta)^{1 - x}, \quad x \in \{0, 1\}
+$$
+
+We can also write
+$$
+\begin{aligned}
+p \left( X = x \mid \theta \right) &= \text{Bernoulli}(x \mid \theta) \\
+X &\sim \text{Bernoulli}(\theta)
+\end{aligned}
+$$
+
+
+## Many Bernoulli trials
+
+Suppose we have $N$ iid trials, resulting in random variables $X_1, \ldots, X_N$ such that
+$$
+X_i \sim \text{Bernoulli}(\theta) .
+$$
+
+Define $\mathbold{X} = [X_1, \ldots, X_N]$.
+
+$$
+\begin{aligned}
+P_{\mathbold{X}}\left( \mathbold{x} \right) 
+ &= \prod_{i=1}^N P_{X_i}\left(x_i\right)
+ \quad (\text{independent}) \\
+ &= \prod_{i=1}^N \theta^{x_i} (1- \theta)^{1 - x_i} \\
+ &= \theta^{\sum_i x_i} (1- \theta)^{1 - \sum_i x_i}
+\end{aligned}
+$$
+
+---
+
+Define $Y = \sum_{i=1}^N X_i$. Then, for $y \in \{0, 1, \ldots, N\}$,
+$$
+\begin{aligned}
+P_Y \left( y \right) 
+ &= P \left( \left\{ \mathbold{x} : \sum_i x_i = y \right\} \right) 
+ &= \binom{N}{y} P_{\mathbold{X}}\left( \mathbold{x} \right) \\
+ &= \binom{N}{y} \theta^y \, (1 - \theta)^{N - y} .
+\end{aligned}
+$$
+
+Recall from previously,
+
+| $y$ | $E = \{ \mathbold{x} \in \{0, 1\}^3 : \sum_i x_i = y \}$ |
+|-----|----------------------------------------------------------|
+|  0  | $\{ 000 \}$                                              |
+|  1  | $\{ 100, 010, 001 \}$                                    |
+|  2  | $\{ 110, 101, 011 \}$                                    |
+|  3  | $\{ 111 \}$                                              |
+
+: {tbl-colwidths="[20,60]"}
+
+We have thus derived the **binomial distribution**.
+
+
+## Binomial distribution
+
+### Definition
+
+A random variable $X$ has a binomial distribution if
+$$
+\begin{aligned}
+P\left( X = x \mid N, \theta \right) \; = \;
+\binom{N}{x} \theta^x \, (1 - \theta)^{N - x}, \quad x \in \{0, 1, \ldots, N\}
+\end{aligned}
+$$
+where $\theta \in [0, 1]$ is the probability of success.
+
+
+## Binomial theorem
+
+### Theorem
+
+For any real numbers $x$ and $y$, and integer $N \ge 0$,
+$$
+(x + y)^N = \sum_{i=0}^N \binom{N}{i} x^i y^{N - i} .
+$$
+
+### Proof
+
+Base case $N = 0$.
+
+LHS: $(x + y)^0 = 1$.
+
+RHS: $\binom{0}{0} x^0 y^{0 - 0} = 1$.
+
+\bigskip
+
+Next, we will assume that the equation holds for $N - 1$, and 
+prove that it also holds for $N$ (a.k.a. inductive step).
+
+---
+
+\bigskip
+
+Assume $(x + y)^{N-1} = \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i}$. Then,
+$$
+\begin{aligned}
+(x + y)^N &= (x + y) (x + y)^{N-1} \\
+ &= (x + y) \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i} \\
+ &= \left( \sum_{i=0}^{N-1} \binom{N-1}{i} x^{i+1} y^{N - 1 - i} \right)
+  + \left( \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - i} \right) .
+\end{aligned}
+$$
+
+In the first sum, re-index with $j = i + 1$. In the second sum, substitute $j = i$.
+This gives
+$$
+\begin{aligned}
+(x + y)^N &=
+    \left( \sum_{j=1}^{N} \binom{N-1}{j-1} x^j y^{N - j} \right)
+  + \left( \sum_{j=0}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right)
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+Next, separate out the last term from the first sum, and the first term
+from the second sum.
+$$
+\begin{aligned}
+(x + y)^N &=
+    \left( \sum_{j=1}^{N-1} \binom{N-1}{j-1} x^j y^{N - j} \right)
+  + \left( \sum_{j=1}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right) \\
+  &\quad + \binom{N-1}{N-1} x^N y^{N-N}
+  + \binom{N}{0} x^0 y^N \\
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+By the binomial coefficient identity,
+$$
+\begin{aligned}
+(x + y)^N &=
+  \left( \sum_{j=1}^{N-1} \binom{N}{j} x^j y^{N - j} \right) 
+  + \binom{N}{N} x^N y^{N-N}
+  + \binom{N}{0} x^0 y^N \\
+  &= \sum_{j=0}^{N} \binom{N}{j} x^j y^{N-j}
+\end{aligned}
+$$
+
+Therefore, by induction,
+$$
+(x + y)^N = \sum_{j=0}^{N} \binom{N}{j} x^j y^{N-j} . \quad \blacksquare
+$$
+
+
+## Proof: Binomial$(N, \theta)$ is a probability distribution
+
+For $x \in \{0, 1, \ldots, N\}$,
+$$
+\text{Binomial}(x \mid N, \theta) 
+ = \binom{N}{x} \theta^x (1 - \theta)^{N - x} .
+$$
+
+### Non-negativity
+
+$\binom{N}{x} \ge 0$ and $\theta \ge 0$.
+$1 - \theta \ge 0$ since $\theta \le 1$.
+
+Therefore, $\text{Binomial}(x \mid N, \theta) \ge 0 \quad \forall x$.
+
+### Unit measure
+
+For $x = \theta$ and $y = 1 - \theta$, by the binomial theorem,
+$$
+\sum_{x=0}^{N} \binom{N}{x} \theta^x (1 - \theta)^{N-x}
+= (\theta + (1 - \theta))^N = 1.
+$$
+
+
+## Summary
+
+Casella & Berger 2002, sections 3.2, pages 86-91, 95-98
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply Bernoulli and binomial distributions in statistical models
+- Derive the binomial and negative binomial distributions
