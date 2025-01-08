@@ -15,8 +15,6 @@ format:
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
-          \newcommand{\mat}[1]{\mathbf{#1}}
-          \renewcommand{\vec}[1]{\mathbold{#1}}
 classoption: t  
 ---
 
@@ -49,7 +47,7 @@ P \left( X = x \mid N \right) \; = \; \frac{1}{N}, \quad
 $$
 where $N > 0$ is an integer parameter.
 
-Useful as a baseline or null model.
+Useful as an expression of ignorance.
 
 Other possible notations are
 $$
