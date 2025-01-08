@@ -15,8 +15,6 @@ format:
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
-          \newcommand{\mat}[1]{\mathbf{#1}}
-          \renewcommand{\vec}[1]{\mathbold{#1}}
 classoption: t  
 ---
 
@@ -122,7 +120,7 @@ Define random variable $X$ as the number of heads.
 
 What event does each possible value of $X$ correspond to?
 
-| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$ |
+| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$   |
 |-------|----------------------------------------------------|
 |       |                                                    |
 |       |                                                    |
@@ -142,7 +140,7 @@ Define random variable $X$ as the number of heads.
 
 What event does each possible value of $X$ correspond to?
 
-| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$ |
+| $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$   |
 |-------|----------------------------------------------------|
 |       |                                                    |
 |       |                                                    |
