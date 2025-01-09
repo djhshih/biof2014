@@ -213,6 +213,11 @@ f_{X,Y}(x, y) = g(x) h(y) .
 $$
 
 
+## Simpson's paradox
+
+
+
+
 ## Summary
 
 Symbolic logic $\rightarrow$ Set theory $\rightarrow$ Probability theory  
