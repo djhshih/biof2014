@@ -1,0 +1,26 @@
+
+Lecture 3, uniform
+
+Prove that the induced probability function $P_X$ satisfies the Kolmogorov's additivity axiom.
+
+---
+
+Lecture 4, binomial
+
+Assignment
+
+Derive geometric distribution from
+the Bernoulli distribution.
+
+Bonus
+
+Derive discrete uniform distribution from the Bernoulii distribution.
+
+---
+
+Lecture 5, joint, conditional, marginal
+
+Given a discrete random vector $(X, Y)$, prove that $f_{Y \mid X} satisfies Kolmogorov's axioms 1 and 2.
+
+Prove that $f_{Y \mid X}(y \mid x) = f_Y(y)$ .
+
