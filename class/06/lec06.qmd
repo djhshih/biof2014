@@ -1,0 +1,182 @@
+---
+title: "Bayes' Theorem"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Apply Bayes' theorems in data modelling
+
+
+## Bayes' theorem for probability functions
+
+If $\mathcal{B}_1, \mathcal{B}_2, \ldots$ be a partition of the sample space 
+$\mathcal{S}$, for any $\mathcal{A} \subseteq \mathcal{S}$,
+$$
+P\left( \mathcal{B}_j \mid \mathcal{A} \right) 
+ = \frac{ P \left( \mathcal{A} \mid \mathcal{B}_j \right)
+   P \left( \mathcal{B}_j \right) }{P\left(\mathcal{A}\right)} ,
+$$
+where $P\left(\mathcal{A}\right)$ is given by the total law of probability:
+$$
+P\left(\mathcal{A}\right) 
+ = \sum_j P\left(\mathcal{A} \mid \mathcal{B}_j \right) 
+   P\left(\mathcal{B}_j\right)
+$$
+
+### Proof
+
+It follows directly from the definition of conditional probability.
+
+
+## Example: Medical testing
+
+Let $X$ be the result of a medical testing: positive ($X = +1$) or negative ($X = -1$).
+
+Let $Y$ represent whether a person has the disease ($Y = 1$) or not ($Y = 0$).
+
+The test has a sensitivity of 0.9, meaning that
+$P \left( X = +1 \mid Y = 1 \right) = 0.9$.
+
+Further, the test has a specificity of 0.6, meaning that
+$P \left( X = -1 \mid Y = 0 \right) = 0.6$, so 
+the false positive rate is $P \left( X = +1 \mid Y = 0 \right) = 1 - 0.6 = 0.4$.
+
+Before taking the test, without knowing any extra knowledge, we may expect a
+person to have same probability of having the disease as the general population,
+which is equal to the disease prevalence.
+
+If the disease prevalence is 1%, we would set $P \left( Y = 1 \right) \; = \; 0.01$.
+
+---
+
+\bigskip
+
+If the test result is positive, then the post-test probability of disease is
+$$
+\begin{aligned}
+&P\left( Y = 1 \mid X = +1 \right) \\
+ &= \frac{ P\left( X = +1 \mid Y = 1\right) P\left( Y = 1 \right) }
+   { 
+    P\left( X = +1 \mid Y = 1 \right) P\left( Y = 1 \right)
+    + P\left( X = +1 \mid Y = 0 \right) P\left( Y = 0 \right)
+   } \\
+ &= \frac{ (0.9)(0.01) }{ (0.9)(0.01) + (1 - 0.4)(1 - 0.01)}
+ \approx 0.022 ,
+\end{aligned}
+$$
+which is higher than probability of disease before the test.
+This value is also called positive predictive value.
+
+---
+
+\bigskip
+
+Conversely, if the result is negative, then the probability of disease after
+the test is
+$$
+\begin{aligned}
+&P\left( Y = 1 \mid X = -1 \right) \\
+ &= \frac{ P\left( X = -1 \mid Y = 1\right) P\left( Y = 1 \right) }
+   { 
+    P\left( X = -1 \mid Y = 1 \right) P\left( Y = 1 \right)
+    + P\left( X = -1 \mid Y = 0 \right) P\left( Y = 0 \right)
+   } \\
+ &= \frac{ (1 - 0.9)(0.01) }{ (1 - 0.9)(0.01) + (0.6)(1 - 0.01)}
+ \approx 0.0017,
+\end{aligned}
+$$
+which is lower than the probability of disease before the test.
+
+
+## Notations
+
+Probability function $P\left(\mathcal{A}\right)$
+takes a set $\mathcal{A} \subseteq \mathcal{S}$ as a input.
+
+Induced probability function 
+$P_X \left( X = x \right)$
+takes a realized value $x$ of the random variable $X$.
+
+\bigskip
+
+Probability mass or density function $f_X(x)$
+
+Cumulative probabilify mass or density function $F_X(x)$
+
+The term "probability distribution" means $f_X(x)$ or $F_X(x)$.
+
+\bigskip
+
+Bayesian shorthand for pmf/pdf is $p(x)$.
+
+
+## Bayes' theorem for probablity distributions
+
+Given observed data $x$, likelihood $p\left( x \mid \theta \right)$, and 
+prior $p\left( \theta \right)$, the posterior of the parameter $\theta$ 
+is given by
+$$
+p\left( \theta \mid x \right)
+ = \frac{ p\left( x \mid \theta \right) \, p\left( \theta \right) }
+   { p\left( x \right) },
+$$
+
+If $\theta$ is discrete, then the model evidence $p\left( x \right)$ 
+is given by
+$$
+p\left( x \right) = \sum_{\theta \in \mathcal{\Theta}} 
+ p\left( x \mid \theta \right) p\left( \theta \right) .
+$$
+
+If $\theta$ is continuous, then
+$$
+p\left( x \right) = \int_{\mathcal{\Theta}} 
+ p\left( x \mid \theta \right) p\left( \theta \right) \, d\theta .
+$$
+
+
+## Notations
+
+Sampling distribution $p\left( X \mid \theta \right)$
+
+\vspace{8em}
+
+Likelihood $L(\theta) = p\left( x \mid \theta \right)$
+
+
+## Uniform-Bernoulli model
+
+
+## Beta-Bernoulli model
+
+
+## Summary
+
+"A Bayesian is skeptical about everything except that he's a Bayesian."
+- Geoffrey Hinton (original source unknown)
+
+\bigskip
+
+Blais 2014, chapters 4-5
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Apply Bayes' theorems in data modelling
