@@ -397,6 +397,10 @@ where $\sup$ is the supremum.
 
 ## Summary
 
+"Probability is a measure of our ignorance."  - Richard Jeffreys
+
+\bigskip
+
 Casella & Berger 2002, sections 3.2, pages 85-86, 98-99
 
 \bigskip

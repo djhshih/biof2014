@@ -316,9 +316,9 @@ total number trials required for one success.
 
 ## Summary
 
-"A Bayesian is skeptical about everything except that he's a Bayesian."
-- Unknown
-  
+"A journey of a thousand miles begins with a single step."  
+- Lao Tzu
+
 \bigskip
 
 Casella & Berger 2002, sections 3.2, pages 86-91, 95-98
