@@ -1,0 +1,230 @@
+---
+title: "Joint, conditional, and marginal distributions"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Apply theorems regarding joint, conditional, and marginal probabilities 
+- Recognize and explain Simpson's paradox
+
+
+## Random vector
+
+### Definition
+
+An $n$-dimensional **random vector** is a function from a sample space 
+$\mathcal{S}$ to $n$-dimensional Euclidean space $\mathcal{R}$^N .
+
+
+## Joint probability mass function
+
+### Definition
+
+Given a discrete bivariate random vector $(X, Y)$, the joint probability mass
+function (pmf) is defined by
+$$
+f_{X, Y}(x, y) \; \triangleq \; P_{X, Y} \left(X = x, Y = y\right) .
+$$
+
+### Properties
+
+A pmf $f_{X, Y}(x, y)$ satisfies
+$$
+f_{X, Y}(x, y) \ge 0 \quad \forall \, (x, y) \in \mathcal{R}^2
+\quad \text{and} \quad
+\sum_{(x, y) \in \mathcal{R}^2} f_{X, Y}(x, y) = 1 .
+$$
+
+
+## Marginal probability mass function
+
+### Definition
+
+The marginal pmfs of random vector $(X, Y)$ are defined by
+$$
+f_X(x) \; \triangleq \; P_X \left(X = x\right) \quad
+f_Y(y) \; \triangleq \; P_Y \left(Y = y\right)
+$$
+
+### Theorem
+
+Given a discrete random vector $(X, Y)$ with joint pmf $f_{X, Y}(x, y)$,
+the marginal pmfs of $X \in \mathcal{X}$ and $Y \in \mathcal{Y}$ are given by
+$$
+f_X(x) = \sum_{y \in \mathcal{Y}} f_{X, Y}(x, y) \quad
+f_Y(x) = \sum_{x \in \mathcal{X}} f_{X, Y}(x, y)
+$$
+
+This theorem follows from the law of total probability.
+
+
+## Total law of probability
+
+Given sample space $\mathcal{S}$, $\mathcal{A} \subseteq \mathcal{S}$,
+$$
+P\left(\mathcal{A}\right) = \sum_i P\left( \mathcal{A} \cap \mathcal{B_i} \right)
+$$
+where $\mathcal{B}_1, \mathcal{B}_2, \ldots \subseteq \mathcal{S}$ is a partition of $\mathcal{S}$,
+which is defined by
+$$
+\begin{aligned}
+\mathcal{B}_i \cap \mathcal{B}_j &= \emptyset \quad \forall i \neq j
+\quad \text{and} \quad
+\bigcup_i^\infty \mathcal{B}_i &= \mathcal{S}
+\end{aligned}
+$$
+
+### Proof
+
+It follows from set theory and Kolmogorov's probability axioms.
+$$
+\begin{aligned}
+\mathcal{A} &= \mathcal{A} \cap \mathcal{S}
+ = \mathcal{A} \cap \left( \bigcup_i \mathcal{B}_i \right)
+ = \bigcup_i \mathcal{A} \cap B_i \\
+P\left( A \right) 
+ &= P\left( \bigcup_i \mathcal{A} \cap B_i \right)
+ = \sum_i P\left( \mathcal{A} \cap \mathcal{B_i} \right)
+ \quad (\text{additivity axiom}) \quad \blacksquare
+\end{aligned}
+$$
+
+## Proof: Marginal pmf
+
+Define $\mathcal{B}_y = \{s \in \mathcal{S}: Y(t) = y\}$.
+
+Since $Y$ is a map from $\mathcal{S}$ to $\mathcal{Y}$, there exists
+some $y$ for every $s \in \mathcal{S}$.
+Then, $\bigcup_{y \in \mathcal{Y}} \mathcal{B}_y = \mathcal{S}$.
+Therefore, $\mathcal{B}_1, \mathcal{B}_2, \ldots$ is a partition of $\mathcal{S}$.
+
+$$
+\begin{aligned}
+f_X(x)
+ &= P_X \left( X = x \right)  \\
+ &= P \left(\{s \in \mathcal{S} : X(s) = x\}\right) \\
+ &= \sum_{y \in \mathcal{Y}} 
+  P \left(\{s \in \mathcal{S} : X(s) = x\}
+    \cap \mathcal{B}_y \right) 
+  \quad (\text{Law of total prob}) \\
+ &= \sum_{y \in \mathcal{Y}} P_{X,Y}\left(X = x, Y = y\right)
+  = \sum_{y \in \mathcal{Y}} f_{X, Y}(x, y)
+\end{aligned}
+$$
+
+The proof for $f_Y(y)$ follows similarly as above. $\blacksquare$
+
+
+## Joint probability density function
+
+### Definition
+
+Given a *continuous* random vector $(X, Y)$, a joint probability density
+function (pdf) is a function $f_{X, Y}(x, y)$ such that, for every subset
+$\mathcal{A} \subset \mathcal{R}^2$,
+$$
+P\left( (X, Y) \in \mathcal{A} \right) \; = \;
+ \int \int_{\mathcal{A}} f_{X, Y}(x, y) \, dx \, dy .
+$$
+The notation $\int \int_{\mathcal{A}}$ means that the limits of integration
+are set so that the function is integrated over all $(x, y) \in \mathcal{A}$.
+
+
+### Properties
+
+A pdf $f_{X,Y}(x, y)$ defined above also satisfies
+$$
+f(x, y) \ge 0 \quad \forall \, (x, y) \in \mathcal{R}^2
+\quad \text{and} \quad
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x, y) \, dx \, dy = 1.
+$$
+
+
+## Marginal probability density function
+
+### Theorem
+
+Given a *continuous* random vector $(X, Y)$ with joint pdf $f_{X,Y}(x,y)$,
+the marginal pdf of $X$ and $Y$ are given by
+$$
+\begin{aligned}
+f_X(x) &= \int_{-\infty}^{\infty} f(x, y) \, dy \quad x \in \mathcal{X}, \\
+f_Y(y) &= \int_{-\infty}^{\infty} f(x, y) \, dy \quad y \in \mathcal{Y}.
+\end{aligned}
+$$
+
+
+## Conditional probability distributions
+
+### Definition
+
+Given a discrete (or continuous) random vector $(X, Y)$ with joint pmf
+(or pdf) $f_{X,Y}(x,y)$ and marginal pmfs (or pdfs) $f_X(x)$ and $f_Y(y)$,
+for any $x$ such that $f_X(x) > 0$, the conditional pmf (or pdf) of $Y$
+given that $X = x$ is defined by
+$$
+f_{Y \mid X} \left( y \mid x \right) = \frac{ f_{X,Y}(x,y) }{ f_X(x) } .
+$$
+
+Similarly, for any $y$ such that $f_Y(y) > 0$,
+$$
+f_{X \mid Y} \left( x \mid y \right) = \frac{ f_{X,Y}(x,y) }{ f_Y(y) } .
+$$
+
+
+## Independence
+
+### Definition
+
+Given random vector $(X, Y)$ with joint pmf (or pdf) $f_{X,Y}(x, y)$ and
+marginal pmfs (or pdfs) $f_X(x)$ and $f_Y(x)$, $X$ and $Y$ are
+**independent** if, for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
+$$
+f_{X, Y}(x, y) = f_X(x) f_Y(y) .
+$$
+
+\bigskip
+
+If $X$ and $Y$ are independent, then $f_{Y \mid X}(y \mid x) = f_Y(y)$.
+
+### Lemma
+
+Given random vector $(X, Y)$, $X$ and $Y$ are independent if and only if (iff)
+there exists functions $g(x)$ and $h(y)$ such that,
+for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
+$$
+f_{X,Y}(x, y) = g(x) h(y) .
+$$
+
+
+## Summary
+
+Symbolic logic $\rightarrow$ Set theory $\rightarrow$ Probability theory  
+$\rightarrow$ Measure theory $\rightarrow$ Statistics $\rightarrow$ Data modelling
+
+\bigskip
+
+Casella & Berger 2002, sections 4.1-4.2
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Apply theorems regarding joint, conditional, and marginal probabilities 
+- Recognize and explain Simpson's paradox
