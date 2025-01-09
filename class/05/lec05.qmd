@@ -131,6 +131,11 @@ $$
 The proof for $f_Y(y)$ follows similarly as above. $\blacksquare$
 
 
+## Marginalization as sweeping
+
+
+
+
 ## Joint probability density function
 
 ### Definition
@@ -186,6 +191,11 @@ Similarly, for any $y$ such that $f_Y(y) > 0$,
 $$
 f_{X \mid Y} \left( x \mid y \right) = \frac{ f_{X,Y}(x,y) }{ f_Y(y) } .
 $$
+
+
+## Conditioning as slicing
+
+
 
 
 ## Independence
