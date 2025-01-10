@@ -43,7 +43,7 @@ A random variable $X$ is *discrete* if $F_X(x)$ is a step funtion of $x$.
 A random variable $X$ has a discrete uniform distribution if
 $$
 P \left( X = x \mid N \right) \; = \; \frac{1}{N}, \quad 
- x = 1, 2, \ldots, N,
+ x \in \{1, 2, \ldots, N \} ,
 $$
 where $N > 0$ is an integer parameter.
 
