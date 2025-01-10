@@ -305,7 +305,7 @@ p\left( \theta \right)
  &= B(a, b)^{-1} \theta^{a - 1} (1 - \theta)^{b - 1} \\
 p\left(\mathbold{x}, \theta \right)
  &= B(a, b)^{-1}
-    \theta^{y + a - 1} (1 - \theta)^{N - y + b - 1} \\
+    \theta^{a + y - 1} (1 - \theta)^{b + N - y - 1} \\
 p\left( \mathbold{x} \right) 
  &= \int_{\mathcal{\Theta}} 
  p\left( \mathbold{x} , \theta \right) \, d\theta 
@@ -329,7 +329,7 @@ p\left( \theta \mid \mathbold{x} \right)
    { p\left( x \right) } \\
  &= \frac{B(a, b)^{-1} 
      \theta^{a + y - 1} (1 - \theta)^{b + N - y - 1} }
-     { B(a, b)^{-1} B(y + a, N - y + b) } \\
+     { B(a, b)^{-1} B(a + y, b + N - y) } \\
  &= B(a + y, b + N - y)^{-1}
     \theta^{a + y - 1} (1 - \theta)^{b + N - y - 1} \\
  &= \text{Beta}\left(\theta \mid a + y, b + N - y \right) .
