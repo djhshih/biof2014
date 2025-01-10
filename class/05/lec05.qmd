@@ -51,6 +51,15 @@ f_{X, Y}(x, y) \ge 0 \quad \forall \, (x, y) \in \mathcal{R}^2
 \sum_{(x, y) \in \mathcal{R}^2} f_{X, Y}(x, y) = 1 .
 $$
 
+### Domain
+
+$f_{X, Y}: \mathcal{R} \times \mathcal{R} \rightarrow [0, 1]$ 
+but we only defined $P_{X, Y}$ for $x \in \mathcal{X} \subseteq \mathcal{R}$
+and $y \in \mathcal{Y}$. 
+So, we define $f_{X, Y} = 0$ for $x \notin \mathcal{X}$ 
+or $y \notin \mathcal{Y}$.
+
+
 
 ## Marginal probability mass function
 
