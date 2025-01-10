@@ -225,7 +225,97 @@ $$
 
 ## Simpson's paradox
 
+$$
+P\left( Y = 1 \mid X = x_1 \right) > 
+ P\left( Y = 1 \mid X = x_2 \right) .
+$$
 
+However, conditioned on $Z = z$ for some $z$,
+$$
+P\left( Y = 1 \mid X = x_1, Z = z \right) < 
+ P\left( Y = 1 \mid X = x_2, Z = z \right) .
+$$
+
+
+## Example: Gender bias?
+
+$Y$ represents undergraduate admission. $X$ represents gender.  
+$Z$ represents department.
+
+$$
+P\left( Y = 1 \mid X = x_1 \right) > 
+ P\left( Y = 1 \mid X = x_2 \right) .
+$$
+
+| All | $x_1$ | $x_2$ |
+|-----|-------|-------|
+| 41% |  **44%**  |  35%  |
+
+: Admission rates by gender
+
+---
+
+\bigskip
+$$
+\begin{aligned}
+P\left( Y = 1 \mid x_1, z \right) &< 
+ P\left( Y = 1 \mid x_2, z \right), \; z \in \{1, 2, 4, 6\} . \\
+P\left( Y = 1 \mid x_1, z \right) &> 
+ P\left( Y = 1 \mid x_2, z \right), \; z \in \{3, 5\} .
+\end{aligned}
+$$
+
+| Department | All | $x_1$ | $x_2$ |
+|------------|-----|-------|-------|
+|      1     | 64% |  62%  |  **82%**  |
+|      2     | 63% |  63%  |  **68%**  |
+|      3     | 35% |  **37%**  |  34%  |
+|      4     | 34% |  33%  |  **35%**  |
+|      5     | 25% |  **28%**  |  24%  |
+|      6     |  6% |   6%  |   **7%**  |
+|  $\ldots$  |     |           |       |
+|     All    | 41% |  **44%**  |  35%  |
+
+: Admission rates by gender and department
+
+---
+
+\bigskip
+
+$$
+\begin{aligned}
+P\left( Y = 1 \mid x_1, z \right) &< 
+ P\left( Y = 1 \mid x_2, z \right), \; z \in \{1, 2, 4, 6\} . \\
+P\left( Y = 1 \mid x_1, z \right) &> 
+ P\left( Y = 1 \mid x_2, z \right), \; z \in \{3, 5\} .
+\end{aligned}
+$$
+
+| Department | All | $x_1$ | $x_2$ |
+|------------|-----|-------|-------|
+|      1     | 933 |  **825**  |  108  |
+|      2     | 585 |  **560**  |   25  |
+|      3     | 918 |  325  |  **593**  |
+|      4     | 792 |  **417**  |  375  |
+|      5     | 584 |  191  |  **393**  |
+|      6     | 714 |  **373**  |  341  |
+|  $\ldots$  |       |         |       |
+|     All    | 12763 |  8442   | 4321  |
+
+: Number of applicants by gender and department
+
+
+## Causal effects?
+
+$$
+P\left( Y = 1 \mid X = x_1 \right) > 
+ P\left( Y = 1 \mid X = x_2 \right)
+ \quad \Rightarrow \quad X \perp Y.
+$$
+
+Suppose that we know that $Y$ does *not* affect $X$.
+
+Does this mean that $X$ affects $Y$?
 
 
 ## Summary
