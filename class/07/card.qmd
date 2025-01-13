@@ -121,3 +121,4 @@ Assume that you have a standard deck of 52 playing cards.
 1. Derive a way to calculate the hypergeometric distribution in a numerically
 stable and computational efficient way as $N$ and $K$ become large while 
 $\frac{K}{N} \in [0, 1]$.
+
