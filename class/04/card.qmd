@@ -95,7 +95,8 @@ well-known Fisher's exact test.
 ## Binomial distribution
 
 We can show that as $N \rightarrow \infty$ while keeping $\frac{K}{N}$
-fixed, the hypergeometric distribution converges to the binomial distribution.
+fixed, Hypergeometric $\left(k \mid N, K, n\right)$ converges to 
+Binomial $\left(k \mid n, \frac{K}{N} \right)$.
 
 
 ## Questions
