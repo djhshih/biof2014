@@ -62,9 +62,9 @@ outcome.
 2. Deal a second card face up to the Player and the Banker.
 3. If either Player or Banker has a hand value of 8 or 9 (called **natural**), 
    compare the hands and declare the winner or a tie.
-4. If the Player wishes to **hit**, deal a third card to the Player.
+4. If the Player wishes to **hit**, deal a third card face up to the Player.
    Otherwise, the Player **stands** (i.e. hand remains the same).
-5. If the Banker wishes to hit, deal a third card to the Banker.
+5. If the Banker wishes to hit, deal a third card face up to the Banker.
    Otherwise, the Banker stands.
 6. Compare the hands and declare the winner or a tie.
 7. Remove all cards from play to start the next round.
