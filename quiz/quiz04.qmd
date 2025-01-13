@@ -1,5 +1,5 @@
 ---
-title: "Quiz 0"
+title: "Quiz 4"
 author: "BIOF2014"
 format: pdf
 ---
@@ -8,7 +8,12 @@ format: pdf
 
 Consider the proof below.
 
-Assume $(x + y)^{N-1} = \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i}$. Then,
+Assume
+$$
+(x + y)^{N-1} = \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i} .
+$$
+
+Then,
 $$
 \begin{aligned}
 (x + y)^N &= (x + y) (x + y)^{N-1} \\
@@ -18,43 +23,47 @@ $$
 \end{aligned}
 $$
 
-In the first sum, re-index with $j = i + 1$. In the second sum, substitute $j = i$.
+In the first sum, re-index with \(j = i + 1\). In the second sum, substitute \(j = i\).
 This gives
 $$
-\begin{aligned}
-(x + y)^N &=
+(x + y)^N =
     \left( \sum_{j=1}^{N} \binom{N-1}{j-1} x^j y^{N - j} \right)
-  + \left( \sum_{j=0}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right)
-\end{aligned}
+  + \left( \sum_{j=0}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right) .
 $$
 
-\bigskip
+Combining the two sums gives
+$$
+(x + y)^N =
+  \left( \sum_{j=0}^{N} \left( \binom{N-1}{j-1} +  \binom{N-1}{j} \right) 
+     x^j y^{N - j} \right) .
+$$
 
-Next, separate out the last term from the first sum, and the first term
-from the second sum.
+By the binomial coefficient identity,
 $$
 \begin{aligned}
-(x + y)^N &=
-    \left( \sum_{j=1}^{N-1} \binom{N-1}{j-1} x^j y^{N - j} \right)
-  + \left( \sum_{j=1}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right) \\
-  &\quad + \binom{N-1}{N-1} x^N y^{N-N}
-  + \binom{N}{0} x^0 y^N \\
+(x + y)^N &= \sum_{j=0}^{N} \binom{N}{j} x^j y^{N-j} .
 \end{aligned}
 $$
 
-Which step of the proof above is not well justified
-or contains an error?
+Therefore, by induction,
+$$
+(x + y)^N = \sum_{j=0}^{N} \binom{N}{j} x^j y^{N-j},
+ \quad N \in \{0, 1, \ldots\}. \quad \blacksquare
+$$
 
 
-*Remark*: On the exam, you will not be asked to spot errors in a proof.
-Rather, you'd be asked to provide fully justified proofs.
+Which step of the proof above is not well justified or contains an error?
+
+
+Remark: On the exam, you will be required to provide fully justified proofs, instead of spotting errors in proofs.
 
 
 ## Question 2
 
 In the Card Drawing tutorial, suppose you draw another set of 8 cards before putting the cards from the first round back into the deck. 
+
 Derive the pmf for the number of non-face
-cards that would be in this second set of cards.
+cards that would be in this second sample of cards.
 
 Define the variables as follows:
 
