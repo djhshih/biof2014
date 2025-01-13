@@ -1,0 +1,52 @@
+---
+title: "Quiz 0"
+author: "BIOF2014"
+format: pdf
+---
+
+## Question 1
+
+Given \(b > a\),
+$$
+f(x) =
+\begin{cases}
+\frac{1}{b - a} \quad & \text{if } x \in [a, b] \\
+0 \quad & \text{otherwise}
+\end{cases}
+$$
+
+Find \( \text{E}(x^2) = \int_{-\infty}^{\infty} x^2 f(x) dx  \).
+
+
+## Question 2
+
+Given
+$$
+L(\lambda) = \prod_{i=1}^N \frac{1}{x_i !} \lambda^{x_i}
+\exp{-\lambda} ,
+$$
+
+Find \( \lambda \) where \( L(\lambda) \) is maximized.
+
+
+## Question 3
+
+Suppose
+$$
+g(x) = \frac{1}{B(\alpha, \beta)} x^{\alpha - 1} (1 - x)^{\beta - 1}, \quad
+x \in (0, 1)
+$$
+and
+$$
+f(x) = b(N, x) \, \theta^x (1 - \theta)^{N - x}, \quad x \in \{0, 1,
+\ldots, N \} .
+$$
+
+We also know that
+$$
+\int_0^1 g(x) \, dx = 1 .
+$$
+
+
+Find \( p(x) = \int_0^1 f(x) \, g(\theta) \, d\theta \) .
+
