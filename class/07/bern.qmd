@@ -192,7 +192,7 @@ $$
 \end{aligned}
 $$
 
-Therefore, by induction,
+Therefore, by induction, for $N = 0, 1, \ldots$,
 $$
 (x + y)^N = \sum_{j=0}^{N} \binom{N}{j} x^j y^{N-j} . \quad \blacksquare
 $$
