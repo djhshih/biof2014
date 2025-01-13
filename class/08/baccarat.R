@@ -27,23 +27,33 @@ simulate_game <- function() {
       }
 
       # basic banker strategy
-      if (banker.value <= 5) {
-         banker.hand <- c(banker.hand, draw_cards(1));
-         banker.value <- hand_value(banker.hand);
+      # if (banker.value <= 5) {
+      #    banker.hand <- c(banker.hand, draw_cards(1));
+      #    banker.value <- hand_value(banker.hand);
+      # }
+      if (banker.value <= player.value) {
+          banker.hand <- c(banker.hand, draw_cards(1));
+          banker.value <- hand_value(banker.hand);
       }
    }
 
    if (player.value > banker.value) {
-      winner <- "player";
+      winner <- 1;
    } else if (banker.value > player.value) {
-      winner <- "banker";
+      winner <- 2;
    } else {
-      winner <- "tie";
+      winner <- 0;
    }
 
    list(player = player.hand, banker = banker.hand, winner = winner)
 }
 
 #set.seed(1234);
-results <- lapply(1:10, function(b) simulate_game());
+results <- lapply(1:100000, function(b) simulate_game());
+
+winners <- vapply(results, function(x) x$winner, 0);
+
+mean(winners == 0)
+mean(winners == 1)
+mean(winners == 2)
 
