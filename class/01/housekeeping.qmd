@@ -59,17 +59,34 @@ Statistical Inference. George Casella, Roger L. Berger. 2002.
 
 ## Assessments
 
-| type          | weight | derivation | programming |
-|---------------|--------|------------|-------------|
-| 15 quizzes    |  10%   |     Y      |             |
-| 8 assignments |  60%   |     Y      |      Y      |
-| 1 exam        |  30%   |     Y      |             |
+| type          | weight | derivation | proof | programming |
+|---------------|--------|------------|-------|-------------|
+| 12 quizzes    |  10%   |     Y      |   ?   |      N      |
+| 8 assignments |  60%   |     Y      |   Y   |      Y      |
+| 1 exam        |  30%   |     Y      |   Y   |      N      |
 
 Quizzes are your opportunity to practice for the exam.
 
-You will be permitted to bring one double-sided A4 sheet of *hand-written* notes
-to the exam. No calculator, computer, phone, or other electronic devices
+Exam questions are similar to derivation and proof questions in 
+the quizzes and the assignments.
+
+You will be permitted to bring one double-sided A4 sheet of *hand-written* 
+notes to the exam. No calculator, computer, phone, or other electronic devices
 are allowed in the exam.
+
+
+## Re-weighting
+
+If your exam grade is higher than your overall grade for the quizzes
+(or assignments), a weight of 10% will be shifted from the quizzes
+(or assignments) to the exam.
+
+| scenario                         | quizzes | assignments | exam |
+|----------------------------------|---------|-------------|------|
+| default                          |   10%   |     60%     |  30% |
+| assignments $\ge$ exam > quizzes |    0%   |     60%     |  40% |
+| quizzes $\ge$ exam > assignments |   10%   |     50%     |  40% |
+| exam > max(quizzes, assignments) |    0%   |     50%     |  50% |
 
 
 ## Lecture recording
@@ -147,6 +164,9 @@ Correct results $\Rightarrow$ correct process (converse error)
 | Incorrect                   | Correct   | 0-20%  |
 | Incorrect                   | Incorrect | 0%     |
 
+
+## Marking scheme
+
 ### Proofs
 
 | Process                                   | Result |  Mark  |
@@ -180,6 +200,8 @@ The penalty for late submission is 10% per day.
 
 Quizzes or assignments will *not* be graded after any answer is discussed or
 released.
+
+Answers to quizzes are released at 8 a.m.\ 7 days after the quiz is open.
 
 
 ## Notations
