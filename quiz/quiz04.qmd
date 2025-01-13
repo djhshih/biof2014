@@ -1,0 +1,69 @@
+---
+title: "Quiz 0"
+author: "BIOF2014"
+format: pdf
+---
+
+## Question 1
+
+Consider the proof below.
+
+Assume $(x + y)^{N-1} = \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i}$. Then,
+$$
+\begin{aligned}
+(x + y)^N &= (x + y) (x + y)^{N-1} \\
+ &= (x + y) \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - 1 - i} \\
+ &= \left( \sum_{i=0}^{N-1} \binom{N-1}{i} x^{i+1} y^{N - 1 - i} \right)
+  + \left( \sum_{i=0}^{N-1} \binom{N-1}{i} x^i y^{N - i} \right) .
+\end{aligned}
+$$
+
+In the first sum, re-index with $j = i + 1$. In the second sum, substitute $j = i$.
+This gives
+$$
+\begin{aligned}
+(x + y)^N &=
+    \left( \sum_{j=1}^{N} \binom{N-1}{j-1} x^j y^{N - j} \right)
+  + \left( \sum_{j=0}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right)
+\end{aligned}
+$$
+
+\bigskip
+
+Next, separate out the last term from the first sum, and the first term
+from the second sum.
+$$
+\begin{aligned}
+(x + y)^N &=
+    \left( \sum_{j=1}^{N-1} \binom{N-1}{j-1} x^j y^{N - j} \right)
+  + \left( \sum_{j=1}^{N-1} \binom{N-1}{j} x^j y^{N - j} \right) \\
+  &\quad + \binom{N-1}{N-1} x^N y^{N-N}
+  + \binom{N}{0} x^0 y^N \\
+\end{aligned}
+$$
+
+Which step of the proof above is not well justified
+or contains an error?
+
+
+*Remark*: On the exam, you will not be asked to spot errors in a proof.
+Rather, you'd be asked to provide fully justified proofs.
+
+
+## Question 2
+
+In the Card Drawing tutorial, suppose you draw another set of 8 cards before putting the cards from the first round back into the deck. 
+Derive the pmf for the number of non-face
+cards that would be in this second set of cards.
+
+Define the variables as follows:
+
+\( N \), number of cards in the deck
+
+\( K \), number of non-face cards in the deck
+
+\( n_i \), number of cards drawn in the \(i\)th round
+
+\( k_i \), number of non-face cards drawn in the \(i\)th round
+
+
