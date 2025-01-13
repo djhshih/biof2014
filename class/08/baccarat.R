@@ -6,7 +6,12 @@ hand_value <- function(hand) {
    sum(hand) %% 10
 }
 
-simulate_game <- function() {
+odds_ratio <- function(prob1, prob2) {
+   prob1 * (1 - prob2) / ((1 - prob1) * prob2)
+}
+
+simulate_game <- function(banker.strategy=0) {
+
    cards <- draw_cards(4);
    player.hand <- cards[c(1, 3)];
    banker.hand <- cards[c(2, 4)];
@@ -26,14 +31,55 @@ simulate_game <- function() {
          player.value <- hand_value(player.hand);
       }
 
-      # basic banker strategy
-      # if (banker.value <= 5) {
-      #    banker.hand <- c(banker.hand, draw_cards(1));
-      #    banker.value <- hand_value(banker.hand);
-      # }
-      if (banker.value <= player.value) {
-          banker.hand <- c(banker.hand, draw_cards(1));
-          banker.value <- hand_value(banker.hand);
+      banker.hits <- FALSE;
+
+      if (banker.strategy == 0) {
+         # basic banker strategy
+         if (banker.value <= 5) {
+            banker.hits <- TRUE;
+         }
+      } else if (banker.strategy == 1) {
+         # banker strategy in Baccarat punto banco
+         # assumes that first two cards are dealt face-down
+         if (length(player.hand) == 2) {
+            if (banker.value <= 5) {
+               banker.hits <- TRUE;
+            }
+         } else {
+            if (player.hand[3] %in% c(0, 1, 9)) {
+               if (banker.value <= 3) {
+                  banker.hits <- TRUE;
+               }
+            } else if (player.hand[3] %in% 2:3) {
+               if (banker.value <= 4) {
+                  banker.hits <- TRUE;
+               }
+            } else if (player.hand[3] %in% 4:5) {
+               if (banker.value <= 5) {
+                  banker.hits <- TRUE;
+               }
+            } else if (player.hand[3] %in% 6:7) {
+               if (banker.value <= 6) {
+                  banker.hits <- TRUE;
+               }
+            } else if (player.hand[3] == 8) {
+               if (banker.value <= 2) {
+                  banker.hits <- TRUE;
+               }
+            }
+         }
+      } else {
+         # banker strategy when all cards are dealt face-up
+         if (banker.value < player.value) {
+            banker.hits <- TRUE;
+         } else if (banker.value == player.value && banker.value <= 5) {
+            banker.hits <- TRUE;
+         }
+      }
+
+      if (banker.hits) {
+         banker.hand <- c(banker.hand, draw_cards(1));
+         banker.value <- hand_value(banker.hand);
       }
    }
 
@@ -49,11 +95,18 @@ simulate_game <- function() {
 }
 
 #set.seed(1234);
-results <- lapply(1:100000, function(b) simulate_game());
 
-winners <- vapply(results, function(x) x$winner, 0);
+results0 <- lapply(1:100000, function(b) simulate_game(banker.strategy=0));
+winners0 <- vapply(results0, function(x) x$winner, 0);
+probs0 <- prop.table(table(winners0))
+odds_ratio(probs0[3], probs0[2])
 
-mean(winners == 0)
-mean(winners == 1)
-mean(winners == 2)
+results1 <- lapply(1:100000, function(b) simulate_game(banker.strategy=1));
+winners1 <- vapply(results1, function(x) x$winner, 0); probs1 <- prop.table(table(winners1))
+odds_ratio(probs1[3], probs1[2])
+
+results2 <- lapply(1:100000, function(b) simulate_game(banker.strategy=2));
+winners2 <- vapply(results2, function(x) x$winner, 0);
+probs2 <- prop.table(table(winners2))
+odds_ratio(probs2[3], probs2[2])
 
