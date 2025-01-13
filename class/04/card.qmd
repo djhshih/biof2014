@@ -54,13 +54,16 @@ population with containing $K$ successes from a population size of $N$.
 
 The hypergeometric pmf is given by
 $$
-P_X(k) = \frac{ \binom{K}{k} \binom{N - K}{n - k} }{ N n } .
+P_X(k \mid N, K, n) = \frac{ \binom{K}{k} \binom{N - K}{n - k} }
+ { \binom{N}{n} } ,
+ \quad k \in \{0, 1, \ldots, K\} ,
 $$
+where $k \le K$ and $n - k \le N - K$.
 
-The derivation of this distribution is as follows. We need to
+To derive the hypergeometric distribution, we need to
 determine two numbers:
 
-$M$, the total number of possible combinations.  
+$M$, the total number of possible combinations of samples.
 $m$, the number of possible combinations that satisfy the specified
    number of success $k$.  
 
@@ -72,10 +75,9 @@ from a population of $N$ is $M = \binom{N}{n}$.
 As for $m$, the $k$ observed successes come from $K$ successes in the 
 population, and there are $\binom{K}{k}$ combinations for the
 observed successes.
-
 Conversely, the $n - k$ observed failures come from $N - K$ failures
 in the population, and there are $\binom{N - K}{n - k}$ combinations
-for the observed failures.
+for these observed failures.
 
 Therefore, $m = \binom{K}{k} \binom{N - K}{n - k}$.
 
@@ -86,7 +88,8 @@ P_X(k) = \frac{m}{M}
  \quad \blacksquare
 $$
 
-The hypergeometric distribution forms the basis for the Fisher's exact test.
+Notably, the hypergeometric distribution forms the basis for the 
+well-known Fisher's exact test.
 
 
 ## Binomial distribution
