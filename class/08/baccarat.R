@@ -10,6 +10,10 @@ odds_ratio <- function(prob1, prob2) {
    prob1 * (1 - prob2) / ((1 - prob1) * prob2)
 }
 
+norm <- function(probs) {
+   probs / sum(probs)
+}
+
 simulate_game <- function(banker.strategy=0) {
 
    cards <- draw_cards(4);
@@ -96,17 +100,22 @@ simulate_game <- function(banker.strategy=0) {
 
 #set.seed(1234);
 
+commissions <- c(0, 0.05);
+
 results0 <- lapply(1:100000, function(b) simulate_game(banker.strategy=0));
 winners0 <- vapply(results0, function(x) x$winner, 0);
 probs0 <- prop.table(table(winners0))
 odds_ratio(probs0[3], probs0[2])
+norm(probs0[2:3]) * (1 - commissions)
 
 results1 <- lapply(1:100000, function(b) simulate_game(banker.strategy=1));
 winners1 <- vapply(results1, function(x) x$winner, 0); probs1 <- prop.table(table(winners1))
 odds_ratio(probs1[3], probs1[2])
+norm(probs1[2:3]) * (1 - commissions)
 
 results2 <- lapply(1:100000, function(b) simulate_game(banker.strategy=2));
 winners2 <- vapply(results2, function(x) x$winner, 0);
 probs2 <- prop.table(table(winners2))
 odds_ratio(probs2[3], probs2[2])
+norm(probs2[2:3]) * (1 - commissions)
 
