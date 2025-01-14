@@ -1,5 +1,5 @@
 ---
-title: "Baccarat chemin de fer"
+title: "Baccarat Chemin de Fer"
 author: "BIOF2014"
 format:
   pdf:
@@ -17,7 +17,7 @@ format:
           \usepackage{mathtools}
 ---
 
-We will play the *chemin de fer* variant of the Baccart card game.
+We will play the *Chemin de Fer* variant of the *Baccart* card game.
 
 ## Game rules
 
@@ -68,10 +68,10 @@ In deriving the theoreotical probability distributions below, you may
 assume that an infinitely large combined deck is used
 (i.e. an infinite number of decks are shuffled together).
 
-1. Traditionally, in *chemin de fer*, the first two cards for each hand
+1. Traditionally, in *Chemin de Fer*, the first two cards for each hand
    are dealt face down. Explain whether this makes a difference
    to the outcomes of the game.
-2. Typically, in *chemin de fer*, six decks or more are mixed together. 
+2. Typically, in *Chemin de Fer*, six decks or more are mixed together. 
    Explain whether this makes a difference.
 3. What are the empirical marginal probabilities of obtaining a final
    hand value of 9 for the Player and the Banker?
