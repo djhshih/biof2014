@@ -105,9 +105,10 @@ It is often overfitted to the questions in the training set.
 ChatGPT can be useful for correcting grammar, improving writing, and perhaps
 as a second opinion.
 
-ChatGPT does poorly (40-70%) on my questions for other courses.
+ChatGPT does poorly (0-60%) on my questions for other courses.
 
-ChatGPT answers are often vague. They also lack mathematical rigor.
+ChatGPT answers are often vague. Their derivations seem helpful on the surface
+but lack mathematical rigor and contain hallucinated/magical steps.
 
 
 ## Marking
