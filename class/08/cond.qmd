@@ -51,14 +51,26 @@ f_{X, Y}(x, y) \ge 0 \quad \forall \, (x, y) \in \mathcal{R}^2
 \sum_{(x, y) \in \mathcal{R}^2} f_{X, Y}(x, y) = 1 .
 $$
 
-### Domain
+
+## Support
 
 $f_{X, Y}: \mathcal{R} \times \mathcal{R} \rightarrow [0, 1]$ 
 but we only defined $P_{X, Y}$ for $x \in \mathcal{X} \subseteq \mathcal{R}$
 and $y \in \mathcal{Y}$. 
-So, we define $f_{X, Y} = 0$ for $x \notin \mathcal{X}$ 
-or $y \notin \mathcal{Y}$.
 
+\bigskip
+
+### Definition
+
+The **support** of a distribution $f_X(x)$ is
+$$
+\mathcal{X} = \{ x: f_X(x) > 0 \}.
+$$
+
+\bigskip
+
+Therefore, $f_{X, Y} = 0$ for $x \notin \mathcal{X}$ 
+or $y \notin \mathcal{Y}$.
 
 
 ## Marginal probability mass function
