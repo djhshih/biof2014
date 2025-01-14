@@ -179,19 +179,9 @@ probs.S[s.idx]
 ## Questions
 
 1. When we are drawing coin flips, why do we sample with replacement?
-2. Check that the induced probability function on X satisfy Kolmogorov's
-   axioms of proability.
-3. How does changing the probability function on the sample space change
+2. How does changing the probability function on the sample space change
    the induced probability function on X?
-4. How can we sample the random variable X directly? This can be implemented
-   in one-line of code using `probs.x`.
-
-
-## Bonus questions
-
-1. As the number of trials increases, can we still calculate `prob.x`
+3. As the number of trials increases, can we still calculate `prob.x`
    accurately? If not, modify the code to make the calculation of
    `prob.x` more accurate.
-2. How can we implement the induced probability function on X in a more
-   computationally efficient manner?
 
