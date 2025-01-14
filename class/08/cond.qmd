@@ -213,14 +213,17 @@ $$
 
 Given random vector $(X, Y)$ with joint pmf (or pdf) $f_{X,Y}(x, y)$ and
 marginal pmfs (or pdfs) $f_X(x)$ and $f_Y(x)$, $X$ and $Y$ are
-**independent** if, for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
+**independent** iff, for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
 $$
 f_{X, Y}(x, y) = f_X(x) f_Y(y) .
 $$
 
+If $X$ are $Y$ are independent, we write $X \perp Y$.
+
 \bigskip
 
-If $X$ and $Y$ are independent, then $f_{Y \mid X}(y \mid x) = f_Y(y)$.
+$X \perp Y \; \Rightarrow \; f_{Y \mid X}(y \mid x) = f_Y(y)$
+for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$ .
 
 ### Lemma
 
