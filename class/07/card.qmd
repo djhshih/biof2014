@@ -107,14 +107,9 @@ Assume that you have a standard deck of 52 playing cards.
 2. What is the difference in the probability of drawing an ace of spades 
    vs. a two of clubs from a deck?
 3. What is the probability of drawing any unique card from a deck?
-4. Explain why the hypergeometric distribution is an appropriate model
-   for the card drawing experiment above.
-5. Plot out the theoretical hypergeometric pmf we would expect to 
+4. Plot out the theoretical hypergeometric pmf we would expect to 
    observe in the card drawing experiment we performed above.
    Compare the empirical and the theoretical pmf.
-6. Modify the experimental procedure so that a binomial distribution
-   would be an appropriate model for drawing cards from a finite deck.
-
 
 ## Bonus question
 

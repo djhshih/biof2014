@@ -64,6 +64,10 @@ outcome.
 
 ## Questions
 
+In deriving the theoreotical probability distributions below, you may
+assume that an infinitely large combined deck is used
+(i.e. an infinite number of decks are shuffled together).
+
 1. Traditionally, in *chemin de fer*, the first two cards for each hand
    are dealt face down. Explain whether this makes a difference
    to the outcomes of the game.
@@ -73,15 +77,15 @@ outcome.
    hand value of 9 for the Player and the Banker?
 4. Derive the theoreotical marginal probability of obtaining a final
    hand value of 9 for the Player and the Banker.
-   Assume that an infinite number of decks are shuffled together.
 5. Derive the theoreotical conditional probabilty distribution of
    the hand value with a third card if the first two cards have a value
-   of 7. Assume that an infinite number of decks are shuffled together.
+   of 7. 
 
 
 ## Bonus question
 
 1. Assume that the first two cards for each hand are dealt face down.
+   Assume an infinitely large combined deck.
    Prove whether the following strategy is optimal for the Player:
    - Hit on hand values of 5 and below;
    - Stand otherwise.
