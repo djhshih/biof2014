@@ -107,6 +107,8 @@ as a second opinion.
 
 ChatGPT does poorly (40-70%) on my questions for other courses.
 
+ChatGPT answers are often vague. They also lack mathematical rigor.
+
 
 ## Marking
 
@@ -141,6 +143,8 @@ Math is as objective as it gets.
 Getting the final answer right is *not* sufficient for full mark.
 
 Rigor and clarity are just as important as the final answer.
+
+All questions must be answered with *mathematical rigor*.
 
 \bigskip
 
