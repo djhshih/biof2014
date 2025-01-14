@@ -213,7 +213,8 @@ $$
 
 Given random vector $(X, Y)$ with joint pmf (or pdf) $f_{X,Y}(x, y)$ and
 marginal pmfs (or pdfs) $f_X(x)$ and $f_Y(x)$, $X$ and $Y$ are
-**independent** iff, for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
+**independent** if and only if (iff),
+for every $x \in \mathcal{X}$ and $y \in \mathcal{Y}$,
 $$
 f_{X, Y}(x, y) = f_X(x) f_Y(y) .
 $$
