@@ -183,7 +183,7 @@ Correct results $\Rightarrow$ correct process (converse error)
 "It ain't what you don't know that gets you into trouble. It's what you know
 for sure that just ain't so."  – Mark Twain
 
-For each non-bonus assignment question, you can get 1 mark for writing 
+For each assignment question, you can get 1 mark for writing 
 "I don't know", provided that all the following conditions hold:
 
 a. "I don't know" is the entirety of your answer
