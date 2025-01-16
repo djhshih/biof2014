@@ -1,0 +1,213 @@
+---
+title: "Germline variant calling"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Short-read sequencing
+
+High-throughput short-read sequencing data consists of millions of 
+sequencing reads.
+Each read consists of a **base sequence** of a fixed length (50-150 bp), 
+such as
+```
+TAGTAAAACTTGTTTTATAAGTTCCGTTAAGCACACCCAGTCAGAAAATG
+```
+
+(If the reads have been trimmed, their lengths may be variable.)
+
+Each read is also associated with a **base quality score sequence**:
+```
+BBBFFFFFFFFFFFFFFFIIFIFIIIFIIFFIIIIIII<FFFBFIIFIIF
+```
+The base qualities are represented by ASCII characters. Different sequencing
+vendors have now standardized on the Phred+33 scale, which assigns a
+quality score of 0 to `!` (which has an integer value of 33 in the ASCII
+table). Additionally, quality scores of 32, 33, 34, ... to `A`, `B`, `C`, 
+... respectively (See [FASTQ format][1] for details). 
+The quality score $Q$ is defined on a Phred scale, which means that
+$$
+Q = -10 \log_{10}(e) ,
+$$
+where $e$ is the **probability of base read error**.
+
+
+## Sequence alignment
+
+In reference-based sequencing analysis, the short reads are aligned
+to the reference genome using a short-read aligner such as [BWA-MEM][2].
+After alignment and pile-up, we can count the numbers of reference and 
+alternative alleles at each genomic position. To simplify the task,
+only the reference allele and the most frequent non-reference allele 
+would be considered, and we refer to the latter as the alternative allele.
+
+```
+reference
+pos   1234567890123456789012345678901234567890123456789012345678901234567890123
+seq   TAGTAAAACTTGTTTTATAAGTTCCGTTAAGCACACCCAGTCAGAAAATGGCAATAAAGACCATATAGATGAG
+
+alignment
+reads TAGTAAAACTTGTTTTATAAGTTCCGTTAAGCACACCCAGTCAGAAAATG
+        GTAAAACTTGTTTTATATGTTCCGTTAAGCACACCCAGTCAGAAAATGAC
+          AAAACTTGTTTTATATGTTCCGTTAAGCACACCCAGTCAGAAAATGACAAT
+            AACTTGTTTTATATGTTCCGTTAAGCACACCCAGTCAGAAAATGACAATAA
+                 GTTTTATAAGTTCCGTTAAGCACACCCAGTCAGAAAATGGCAATAAAGACC
+                      ATATGTTCCGTTAAGCACACCCAGTCAGAAAATGACAATAAAGACCATATA
+                        AAGTTCCGTTAAGCACACCCAGTCAGAAAATGACAATAAAGACCATATAGA
+                           TTCCGTTAAGCACACCCAGTCAGAAAATGGCAATAAAGACCATATAGATGA
+                                  AAGCACACCCAGTCAGAAAATGACAATAAAGACCATATAGATGAG
+
+allele counts
+ref   1122334444455555667378888888999999999999999999999928777665555544444332221
+alt   0000000000000000000400000000000000000000000000000060000000000000000000000
+```
+
+
+## Variant calling
+
+There are many types of variants that can occur in the DNA. We will focus on the simplest
+and most abundant type of variants known as **single-nucleotide variants** (SNV), which
+involves the change of a single nucleotide in the DNA (e.g. A>T, G>A).
+
+In SNV calling, we are only interested in positions with a alternative 
+alleles, the input to the mutation calling model would be the reads and their
+quality scores at selected positions. 
+
+Additionally, each aligned read is also given an **mapping quality score** by the
+aligner, which is a Phred scale score correpsonding to the probability that a
+read is mapped/aligned to the incorrect position.
+
+The bioinformatic tool `bcftools` implements a simple statistical model for 
+[SNV calling][3]. Let's derive a Bayesian model for SNV calling.
+
+### Data
+
+The data consists of the read $j \in \{1 \ldots J \}$ that overlap 
+with a specific genomic position $l$. Our model will analyze each 
+genomic position separately, so we will omit index $l$ from our model. 
+
+$X_j$ represents an observed random variable indicator for whether 
+read $j$ contains the  alternative allele at the base that 
+aligns to genomic position $l$. 
+If read $j$ contains the alternative allele, $X_j = 1$;
+otherwise, $X_j = 0$. Let $\mathbold{X} = [X_j]$ be the vector
+of read indicators.
+
+$e_j \in [0, 1]$ represents the probability of read error for read $j$ 
+at the base that aligns to position $l$. We treat $e_j$ as an known
+fixed value.
+
+
+### Haploid model
+
+Our goal is to infer the unknown genotype $G$ at position $l$.
+Let's first consider a simple haploid model where $G = 0$ 
+if the genotype is reference, and $G = 1$ if the genotype is alternative.
+
+The likelihood is
+$$
+\begin{aligned}
+p \left( x_j \mid G = 0 \right) 
+\; &= \;
+\begin{cases}
+1 - e_j & \text{ if } x_j = 0 \\
+e_j & \text{ if } x_j = 1
+\end{cases}
+\quad &&= \; (1 - e_j)^{1 - x_j} e_j^{x_j} 
+\\
+p \left( x_j \mid G = 1 \right) 
+\; &= \; 
+\begin{cases}
+e_j & \text{ if } x_j = 0 \\
+1 - e_j & \text{ if } x_j = 1
+\end{cases}
+\quad &&= \; e_j^{1 - x_j} e_j^{x_j} .
+\end{aligned}
+$$
+
+Since the reads are independent,
+$$
+p \left( \mathbold{x} \mid g \right) = \prod_j p \left( x_j \mid g \right) .
+$$
+
+Let's start with an uniform prior:
+$$
+p \left( g \right) = \frac{1}{2} .
+$$
+
+
+### Diploid model
+
+Indeed, many organisms including humans are diploid. So, let's derive a SNV 
+calling model for diploids.
+
+At position $l$, let $G \in \{0, 1, 2\}$ represent the diploid genotype as follows:
+
+- $G = 0$ for homozygous reference
+- $G = 1$ for heterozygous
+- $G = 2$ for homozygous alternative
+
+The homozygous genotypes have the same likelihoods as in the corresponding
+genotypes under the haploid model:
+$$
+\begin{aligned}
+p \left( x_j \mid G = 0 \right) 
+\; &= \;
+\begin{cases}
+1 - e_j & \text{ if } x_j = 0 \\
+e_j & \text{ if } x_j = 1
+\end{cases}
+\\
+p \left( x_j \mid G = 2 \right) 
+\; &= \; 
+\begin{cases}
+e_j & \text{ if } x_j = 0 \\
+1 - e_j & \text{ if } x_j = 1
+\end{cases} .
+\end{aligned} 
+$$
+
+As for the heterozygous genotype, observing the reference allele
+is equal probable to observing alternative allele. Therefore,
+$$
+p\left( x_j \mid G = 1 \right)
+\; = \; 
+\begin{cases}
+\frac{1}{2} & \text{ if } x_j = 0 \\
+\frac{1}{2} & \text{ if } x_j = 1
+\end{cases} .
+$$
+
+A uniform prior on $G \in \{0, 1, 2\}$ would be
+$$
+p \left( g \right) = \frac{1}{3} .
+$$
+
+
+### General model
+
+
+
+## References
+
+[1]: https://en.wikipedia.org/wiki/FASTQ_format
+[2]: https://github.com/lh3/bwa
+[3]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3198575/pdf/btr509.pdf
+
+## Questions
+
+
+
