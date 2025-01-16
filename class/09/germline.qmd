@@ -201,13 +201,13 @@ $$
 
 
 
-## References
 
-[1]: https://en.wikipedia.org/wiki/FASTQ_format
-[2]: https://github.com/lh3/bwa
-[3]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3198575/pdf/btr509.pdf
 
 ## Questions
 
 
 
+
+[1]: https://en.wikipedia.org/wiki/FASTQ_format
+[2]: https://github.com/lh3/bwa
+[3]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3198575/pdf/btr509.pdf
