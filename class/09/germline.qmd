@@ -91,7 +91,7 @@ aligner, which is a Phred scale score correpsonding to the probability that a
 read is mapped/aligned to the incorrect position.
 
 The bioinformatic tool `bcftools` implements a simple statistical model for 
-[SNV calling][3]. Let's derive a Bayesian model for SNV calling.
+SNV calling, as detailed in [Li 2011][3]. Let's derive a Bayesian model for SNV calling.
 
 ### Data
 
@@ -199,13 +199,18 @@ $$
 
 ### General model
 
-
+TODO
 
 
 
 ## Questions
 
-
+1. Which distribution are the likelihoods in the models above based on?
+2. Why is $e_j$ always written in lower case?
+3. Why don't we need to condition the likelihood on $e_j$?
+4. Is a uniform prior on $G$ appropriate? Can we do better?
+5. Show that the likelihood in the general model is equivalent to the
+   likelihood in [Li 2011][3].
 
 
 [1]: https://en.wikipedia.org/wiki/FASTQ_format
