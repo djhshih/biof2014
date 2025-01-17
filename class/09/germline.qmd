@@ -1,5 +1,5 @@
 ---
-title: "Germline variant calling"
+title: "Germline Variant Calling"
 author: "BIOF2014"
 format:
   pdf:
@@ -202,9 +202,9 @@ $$
 
 ### General model
 
-Let's extend our model to support any ploidy $m = 1, 2, 3, 4, \ldots$
+Let's extend our model to support any ploidy $M = 1, 2, 3, 4, \ldots$
 
-We now define $G \in \{0, \ldots m\}$ more generally as the number of 
+We now define $G \in \{0, \ldots M\}$ more generally as the number of 
 copies of the alternative alleles at a specific position $l$ in the genome.
 
 To help us think through the problem, we introduce a **latent**
@@ -246,50 +246,50 @@ $$
 
 Now, we need to derive $p \left( z_j \mid g, m \right)$.
 
-Similar to the haploid model, $p \left( z_j \mid g , m = 1 \right)$ 
+Similar to the haploid model, $p \left( z_j \mid g , M = 1 \right)$ 
 is given by
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, m = 1 \right) = 1 
+p\left( z_j = 0 \mid G = 0, M = 1 \right) = 1 
 \quad\quad &
-p\left( z_j = 1 \mid G = 0, m = 1 \right) = 0 \\
-p\left( z_j = 0 \mid G = 1, m = 1 \right) = 0
+p\left( z_j = 1 \mid G = 0, M = 1 \right) = 0 \\
+p\left( z_j = 0 \mid G = 1, M = 1 \right) = 0
 \quad\quad &
-p\left( z_j = 1 \mid G = 1, m = 1 \right) = 1 .
+p\left( z_j = 1 \mid G = 1, M = 1 \right) = 1 .
 \end{aligned}
 $$
 
-Similar to the diploid model, $p \left( z_j \mid g , m = 2 \right)$ 
+Similar to the diploid model, $p \left( z_j \mid G , M = 2 \right)$ 
 is given by
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, m = 2 \right) = 1 
+p\left( z_j = 0 \mid G = 0, M = 2 \right) = 1 
 \quad\quad &
-p\left( z_j = 1 \mid G = 0, m = 2 \right) = 0 \\
-p\left( z_j = 0 \mid G = 1, m = 2 \right) = \frac{1}{2}
+p\left( z_j = 1 \mid G = 0, M = 2 \right) = 0 \\
+p\left( z_j = 0 \mid G = 1, M = 2 \right) = \frac{1}{2}
 \quad\quad &
-p\left( z_j = 1 \mid G = 1, m = 2 \right) = \frac{1}{2} \\
-p\left( z_j = 0 \mid G = 2, m = 2 \right) = 0
+p\left( z_j = 1 \mid G = 1, M = 2 \right) = \frac{1}{2} \\
+p\left( z_j = 0 \mid G = 2, M = 2 \right) = 0
 \quad\quad &
-p\left( z_j = 1 \mid G = 2, m = 2 \right) = 1 .
+p\left( z_j = 1 \mid G = 2, M = 2 \right) = 1 .
 \end{aligned}
 $$
 
 Do you recognize the pattern?
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, m = 3 \right) = 
+p\left( z_j = 0 \mid G = 0, M = 3 \right) = 
 \quad\quad &
-p\left( z_j = 1 \mid G = 0, m = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 1, m = 3 \right) = 
+p\left( z_j = 1 \mid G = 0, M = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 1, M = 3 \right) = 
 \quad\quad &
-p\left( z_j = 1 \mid G = 1, m = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 2, m = 3 \right) = 
+p\left( z_j = 1 \mid G = 1, M = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 2, M = 3 \right) = 
 \quad\quad &
-p\left( z_j = 1 \mid G = 2, m = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 3, m = 3 \right) = 
+p\left( z_j = 1 \mid G = 2, M = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 3, M = 3 \right) = 
 \quad\quad &
-p\left( z_j = 1 \mid G = 3, m = 3 \right) =  .
+p\left( z_j = 1 \mid G = 3, M = 3 \right) =  .
 \end{aligned}
 $$
 
@@ -307,10 +307,6 @@ for the likelihood $p \left( x_j \mid g, m \right)$.
 5. Under the general model, which probability rule was applied at
    each step in the derivation of $p \left( x_j \mid g, m \right)$?
 6. Fill in the missing probabilities for $p(z_j \mid g, m)$.
-7. Complete the derivation of the likelihood $p \left( x_j \mid g, m \right)$
-   under the general model.
-8. Show that the likelihood you derived for the general model is 
-   equivalent to the likelihood in [Li 2011][3].
 
 
 [1]: https://en.wikipedia.org/wiki/FASTQ_format
