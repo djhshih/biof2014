@@ -27,14 +27,15 @@ in present in the cancer cells but not the normal cells. These are known
 as **somatic variants** (or mutations).
 
 Let $g_N$ represent the genotype in normal cells at a genomic position $l$,
-and let $g_T$ represent the genotype in tumour cells. The **joint genotypes**
-are as follows:
+and let $g_T$ represent the genotype in tumour cells. The joint genotypes are as follows.
 
 |           $g_T$ = | AA        | AB       | BB       |
 |------------------:|-----------|----------|----------|
 | $g_N = \text{AA}$ | wild type | somatic  | somatic  |
 | AB                | LOH       | germline | LOH      |
 | BB                | error     | error    | germline |
+
+: Joint genotype of a tumour-normal pair
 
 LOH, loss of heterozygosity.
 
@@ -49,10 +50,118 @@ by accounting for whether a read is mapped correctly using its
 **mapping quality score**.
 
 
-## Model
+## Somatic variant model for a tumour sample
 
-Our somatic model will assess each genomic position $l$ separately, so we
+Our model will assess each genomic position $l$ separately, so we
 will omit the $l$ index.
+
+The input consists of $J$ reads with observed read status 
+$\mathbold{X} = [X_j]$, base correctness probabilities
+$\mathbold{q} = [q_j]$, and mapping correctness probabilities 
+$\mathbold{r} = [r_j]$.
+$X_j = 1$ if read $j$ contains the alternative allele at genomic position
+$l$, and $X_j = 0$ otherwise.
+$q_j$ represents probability that the base mapping to genomic position 
+$l$ is read correctly.
+In other words, $q_j = 1 - e_j$ where $e_j$ is the probability of 
+read error as defined in the previous tutorial.
+$r_j$ represents the probability that read $j$ is mapped
+correctly.
+We will treat $x_j$ as observed random variables, while
+$q_j$ and $r_j$ are observed fixed values.
+
+We define $Z_j$ as the latent indicator random variable for 
+$X_j$ such that $Z_j = 1$ if read $j$ truly contains the 
+alternative allele and $Z_j = 0$ otherwise.
+
+We further $B_j$ as the latent indicator random variable such that
+$B_j = 1$ if read $j$ is mapped correctly and $B_j = 0$ otherwise.
+
+If read $j$ is mapped correctly ($B_j = 1$), the likelihood is 
+similar to the germline variant model:
+$$
+\begin{aligned}
+p \left( x_j \mid Z_j = 1, B_j = 1 \right)
+&= \begin{cases}
+ q_j & \text{ if } x_j = 1 \\
+ 1 - q_j & \text{ if } x_j = 0
+\end{cases} \\
+p \left( x_j \mid Z_j = 0, B_j = 1 \right)
+&= \begin{cases}
+ 1 - q_j & \text{ if } x_j = 1 \\
+ q_j & \text{ if } x_j = 0
+\end{cases} .
+\end{aligned}
+$$
+
+If read $j$ is mapped incorrectly ($B_j = 0$), the likelihood is
+uniform over the domain of $x_j$:
+$$
+p \left( x_j \mid Z_j = 1, B_j = 0 \right) = \frac{1}{2},
+\quad x_j \in \{0, 1\} .
+$$
+
+The prior on the latent mapping indicator $B_j$ is given by
+$$
+p \left( b_j \right)
+= \begin{cases}
+ r_j & \text{ if } b_j = 1 \\
+ 1 - r_j & \text{ if } b_j = 0
+\end{cases} .
+$$
+
+Now, the prior on the latent read indicator $Z_j$ is a bit different
+from the germline variant model.
+$$
+p \left( z_j \mid g, \mu_g \right) = 
+\begin{cases}
+ \mu_g & \text{ if } z_j = 1 \\
+ 1 - \mu_g & \text{ if } z_j = 0
+\end{cases} .
+$$
+In other words, $\mu_g$ is the probability that $z_j = 1$ given genotype 
+$g \in \{0, 1, \ldots, m\}$, which represents the number of copies of 
+the alternative allele.
+
+Under the germline variant model, we derived a general expression
+for $p(z_j \mid g, m)$ based on genotype $g$ and ploidy $m$. 
+Recall that
+$$
+p(z_j \mid g, m) =
+\begin{cases}
+ \frac{g}{m} & \text{ if } z_j = 1 \\
+ 1 - \frac{g}{m} & \text{ if } z_j = 0
+\end{cases}  .
+$$
+Therefore, $\mu_g = \frac{g}{m}$ for germline variants.
+
+However, under a somatic variant model, $\mu_g$ is more difficult to
+define because it now depends on the joint genotype of the tumour
+sample as its matched normal sample. Rather than defining $\mu_g$ directly,
+we can define it probabilitistic by putting a prior on $\mu_g$.
+$$
+p \left( \mu_g \right) = \text{Beta} \left( \mu_g \mid a_g, b_g \right) ,
+$$
+where $a_g$ and $b_g$ are model **hyperparameters** (i.e. tuning parameters
+that we can set to specific values). Hyperapameters are normally treated
+as fixed values.
+
+Hence, we have extended our germline variant model to consider mapping errors
+and to incorporate uncertainty or variability in $\mu_g$.
+The model that we described so far closely resembles the [SNVMix2 model][1],
+though we have fixed a few errors in the latter model.
+
+
+## Somatic variant model for a tumour-normal sample pair
+
+Previously, we defined the unknown genotype parameter $G$ as the
+number of copies of the alternative allele in the genome of the sample
+at position $l$. Now, we have a tumour-normal pair, and we need to
+formally define $G$ as the joint genotype of tumour-normal pair (Table 1).
+
+
+
+
 
 
 ## Questions
@@ -60,5 +169,5 @@ will omit the $l$ index.
 1. 
 
 
-[1]: jointsnvmix
-[2]: snvmix
+[1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC2832826/pdf/btq040.pdf
+[2]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3315723/pdf/bts053.pdf
