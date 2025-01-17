@@ -114,8 +114,11 @@ fixed value.
 ### Haploid model
 
 Our goal is to infer the unknown genotype $G$ at position $l$.
-Let's first consider a simple haploid model where $G = 0$ 
-if the genotype is reference, and $G = 1$ if the genotype is alternative.
+Let's first consider a simple haploid model.
+Let $m$ represent the ploidy (i.e. the total number of alleles).
+
+We define the unknown random variable $G = 0$ if the genotype is reference,
+and $G = 1$ if the genotype is alternative.
 
 The likelihood is
 $$
@@ -152,9 +155,9 @@ $$
 ### Diploid model
 
 Indeed, many organisms including humans are diploid. So, let's derive a SNV 
-calling model for diploids.
+calling model for diploids ($m = 2$).
 
-At position $l$, let $G \in \{0, 1, 2\}$ represent the diploid genotype as follows:
+At position $l$, let $G \in \{0, 1, 2\}$ represent the diploid genotype;
 
 - $G = 0$ for homozygous reference
 - $G = 1$ for heterozygous
@@ -199,8 +202,100 @@ $$
 
 ### General model
 
-TODO
+Let's extend our model to support any ploidy $m = 1, 2, 3, 4, \ldots$
 
+We now define $G \in \{0, \ldots m\}$ more generally as the number of 
+copies of the alternative alleles at a specific position $l$ in the genome.
+
+To help us think through the problem, we introduce a **latent**
+(i.e. unknown and unobserved) random variable $Z_j$ that represents whether
+read $j$ truly correspond to the alternative allele. The **observed**
+random variable $X_j$ represents whether read $j$ is observed to correspond
+to the alternative allele, and $Z_j$ represents the unknown underlying truth.
+
+Similar to the haploid model, if we know $Z_J$, then,
+$$
+\begin{aligned}
+p \left( x_j \mid Z_j = 0 \right) 
+\; &= \;
+\begin{cases}
+1 - e_j & \text{ if } x_j = 0 \\
+e_j & \text{ if } x_j = 1
+\end{cases}
+\\
+p \left( x_j \mid Z_j = 1 \right) 
+\; &= \; 
+\begin{cases}
+e_j & \text{ if } x_j = 0 \\
+1 - e_j & \text{ if } x_j = 1
+\end{cases} .
+\end{aligned} 
+$$
+
+Applying the rules of probability,
+$$
+\begin{aligned}
+p \left( x_j \mid g, m \right) 
+&= \sum_{z_j \in \{0, 1\}} p \left( x_j, z_j, g, m \right)
+   &\quad ( \text{justification?} ) \\
+&= \sum_{z_j \in \{0, 1\}} 
+   p \left( x_j \mid z_j \right) p \left( z_j \mid g, m \right)
+   &\quad ( \text{justification?} )
+\end{aligned}
+$$
+
+Now, we need to derive $p \left( z_j \mid g, m \right)$.
+
+Similar to the haploid model, $p \left( z_j \mid g , m = 1 \right)$ 
+is given by
+$$
+\begin{aligned}
+p\left( z_j = 0 \mid G = 0, m = 1 \right) = 1 
+\quad\quad &
+p\left( z_j = 1 \mid G = 0, m = 1 \right) = 0 \\
+p\left( z_j = 0 \mid G = 1, m = 1 \right) = 0
+\quad\quad &
+p\left( z_j = 1 \mid G = 1, m = 1 \right) = 1 .
+\end{aligned}
+$$
+
+Similar to the diploid model, $p \left( z_j \mid g , m = 2 \right)$ 
+is given by
+$$
+\begin{aligned}
+p\left( z_j = 0 \mid G = 0, m = 2 \right) = 1 
+\quad\quad &
+p\left( z_j = 1 \mid G = 0, m = 2 \right) = 0 \\
+p\left( z_j = 0 \mid G = 1, m = 2 \right) = \frac{1}{2}
+\quad\quad &
+p\left( z_j = 1 \mid G = 1, m = 2 \right) = \frac{1}{2} \\
+p\left( z_j = 0 \mid G = 2, m = 2 \right) = 0
+\quad\quad &
+p\left( z_j = 1 \mid G = 2, m = 2 \right) = 1 .
+\end{aligned}
+$$
+
+Do you recognize the pattern?
+$$
+\begin{aligned}
+p\left( z_j = 0 \mid G = 0, m = 3 \right) = 
+\quad\quad &
+p\left( z_j = 1 \mid G = 0, m = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 1, m = 3 \right) = 
+\quad\quad &
+p\left( z_j = 1 \mid G = 1, m = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 2, m = 3 \right) = 
+\quad\quad &
+p\left( z_j = 1 \mid G = 2, m = 3 \right) =  \\
+p\left( z_j = 0 \mid G = 3, m = 3 \right) = 
+\quad\quad &
+p\left( z_j = 1 \mid G = 3, m = 3 \right) =  .
+\end{aligned}
+$$
+
+After deriving $p(z_j \mid g, m)$ based on our
+understanding of genetics, we can now derive a closed-form expression
+for the likelihood $p \left( x_j \mid g, m \right)$.
 
 
 ## Questions
@@ -209,8 +304,13 @@ TODO
 2. Why is $e_j$ always written in lower case?
 3. Why don't we need to condition the likelihood on $e_j$?
 4. Is a uniform prior on $G$ appropriate? Can we do better?
-5. Show that the likelihood in the general model is equivalent to the
-   likelihood in [Li 2011][3].
+5. Under the general model, which probability rule was applied at
+   each step in the derivation of $p \left( x_j \mid g, m \right)$?
+6. Fill in the missing probabilities for $p(z_j \mid g, m)$.
+7. Complete the derivation of the likelihood $p \left( x_j \mid g, m \right)$
+   under the general model.
+8. Show that the likelihood you derived for the general model is 
+   equivalent to the likelihood in [Li 2011][3].
 
 
 [1]: https://en.wikipedia.org/wiki/FASTQ_format
