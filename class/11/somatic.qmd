@@ -1,0 +1,64 @@
+---
+title: "Somatic Variant Calling"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Motivation
+
+Building on our modeling experience in germline variant calling, we will now
+establish a model for somatic variant calling.
+
+In cancer sequencing, we are interested in identifying variants that are 
+in present in the cancer cells but not the normal cells. These are known
+as **somatic variants** (or mutations).
+
+Let $g_N$ represent the genotype in normal cells at a genomic position $l$,
+and let $g_T$ represent the genotype in tumour cells. The **joint genotypes**
+are as follows:
+
+|           $g_T$ = | AA        | AB       | BB       |
+|------------------:|-----------|----------|----------|
+| $g_N = \text{AA}$ | wild type | somatic  | somatic  |
+| AB                | LOH       | germline | LOH      |
+| BB                | error     | error    | germline |
+
+LOH, loss of heterozygosity.
+
+Since tumour cells come from normal cells, $g_T$ is dependent on $g_N$, and
+some joint genotypes are likely to be due to sequencing errors. Therefore,
+calling the variants in a tumour sample jointly with its matched normal
+sample would yield higher accuracy than calling the genotype for normal and 
+tumour samples separately.
+
+Additionally, we will also enhance our previous variant calling model 
+by accounting for whether a read is mapped correctly using its 
+**mapping quality score**.
+
+
+## Model
+
+Our somatic model will assess each genomic position $l$ separately, so we
+will omit the $l$ index.
+
+
+## Questions
+
+1. 
+
+
+[1]: jointsnvmix
+[2]: snvmix
