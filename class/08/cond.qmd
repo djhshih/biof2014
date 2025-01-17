@@ -195,6 +195,16 @@ f_Y(y) &= \int_{-\infty}^{\infty} f(x, y) \, dy \quad y \in \mathcal{Y}.
 \end{aligned}
 $$
 
+## Conditional probability
+
+### Definition
+
+Given events $A$ and $B$, if $P\left(B\right) > 0$, then
+$$
+P\left( A \mid B \right) \triangleq 
+\frac{P\left(A \cap B\right)}{P\left(B\right)} .
+$$
+
 
 ## Conditional probability distributions
 
@@ -217,6 +227,55 @@ $$
 ## Conditioning as slicing
 
 
+
+## Chain rule of probability
+
+By re-arranging definition of conditional probability, we have
+$$
+P\left(A_1 \cap A_2 \right) = P\left(A_1 \mid A_2\right) P\left( A_2 \right)
+$$
+
+Of course, we can apply the definition of $P\left(A_2 \mid A_1\right)$ as well:
+$$
+P\left(A_1 \cap A_2 \right) = P\left(A_2 \mid A_1\right) P\left( A_1 \right) .
+$$
+
+
+## Chain rule of probability
+
+If we have a sequence of $J$ events, $A_1, A_2, \ldots A_J$ in 
+some *arbitrary order*, 
+we can keep applying the definition of conditional probability.
+$$
+\begin{aligned}
+&P\left(A_1 \cap A_2 \cap \ldots A_J \right) \\
+&= P\left(A_1 \mid A_2, A_3, \ldots, A_J \right)
+  P\left(A_2 \cap A_3 \cap \ldots A_J \right) \\
+&= P\left(A_1 \mid A_2, A_3, \ldots, A_J \right)
+  P\left(A_2 \mid A_3 \cap \ldots A_J \right)
+  P\left(A_3 \cap A_4 \cap \ldots A_J \right) \\
+&= \ldots
+\end{aligned}
+$$
+
+This then gives the **chain rule**:
+$$
+P\left( \bigcap_{j=1}^{J} A_j \right)
+= \prod_{j=1}^J P\left( A_j \; \middle| \; \bigcap_{k=1}^{j-1} A_k \right) .
+$$
+This applies to probablity distributions as well.
+
+
+## Conditioning direction
+
+Typically, we try to define the conditional probabilities based on our
+assumptions about the causal relationships If we believe $A$ causes 
+$B_1, B_2, \ldots B_J$, then in our model, it would be easier to define
+$P\left(B_1 \mid A\right), \ldots, P\left(B_J \mid A\right)$.
+
+We can also choose to define $P\left(A \mid B_1, B_2, \ldots B_J \right)$ 
+instead, but this can make the derivations more difficult if it is
+inconsistent with the underlying causal relationship.
 
 
 ## Independence
@@ -335,7 +394,7 @@ $$
 $$
 P\left( Y = 1 \mid X = x_1 \right) > 
  P\left( Y = 1 \mid X = x_2 \right)
- \quad \Rightarrow \quad X \perp Y.
+ \quad \Rightarrow \quad X \not \perp Y.
 $$
 
 Suppose that we know that $Y$ does *not* affect $X$.
