@@ -48,7 +48,7 @@ by accounting for whether a read is mapped correctly using its
 **mapping quality score**.
 
 
-## Somatic variant model for a tumour sample
+## Somatic variant model for a single tumour
 
 Our model will assess each genomic position $l$ separately, so we
 will omit the $l$ index.
@@ -193,8 +193,21 @@ Hence, we have a model similar to the [JointSNVMix2 model][2].
 
 ## Questions
 
-1. Using the information in Table 1, assign appropriate values to 
-   the hyperparameter $\symbf{\delta}$.
+1. Verify that each probability distribution that we define is proper
+   (i.e. the distribution satisfies Kolmogorov's axiom 1 and 2).
+   
+2. Assign reasonable values to hyperparamter $\symbf{\delta}$ in the
+   somatic model for a single tumour.
+
+3. Using the information in Table 1, assign appropriate values to 
+   the hyperparameter $\symbf{\delta}$ in the somatic model for
+   tumour-normal pair.
+
+4. If you were to explicitly show the genomic position index $l$,
+   which variables would be indexed by $l$?
+   
+5. If you were to explicity show the sample index $i$,
+   which variables would be indexed by $i$?
 
 
 [1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC2832826/pdf/btq040.pdf
