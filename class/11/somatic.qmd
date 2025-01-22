@@ -9,10 +9,8 @@ format:
           \usepackage{amsmath}
           \usepackage{amssymb}
           \usepackage{amsthm}
-          \usepackage{bm}
-          \usepackage{bbm}
-          \usepackage[english]{babel}
           \usepackage{fixmath}
+          \usepackage[english]{babel}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
 ---
@@ -136,8 +134,8 @@ $$
 Therefore, $\mu_g = \frac{g}{m}$ for germline variants.
 
 However, under a somatic variant model, $\mu_g$ is more difficult to
-define because it now depends on the joint genotype of the tumour
-sample as its matched normal sample. Rather than defining $\mu_g$ directly,
+define because it now depends on tumour ploidy, purity, and copy-number
+state at the genomic position. Rather than defining $\mu_g$ directly,
 we can define it probabilitistic by putting a prior on $\mu_g$.
 $$
 p \left( \mu_g \right) = \text{Beta} \left( \mu_g \mid a_g, b_g \right) ,
@@ -146,8 +144,21 @@ where $a_g$ and $b_g$ are model **hyperparameters** (i.e. tuning parameters
 that we can set to specific values). Hyperapameters are normally treated
 as fixed values.
 
+Now, we are ready to define the prior on genotype $G$:
+$$
+p \left( G \mid \symbf{\theta} \right) 
+= \text{Categorical}\left( G \mid \symbf{\theta} \right) .
+$$
+
+In turn, we put a prior on the parameter $\symbf{\theta}$:
+$$
+p \left( \symbf{\theta} \mid \symbf{\delta} \right)
+= \text{Dirichlet}\left( \symbf{\theta} \mid \symbf{\delta} \right) .
+$$
+
 Hence, we have extended our germline variant model to consider mapping errors
-and to incorporate uncertainty or variability in $\mu_g$.
+and to incorporate uncertainty or variability in $\mu_g$, as well as putting
+a flexible prior on the genotype $G$.
 The model that we described so far closely resembles the [SNVMix2 model][1],
 though we have fixed a few errors in the latter model.
 
