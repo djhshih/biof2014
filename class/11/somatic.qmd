@@ -153,8 +153,9 @@ $$
 In turn, we put a prior on the parameter $\symbf{\theta}$:
 $$
 p \left( \symbf{\theta} \mid \symbf{\delta} \right)
-= \text{Dirichlet}\left( \symbf{\theta} \mid \symbf{\delta} \right) .
+= \text{Dirichlet}\left( \symbf{\theta} \mid \symbf{\delta} \right) ,
 $$
+where $\symbf{\delta}$ are hyperparameter weights.
 
 Hence, we have extended our germline variant model to consider mapping errors
 and to incorporate uncertainty or variability in $\mu_g$, as well as putting
@@ -168,16 +169,32 @@ though we have fixed a few errors in the latter model.
 Previously, we defined the unknown genotype parameter $G$ as the
 number of copies of the alternative allele in the genome of the sample
 at position $l$. Now, we have a tumour-normal pair, and we need to
-formally define $G$ as the joint genotype of tumour-normal pair (Table 1).
+formally define $G$ to correspond to the joint genotype of tumour-normal 
+pair (Table 1).
 
+Therefore, define joint genotype set as
+$$
+\mathcal{S} = \{
+  (AA,AA), (AB,AA), (BB,AA),
+  \ldots,
+  (AA,BB), (AB,BB), (BB,BB)
+\} ,
+$$
+where we enumerate the joint genotype table in column-major order.
+Then, random variable $G = k$ corresponds to the $k$th element of 
+$\mathcal{S}$.
 
+Finally, we can define $\symbf{\delta}$ such that more probable
+joint genotypes are given higher weights, and $\delta_k$ also
+corresponds to the $k$th element of $\mathcal{S}$.
 
-
+Hence, we have a model similar to the [JointSNVMix2 model][2].
 
 
 ## Questions
 
-1. 
+1. Using the information in Table 1, assign appropriate values to 
+   the hyperparameter $\symbf{\delta}$.
 
 
 [1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC2832826/pdf/btq040.pdf
