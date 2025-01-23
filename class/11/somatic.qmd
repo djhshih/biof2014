@@ -141,7 +141,7 @@ $$
 p \left( \mu_g \right) = \text{Beta} \left( \mu_g \mid a_g, b_g \right) ,
 $$
 where $a_g$ and $b_g$ are model **hyperparameters** (i.e. tuning parameters
-that we can set to specific values). Hyperapameters are normally treated
+that we can set to specific values). Hyperparameters are normally treated
 as fixed values.
 
 Now, we are ready to define the prior on genotype $G$:
