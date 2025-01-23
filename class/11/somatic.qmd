@@ -118,11 +118,11 @@ p \left( z_j \mid g, \mu_g \right) =
 \end{cases} .
 $$
 In other words, $\mu_g$ is the probability that $z_j = 1$ given genotype 
-$g \in \{0, 1, \ldots, m\}$, which represents the number of copies of 
+$g \in \{0, 1, \ldots, M\}$, which represents the number of copies of 
 the alternative allele.
 
 Under the germline variant model, we derived a general expression
-for $p(z_j \mid g, m)$ based on genotype $g$ and ploidy $m$. 
+for $p(z_j \mid g, m)$ based on genotype $G$ and ploidy $M$. 
 Recall that
 $$
 p(z_j \mid g, m) =
@@ -156,7 +156,7 @@ $$
 p \left( \symbf{\theta} \right)
 = \text{Dirichlet}\left( \symbf{\theta} \mid \mathbold{d} \right) ,
 $$
-where $\mathbold{d} = ( d_g )$ are hyperparameter weights.
+where $\mathbold{d} = [ d_g ]$ are hyperparameter weights.
 
 Hence, we have extended our germline variant model to consider mapping errors
 and to incorporate uncertainty or variability in $\mu_g$, as well as putting

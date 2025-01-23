@@ -307,6 +307,7 @@ for the likelihood $p \left( x_j \mid g, m \right)$.
 5. Under the general model, which probability rule was applied at
    each step in the derivation of $p \left( x_j \mid g, m \right)$?
 6. Derive a general expression for $p(z_j \mid g, m)$.
+   derive a general expression for
 
 
 [1]: https://en.wikipedia.org/wiki/FASTQ_format
