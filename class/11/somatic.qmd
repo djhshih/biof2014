@@ -72,19 +72,19 @@ We define $Z_j$ as the latent indicator random variable for
 $X_j$ such that $Z_j = 1$ if read $j$ truly contains the 
 alternative allele and $Z_j = 0$ otherwise.
 
-We further $B_j$ as the latent indicator random variable such that
-$B_j = 1$ if read $j$ is mapped correctly and $B_j = 0$ otherwise.
+We further $C_j$ as the latent indicator random variable such that
+$C_j = 1$ if read $j$ is mapped correctly and $C_j = 0$ otherwise.
 
-If read $j$ is mapped correctly ($B_j = 1$), the likelihood is 
+If read $j$ is mapped correctly ($C_j = 1$), the likelihood is 
 similar to the germline variant model:
 $$
 \begin{aligned}
-p \left( x_j \mid Z_j = 1, B_j = 1 \right)
+p \left( x_j \mid Z_j = 1, C_j = 1 \right)
 &= \begin{cases}
  q_j & \text{ if } x_j = 1 \\
  1 - q_j & \text{ if } x_j = 0
 \end{cases} \\
-p \left( x_j \mid Z_j = 0, B_j = 1 \right)
+p \left( x_j \mid Z_j = 0, C_j = 1 \right)
 &= \begin{cases}
  1 - q_j & \text{ if } x_j = 1 \\
  q_j & \text{ if } x_j = 0
@@ -92,19 +92,19 @@ p \left( x_j \mid Z_j = 0, B_j = 1 \right)
 \end{aligned}
 $$
 
-If read $j$ is mapped incorrectly ($B_j = 0$), the likelihood is
+If read $j$ is mapped incorrectly ($C_j = 0$), the likelihood is
 uniform over the domain of $x_j$:
 $$
-p \left( x_j \mid Z_j = 1, B_j = 0 \right) = \frac{1}{2},
+p \left( x_j \mid Z_j = 1, C_j = 0 \right) = \frac{1}{2},
 \quad x_j \in \{0, 1\} .
 $$
 
-The prior on the latent mapping indicator $B_j$ is given by
+The prior on the latent mapping indicator $C_j$ is given by
 $$
-p \left( b_j \right)
+p \left( c_j \right)
 = \begin{cases}
- r_j & \text{ if } b_j = 1 \\
- 1 - r_j & \text{ if } b_j = 0
+ r_j & \text{ if } c_j = 1 \\
+ 1 - r_j & \text{ if } c_j = 0
 \end{cases} .
 $$
 
@@ -146,16 +146,17 @@ as fixed values.
 
 Now, we are ready to define the prior on genotype $G$:
 $$
-p \left( G \mid \symbf{\theta} \right) 
-= \text{Categorical}\left( G \mid \symbf{\theta} \right) .
+p \left( G = g \mid \symbf{\theta} \right) 
+= \text{Categorical}\left( g \mid \symbf{\theta} \right) ,
+\quad g \in \{0, 1, \ldots, m\} ,
 $$
 
 In turn, we put a prior on the parameter $\symbf{\theta}$:
 $$
 p \left( \symbf{\theta} \right)
-= \text{Dirichlet}\left( \symbf{\theta} \mid \symbf{\delta} \right) ,
+= \text{Dirichlet}\left( \symbf{\theta} \mid \mathbold{d} \right) ,
 $$
-where $\symbf{\delta}$ are hyperparameter weights.
+where $\mathbold{d} = ( d_g )$ are hyperparameter weights.
 
 Hence, we have extended our germline variant model to consider mapping errors
 and to incorporate uncertainty or variability in $\mu_g$, as well as putting
@@ -174,18 +175,20 @@ pair (Table 1).
 
 Therefore, define joint genotype set as
 $$
+\begin{aligned}
 \mathcal{S} = \{
-  (AA,AA), (AB,AA), (BB,AA),
-  \ldots,
-  (AA,BB), (AB,BB), (BB,BB)
+  &(AA,AA), (AB,AA), (BB,AA), \\
+  &(AA,AB), (AB,AB), (BB,AB), \\
+  &(AA,BB), (AB,BB), (BB,BB)
 \} ,
+\end{aligned}
 $$
 where we enumerate the joint genotype table in column-major order.
 Then, random variable $G = k$ corresponds to the $k$th element of 
 $\mathcal{S}$.
 
-Finally, we can define $\symbf{\delta}$ such that more probable
-joint genotypes are given higher weights, and $\delta_k$ also
+Finally, we can define $\mathbold{d}$ such that more probable
+joint genotypes are given higher weights, and $d_k$ also
 corresponds to the $k$th element of $\mathcal{S}$.
 
 Hence, we have a model similar to the [JointSNVMix2 model][2].
@@ -196,17 +199,19 @@ Hence, we have a model similar to the [JointSNVMix2 model][2].
 1. Verify that each probability distribution that we define is proper
    (i.e. the distribution satisfies Kolmogorov's axiom 1 and 2).
    
-2. Assign reasonable values to hyperparamter $\symbf{\delta}$ in the
+2. Assign reasonable values to hyperparamter $\mathbold{d}$ in the
    somatic model for a single tumour.
 
 3. Using the information in Table 1, assign appropriate values to 
-   the hyperparameter $\symbf{\delta}$ in the somatic model for
+   the hyperparameter $\mathbold{d}$ in the somatic model for
    tumour-normal pair.
 
-4. If you were to explicitly show the genomic position index $l$,
+4. What does Table 1 assume about the ploidy of the tumour?
+
+5. If you were to explicitly show the genomic position index $l$,
    which variables would be indexed by $l$?
    
-5. If you were to explicity show the sample index $i$,
+6. If you were to explicity show the sample index $i$,
    which variables would be indexed by $i$?
 
 
