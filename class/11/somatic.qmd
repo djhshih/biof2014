@@ -152,7 +152,7 @@ $$
 
 In turn, we put a prior on the parameter $\symbf{\theta}$:
 $$
-p \left( \symbf{\theta} \mid \symbf{\delta} \right)
+p \left( \symbf{\theta} \right)
 = \text{Dirichlet}\left( \symbf{\theta} \mid \symbf{\delta} \right) ,
 $$
 where $\symbf{\delta}$ are hyperparameter weights.
