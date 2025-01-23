@@ -138,7 +138,7 @@ define because it now depends on tumour ploidy, purity, and copy-number
 state at the genomic position. Rather than defining $\mu_g$ directly,
 we can define it probabilitistic by putting a prior on $\mu_g$.
 $$
-p \left( \mu_g \right) = \text{Beta} \left( \mu_g \mid a_g, b_g \right) ,
+p \left( \mu_g \right) = \text{Beta} \left( \mu_g \mid a_g,  \right) ,
 $$
 where $a_g$ and $b_g$ are model **hyperparameters** (i.e. tuning parameters
 that we can set to specific values). Hyperparameters are normally treated
@@ -193,6 +193,75 @@ corresponds to the $k$th element of $\mathcal{S}$.
 
 Hence, we have a model similar to the [JointSNVMix2 model][2].
 
+
+## Posterior
+
+For variant calling, we would want to solve for the posterior 
+distribution $p \left( g \mid \mathbold{x} \right)$ for the 
+random variable $G$ with support $\mathcal{G}$, which can be
+derived using Bayes' theorem.
+$$
+p \left( g \mid \mathbold{x} \right)
+= \frac{ p \left( \mathbold{x} \mid g \right) \, p \left( g \right) }
+       { p \left( \mathbold{x} \right) } .
+$$
+
+The prior $p\left(g\right)$ is not immediately available from our model
+definition, so we need to derive it by
+$$
+\begin{aligned}
+p \left( G \right)
+&= \int_{\symbf{\Theta}} \;
+   p \left( G \mid \symbf{\theta} \right) \,
+   p \left( \symbf{\theta} \right) \, d \symbf{\theta} \\
+&= \int_{\symbf{\Theta}} \;
+   \symbf{\theta} \;
+   p \left( \symbf{\theta} \right) \, d \symbf{\theta} \\
+&= \text{E} \left( \symbf{\theta} \right)  
+\quad (\text{definition of expectation}) .
+\end{aligned}
+$$
+
+Therefore, 
+$$
+p \left( g \right)
+= \text{E} \left( \theta_g \right)
+$$
+
+Under the Dirichlet distribution, the expectation is given by
+$$
+\text{E} \left( \theta_g \right)
+= \frac{d_g}{\sum_k d_g} .
+$$
+
+On the other hand, the model evidence $p \left( \mathbold{x} \right)$ is given by
+$$
+p \left( \mathbold{x} \right) 
+= \sum_{g \in \mathcal{G}} 
+  p \left( \mathbold{x} \mid g \right) \, p \left( g \right) .
+$$
+
+Now, we need to derive the following quantities:
+$$
+\begin{aligned}
+p \left( \mathbold{x} \mid g \right) 
+&= \sum_j p \left( x_j \mid g \right) \\
+p \left( x_j \mid g \right)
+&= \int_0^1 p \left( x_j \mid g, \mu_g \right) 
+   p \left( \mu_g \right) \, d \mu_g \\
+p \left( x_j \mid g, \mu_g \right)
+&= \sum_{c=0}^1 \sum_{z=0}^1
+  p\left(x_j, g, \mu_g, c, z \right) .
+\end{aligned}
+$$
+
+<!--
+p \left( x_j \mid g, \mu_g \right)
+= \sum_{c=0}^1 \sum_{z=0}^1
+  p\left(x_j \mid c, z \right) \, 
+  p\left( c \right) \,
+  p\left( z \mid g, \mu_g \right) .
+-->
 
 ## Questions
 
