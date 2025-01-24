@@ -67,7 +67,15 @@ $$
 where $\symbfit{c}_k \in \mathcal{R}_{\ge 0}^J$ and
 $\symbfit{d} \in \mathcal{R}_{\ge 0}^K$ are hyperparameters.
 
-## Derivation outline
+## Derivation outline for model fitting
+
+
+
+## Derivation for model fitting
+
+
+
+## Derivation outline for model prediction
 
 To perform classification using our model, we need to derive
 the posterior predictive distribution
@@ -115,7 +123,7 @@ p\left(
 p\left( \tilde{Y} = k \mid \symbfit{y} \right) .
 $$
 
-## Derivation
+## Derivation for model prediction
 
 
 
