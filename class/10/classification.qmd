@@ -1,0 +1,94 @@
+---
+title: "Molecular Classification"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{fixmath}
+          \usepackage[english]{babel}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Problem
+
+We want to classify tumours based on their molecular characteristics, as 
+determined by RNA expression profiles. Each expression profile consists of 
+the expression levels of selected genes, measured as counts of molecules.
+
+Some cancer types can be classified reliably into molecular classes, and these
+molecule classes may reflect different cellular origins of the tumours. For
+example, the pediatric brain tumour known as medulloblastoma can be 
+[molecularly classified][1] into WNT, SHH, and Group3, and Group4 subgroups.
+
+## Model
+
+Given training data with expression profiles 
+$\symbf{X} = [\symbfit{x}_i^\top]$ and
+class labels $\symbfit{y} = [y_i]$ for $i \in \{1 \ldots N\}$,
+we want to predict the unknown label $\tilde{y}$ of a new
+sample with expression profile $\tilde{\symbfit{x}}$.
+
+Each expression profile consists the detected counts of transcript
+molecules of $J$ genes, so 
+$\symbfit{x}_i, \tilde{\symbfit{x}} \in \mathcal{N}_0^J$.
+Suppose there are $K$ classes, so $y_i, \tilde{y} \in \{1 \ldots K\}$.
+
+Define
+$$
+\begin{aligned}
+m_i = \sum_j x_{ij}, \quad
+s_j = \sum_i x_{ij}, \quad
+n_k = \sum_i I(y_i == k).
+\end{aligned}
+$$
+
+Define our model as follows:
+$$
+\begin{aligned}
+\symbfit{X}_i = \symbfit{x} \mid Y_i = y, \, \symbfit{\eta}_y
+\; &\sim \; \text{Multinomial}\left( m_i \mid \symbfit{\eta}_y \right)
+\\
+\symbfit{\eta}_k 
+&\sim \text{Dirichlet}\left( \symbfit{c}_k \right)
+\\
+Y_i
+&\sim \symbfit{\theta}
+\\
+\symbfit{\theta}
+&\sim \text{Dirichlet}\left( \symbfit{d} \right) ,
+\end{aligned}
+$$
+where $\symbfit{c}_k \in \mathcal{R}_{\ge 0}^J$ and
+$\symbfit{d} \in \mathcal{R}_{\ge 0}^K$ are hyperparameters.
+
+## Derivation outline
+
+To perform classification using our model, we need to derive
+the conditional posterior predictive distribution
+$p \left( \tilde{y} \mid \tilde{\symbf{x}}, \symbf{X}, \symbfit{y} \right)$.
+
+## Derivation
+
+
+
+## Questions
+
+1. What is the dimension of $\symbfit{\theta}$? 
+   What are the constraints for each element of $\symbfit{\theta}$?
+
+2. What is the dimension of each $\symbfit{\eta}_k$?
+   What are the constraints for each element of $\symbfit{\eta}_k$?
+   
+3. How many individual observed data elements are provided to the model?
+   
+4. How many individual parameters and hyperparameters are in the model?
+
+
+
+[1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3306784/pdf/401_2011_Article_899.pdf
