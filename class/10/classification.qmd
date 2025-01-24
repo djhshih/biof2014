@@ -70,8 +70,50 @@ $\symbfit{d} \in \mathcal{R}_{\ge 0}^K$ are hyperparameters.
 ## Derivation outline
 
 To perform classification using our model, we need to derive
-the conditional posterior predictive distribution
-$p \left( \tilde{y} \mid \tilde{\symbf{x}}, \symbf{X}, \symbfit{y} \right)$.
+the posterior predictive distribution
+$$
+p \left( \tilde{y} \mid \tilde{\symbf{x}}, \symbf{X}, \symbfit{y} \right)
+= \frac{
+    p\left( 
+     \tilde{\symbf{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
+    \right)
+    \,
+    p\left( \tilde{y} \mid \symbfit{y} \right)
+  }
+  { p\left( \tilde{x} \mid \symbf{X}, \symbfit{y} \right) } .
+$$
+
+In turn, we need to derive other posterior predictive distributions
+$$
+\begin{aligned}
+p\left( 
+ \tilde{\symbfit{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
+\right)
+&=
+\int
+p\left( \tilde{\symbfit{x}} \mid 
+ \tilde{y}, \symbfit{\eta}_{\tilde{y}} \right) \,
+p\left( \symbfit{\eta}_{\tilde{y}} \mid \symbf{X}, \symbfit{y} \right) \,
+d \symbfit{\eta}_{\tilde{y}} \\
+p\left( \tilde{y} \mid \symbfit{y} \right)
+&=
+\int
+p\left( \tilde{y} \mid \symbfit{\theta} \right) \,
+p\left( \symbfit{\theta} \mid \symbfit{y} \right) \,
+d \symbfit{\theta} .
+\end{aligned}
+$$
+
+Given the above quantities, we can then derive
+$$
+p\left( \tilde{x} \mid \symbf{X}, \symbfit{y} \right)
+=
+\sum_{k=1}^K
+p\left( 
+ \tilde{\symbfit{x}} \mid \tilde{Y} = k, \symbf{X}, \symbfit{y}
+\right) \,
+p\left( \tilde{Y} = k \mid \symbfit{y} \right) .
+$$
 
 ## Derivation
 
