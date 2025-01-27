@@ -1,5 +1,5 @@
 ---
-title: "Birthday Problem II"
+title: "Birthday Problem 2"
 author: "BIOF2014"
 format:
   pdf:
