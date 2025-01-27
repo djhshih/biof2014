@@ -1,0 +1,80 @@
+---
+title: "Molecular Classification 2"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{fixmath}
+          \usepackage[english]{babel}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Problem
+
+We want to classify tumours based on their molecular characteristics, as 
+determined by RNA expression profiles. Each expression profile consists of 
+the expression levels of selected genes, measured as counts of molecules.
+
+We have previously mathematically derived posterior predictive distribution 
+$p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)$.
+for a new class label $\tilde{y}$ given new data $\tilde{\symbfit{x}}$.
+
+If we are willing to tolerate computational inefficiency, we can also
+use an Markov chain Monte Carlo sampler such as [Stan][1]
+to estimate the posterior predictive distribution 
+(or any quantities of interest).
+
+
+## Model
+
+Given training data with expression profiles 
+$\symbf{X} = [\symbfit{x}_i^\top]$ and
+class labels $\symbfit{y} = [y_i]$ for $i \in \{1 \ldots N\}$,
+we want to predict the unknown label $\tilde{y}$ of a new
+sample with expression profile $\tilde{\symbfit{x}}$.
+
+Each expression profile consists the detected counts of transcript
+molecules of $J$ genes, so 
+$\symbfit{x}_i, \tilde{\symbfit{x}} \in \mathcal{N}_0^J$.
+Suppose there are $K$ classes, so $y_i, \tilde{y} \in \{1 \ldots K\}$.
+
+Define our model as follows:
+$$
+\begin{aligned}
+\symbfit{X}_i = \symbfit{x} \mid Y_i = y, \, \symbfit{\eta}_y
+\; &\sim \; \text{Multinomial}\left( m_i \mid \symbfit{\eta}_y \right)
+\\
+\symbfit{\eta}_k 
+&\sim \text{Dirichlet}\left( \symbfit{c}_k \right)
+\\
+Y_i
+&\sim \symbfit{\theta}
+\\
+\symbfit{\theta}
+&\sim \text{Dirichlet}\left( \symbfit{d} \right) ,
+\end{aligned}
+$$
+where $\symbfit{c}_k \in \mathcal{R}_{\ge 0}^J$ and
+$\symbfit{d} \in \mathcal{R}_{\ge 0}^K$ are hyperparameters.
+
+
+## Tasks
+
+1. Implement the classification model in Stan and R and sample from
+$p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)$.
+   
+2. Implement the previously derived
+$p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)$.
+
+3. Compare the empirical pmf of
+   from MCMC sampling vs. the mathematically-derived posterior predictive distribution
+   $p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)$.
+
+
+[1]: https://mc-stan.org/
