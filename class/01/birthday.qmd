@@ -23,18 +23,18 @@ the same birthday?
 ### Variables
 
 Let $N$ be the number of people in this class.  
-Let $x$ be the number of people with the same birthday.
+Let $X$ be the number of people with the same birthday.
 
 ### Task
 
-1. Derive a mathematical equation for $P( x \ge 2 )$.
-2. Implement this equation and compute $P( x \ge 2 )$.
+1. Derive a mathematical equation for $P( X \ge 2 )$.
+2. Implement this equation and compute $P( X \ge 2 )$.
 
 
 ## Hint
 
 $$
-P( x \ge 2 ) \; = \; P( x > 1 ) \; = \; 1 - P(x = 1) .
+P( X \ge 2 ) \; = \; P( X > 1 ) \; = \; 1 - P(X = 1) .
 $$
 
 \pagebreak
