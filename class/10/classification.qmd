@@ -67,17 +67,302 @@ $$
 where $\symbfit{c}_k \in \mathcal{R}_{\ge 0}^J$ and
 $\symbfit{d} \in \mathcal{R}_{\ge 0}^K$ are hyperparameters.
 
-## Derivation outline for model fitting
+## Model fitting
+
+### Outline
+
+Model fitting involves using the observed data $(\symbf{X}, \symbfit{y})$ to
+learn the model parameters $((\symbfit{\eta}_k), \symbfit{\theta})$.
+The hyperparameters $((\symbfit{c}_k), \symbfit{d})$ can be set based on 
+prior knowledge or data.
+
+Therefore, the objective of model fitting (i.e. training) is to estimate the 
+posterior distributions of the parameters.
+
+For $\symbfit{\theta}$, we can apply Bayes' theorem and get
+$$
+p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+= \frac{ p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
+         p\left( \symbfit{\theta} \right)}
+  { p\left(\symbfit{y}\right)} .
+$$
+
+For $k \in \{1, \ldots, K\}$, we need to solve
+$$
+p\left( \symbfit{\eta}_k \mid \symbf{X}, \symbfit{y} \right)
+= \frac{ p\left( \symbf{X} \mid \symbfit{\eta}_k, \symbfit{y} \right) \,
+         p\left( \symbfit{\eta}_k \mid \symbfit{y} \right) }
+  { p\left( \symbf{X} \mid \symbfit{y} \right)} ,
+$$
+which can be seen as the application of a special case of the Bayes' theorem.
+
+### Derivation
+
+Let's solve $p\left( \symbfit{\theta} \mid \symbfit{y} \right)$.
+
+$$
+\begin{aligned}
+p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \right)
+&= \left( \prod_i^N p\left(y_i \mid \symbfit{\theta}\right) \right) \,
+   p\left( \symbfit{\theta} \right) \\
+&= \left( \prod_i^N \theta_{y_i} \right) \,
+   \left( B(\symbfit{d})^{-1} \prod_k \theta_k^{d_k - 1} \right) \\
+&= \left( \prod_i^N \prod_k^K \left(\theta_k\right)^{I(y_i = k)} \right) \,
+   \left( B(\symbfit{d})^{-1} \prod_k \theta_k^{d_k - 1} \right) \\
+&= \left( \prod_k^K \left(\theta_k\right)^{\sum_i^N I(y_i = k)} \right) \,
+   \left( B(\symbfit{d})^{-1} \prod_k \theta_k^{d_k - 1} \right) \\
+&= B(\symbfit{d})^{-1}
+   \left( \prod_k^K \left(\theta_k\right)^{
+    d_k + n_k - 1
+   } \right) ,
+\end{aligned}
+$$
+where $n_k = \sum_i I(y_i = k)$.
+
+Now, let's solve for
+$$
+p\left(\symbfit{y}\right)
+= \int_{\mathcal{\Theta}} 
+ p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \right) \,
+ d \symbfit{\theta} 
+$$
+
+From the definition of
+Dirichlet$\left(\symbfit{x} \mid \symbfit{\alpha}\right)$, 
+we know that
+$$
+\begin{aligned}
+\int_{\mathcal{X}}
+ \left( B(\symbfit{\alpha})^{-1} \prod_k x_k^{\alpha_k - 1} \right)
+ d \symbfit{x} = 1 \\
+B(\symbfit{\alpha})
+ = \int_{\mathcal{X}}
+   \left( \prod_k \theta_k^{\alpha_k - 1} \right)
+   d \symbfit{x},
+\end{aligned}
+$$
+for any $\symbfit{\alpha}$ such that $\alpha_k > 0$.
+
+Define $\symbfit{d}' = [d'_k]$ where $d'_k = d_k + n_k$. Then,
+$$
+\int_{\mathcal{\Theta}} 
+ \prod_k^K \left(\theta_k\right)^{d_k + n_k - 1}
+ d \symbfit{\theta}
+= 
+\int_{\mathcal{\Theta}} 
+ \prod_k^K \left(\theta_k\right)^{d'_k - 1}
+ d \symbfit{\theta}
+= B(\symbfit{d}') .
+$$
+
+Therefore,
+$$
+\begin{aligned}
+p\left(\symbfit{y}\right)
+&= \int_{\mathcal{\Theta}} 
+ p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \right) \,
+ d \symbfit{\theta} 
+&= \int_{\mathcal{\Theta}}
+ B(\symbfit{d})^{-1}
+   \left( \prod_k^K \left(\theta_k\right)^{
+    d_k + n_k - 1
+   } \right)
+ d \symbfit{\theta} 
+&= B(\symbfit{d})^{-1} 
+ \int_{\mathcal{\Theta}}
+   \left( \prod_k^K \left(\theta_k\right)^{
+    d_k + n_k - 1
+   } \right)
+ d \symbfit{\theta} \\
+&= B(\symbfit{d})^{-1} B(\symbfit{d}') .
+\end{aligned}
+$$
+
+Now, we are ready to solve for the posterior:
+$$
+\begin{aligned}
+p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+&= \frac{ p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
+         p\left( \symbfit{\theta} \right)}
+  { p\left(\symbfit{y}\right)}
+&= \frac{ B(\symbfit{d})^{-1}
+   \left( \prod_k^K \left(\theta_k\right)^{
+    d_k + n_k - 1
+   } \right) }
+  { B(\symbfit{d})^{-1} B(\symbfit{d}') } 
+&= 
+  B(\symbfit{d}')^{-1}
+  \prod_k^K \left(\theta_k\right)^{d'_k - 1} .
+\end{aligned}
+$$
+
+Therefore, the posterior of $\symbfit{\theta}$ is
+$$
+p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+= \text{Dirichlet}\left( \symbfit{\theta} \mid \symbfit{d}' \right) ,
+$$
+where $\symbfit{d}' = (d'_k)$ and $d'_k = d_k + \sum_i I(y_i = k)$.
+
+\vspace{3em}
+
+Next, let's solve, for any $k \in \{1, \ldots, K\}$,
+$$
+p\left( \symbfit{\eta}_k \mid \symbf{X}, \symbfit{y} \right)
+= \frac{ p\left( \symbf{X} \mid \symbfit{\eta}_k, \symbfit{y} \right) \,
+         p\left( \symbfit{\eta}_k \mid \symbfit{y} \right) }
+  { p\left( \symbf{X} \mid \symbfit{y} \right)} .
+$$
+
+As before, we will start with the numerator:
+$$
+\begin{aligned}
+p\left( \symbf{X} \mid \symbfit{\eta}_k, \symbfit{y} \right) \,
+ p\left( \symbfit{\eta}_k \mid \symbfit{y} \right)
+&= \left( \prod_i^N p\left(
+   \symbfit{x}_i \mid \symbfit{\eta}_{y_i}, y_i\right) \right) \,
+ p\left( \symbfit{\eta}_k \right) \\
+&= \left( \prod_i^N \Gamma(M_i + 1)
+   \prod_j^J
+    \Gamma(x_{ij} + 1)^{-1}
+    \eta_{y_{i}j}^{x_{ij}}
+  \right) \,
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  \left( \prod_i^N \Gamma(M_i + 1) \right)
+  \left( \prod_i^N \prod_j^J \Gamma(x_{ij} + 1)^{-1} \right)
+  \left( \prod_i^N \prod_j^J \eta_{y_{i}j}^{x_{ij}} \right)
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  g_1(\symbf{X}) \,
+  \left( \prod_i^N \prod_j^J \eta_{y_{i}j}^{x_{ij}} \right)
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  g_1(\symbf{X}) \,
+  \left( \prod_{i: y_i \neq k}^N \prod_j^J \eta_{y_{i}j}^{x_{ij}} \right)
+  \left( \prod_{i: y_i = k}^N \prod_j^J \eta_{kj}^{x_{ij}} \right)
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  g_1(\symbf{X}) \,
+  g_2(\symbf{X}, \symbfit{y}, k) \,
+  \left( \prod_{i: y_i = k}^N \prod_j^J \eta_{kj}^{x_{ij}} \right)
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  g_1(\symbf{X}) \,
+  g_2(\symbf{X}, \symbfit{y}, k) \,
+  \left( \prod_j^J \eta_{kj}^{\sum_i x_{ij} \, I(y_i = k)} \right)
+  \left(
+   B(\symbfit{c}_k)^{-1} \prod_j^J \eta_{kj}^{c_{kj} - 1}
+  \right) \\
+&=
+  g_1(\symbf{X}) \,
+  g_2(\symbf{X}, \symbfit{y}, k) \,
+  B(\symbfit{c}_k)^{-1}
+  \left( \prod_j^J \eta_{kj}^{\sum_i x_{ij} \, I(y_i = k)} \right)
+  \prod_j^J \eta_{kj}^{c_{kj} - 1} \\
+&=
+  g_1(\symbf{X}) \,
+  g_2(\symbf{X}, \symbfit{y}, k) \,
+  B(\symbfit{c}_k)^{-1}
+  \prod_j^J \eta_{kj}^{c_{kj} + s_{kj} - 1}
+\end{aligned}
+$$
+where
+$$
+\begin{aligned}
+s_{kj} &= \sum_i x_{ij} \, I(y_i = k) \\
+g_1(\symbf{X}) &=
+  \left( \prod_i^N \Gamma(M_i + 1) \right)
+  \left( \prod_i^N \prod_j^J \Gamma(x_{ij} + 1)^{-1} \right) \\
+g_2(\symbf{X}, \symbfit{y}, k) &=
+  \left( \prod_{i: y_i \neq k}^N \prod_j^J \eta_{y_{i}j}^{x_{ij}} \right) .
+\end{aligned}
+$$
+
+Now, we solve for the denominator:
+$$
+\begin{aligned}
+p\left(\symbf{X}, \symbfit{y}\right)
+&=
+ \int_{\mathcal{\Eta}}
+  p\left( \symbf{X} \mid \symbfit{\eta}_k, \symbfit{y} \right) \,
+  p\left( \symbfit{\eta}_k \mid \symbfit{y} \right) \,
+ d \symbfit{\eta}_k \\
+&= 
+ \int_{\mathcal{\Eta}}
+  g_1(\symbf{X}) \,
+  g_2(\symbf{X}, \symbfit{y}, k) \,
+  B(\symbfit{c}_k)^{-1} \,
+  \prod_j^J \eta_{yj}^{c_{yj} + s_j - 1} \,
+ d \symbfit{\eta}_k \\
+&=
+ g_1(\symbf{X}) \,
+ g_2(\symbf{X}, \symbfit{y}, k) \,
+ B(\symbfit{c}_k)^{-1} \,
+ \int_{\mathcal{\Eta}}
+  \prod_j^J \eta_{yj}^{c_{yj} + s_j - 1} \,
+ d \symbfit{\eta}_k \\
+&= 
+ g_1(\symbf{X}) \,
+ g_2(\symbf{X}, \symbfit{y}, k) \,
+ B(\symbfit{c}_k)^{-1} \,
+ B(\symbfit{c}'_k) ,
+\end{aligned}
+$$
+where $\symbfit{c}'_k = (c'_{kj})$ and $c'_{kj} = c_{kj} + s_{kj}$.
+
+Putting the numerator and denominator together, we get
+$$
+\begin{aligned}
+p\left( \symbfit{\eta}_k \mid \symbf{X}, \symbfit{y} \right)
+&= \frac{ p\left( \symbf{X} \mid \symbfit{\eta}_k, \symbfit{y} \right) \,
+         p\left( \symbfit{\eta}_k \mid \symbfit{y} \right) }
+  { p\left( \symbf{X} \mid \symbfit{y} \right)} 
+&= \frac{ 
+   g_1(\symbf{X}) \,
+   g_2(\symbf{X}, \symbfit{y}, k) \,
+   B(\symbfit{c}_k)^{-1} \,
+   \prod_j^J \eta_{kj}^{c'_{kj} - 1}
+  }
+  {
+   g_1(\symbf{X}) \,
+   g_2(\symbf{X}, \symbfit{y}, k) \,
+   B(\symbfit{c}_k)^{-1} \,
+   B(\symbfit{c}'_k) ,
+  } \\
+&= 
+  B(\symbfit{c}'_k)^{-1}
+  \prod_j^J \eta_{kj}^{c'_{kj} - 1} .
+\end{aligned}
+$$
+
+Therefore, for each $k$, the posterior of $\symbfit{\eta}_k$ 
+conditional on $\symbfit{y}$ is
+$$
+p\left( \symbfit{\eta}_k \mid \symbf{X}, \symbfit{y} \right)
+= \text{Dirichlet}\left( \symbfit{\eta}_k \mid \symbfit{c}' \right) ,
+$$
+where $\symbfit{c}'_k = (c'_{kj})$ and 
+$c'_{kj} = c_{kj} + \sum_i x_{ij} I(y_i = k)$.
 
 
+## Model prediction
 
-## Derivation for model fitting
+### Outline
 
-
-
-## Derivation outline for model prediction
-
-To perform classification using our model, we need to derive
+To use our model for classification, we need to derive
 the posterior predictive distribution
 $$
 p \left( \tilde{y} \mid \tilde{\symbf{x}}, \symbf{X}, \symbfit{y} \right)
@@ -123,9 +408,57 @@ p\left(
 p\left( \tilde{Y} = k \mid \symbfit{y} \right) .
 $$
 
-## Derivation for model prediction
 
+### Derivation
 
+$$
+\begin{aligned}
+p\left( \tilde{y} \mid \symbfit{y} \right)
+&= \int_{\mathcal{\Theta}} 
+  p\left( \tilde{y} \mid \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right) \,
+  d \symbfit{\theta} \\
+&= \int_{\mathcal{\Theta}} 
+  \theta_{\tilde{y}} \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right) \,
+  d \symbfit{\theta} \\
+&= \int_0^1
+  \int_{\mathcal{\Theta}_{-\tilde{y}}} 
+  \theta_{\tilde{y}} \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right) \,
+  d \symbfit{\theta}_{-\tilde{y}} \,
+  d \theta_{\tilde{y}} \\
+&= \int_0^1
+  \theta_{\tilde{y}} \,
+  \int_{\mathcal{\Theta}_{-\tilde{y}}} 
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right) \,
+  d \symbfit{\theta}_{-\tilde{y}} \,
+  d \theta_{\tilde{y}} \\
+&= \int_0^1
+  \theta_{\tilde{y}} \,
+  \int_{\mathcal{\Theta}_{-\tilde{y}}} 
+  p\left( \theta_{\tilde{y}}, \symbfit{\theta}_{-\tilde{y}} 
+   \mid \symbfit{y} \right) \,
+  d \symbfit{\theta}_{-\tilde{y}} \,
+  d \theta_{\tilde{y}} \\
+&= \int_0^1
+  \theta_{\tilde{y}} \,
+  p\left( \theta_{\tilde{y}} \mid \symbfit{y} \right) \,
+  d \theta_{\tilde{y}} \\
+&= \text{E}_{p\left( \theta_{\tilde{y}} \mid \symbfit{y} \right)}\left( 
+  \theta_{\tilde{y}}
+  \right)
+\end{aligned}
+$$
+
+As we showed above, $p\left(\symbfit{\theta} \mid \symbfit{y} \right)$ 
+is Dirichlet$\left(\theta \mid \symbfit{d}' \right)$. Therefore,
+$$
+\text{E}_{p\left( \theta_{\tilde{y}} \mid \symbfit{y} \right)}\left( 
+  \theta_{\tilde{y}}
+\right) =
+ \frac{d'_{\tilde{y}}}{\sum_k d'_k} .
+$$
 
 ## Questions
 
