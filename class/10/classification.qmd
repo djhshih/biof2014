@@ -24,7 +24,7 @@ the expression levels of selected genes, measured as counts of molecules.
 Some cancer types can be classified reliably into molecular classes, and these
 molecule classes may reflect different cellular origins of the tumours. For
 example, the pediatric brain tumour known as medulloblastoma can be 
-[molecularly classified][1] into WNT, SHH, and Group3, and Group4 subgroups.
+[molecularly classified][1] into different subtypes.
 
 ## Model
 
@@ -43,8 +43,8 @@ Define
 $$
 \begin{aligned}
 m_i = \sum_j x_{ij}, \quad
-s_j = \sum_i x_{ij}, \quad
-n_k = \sum_i I(y_i == k).
+n_k = \sum_i I(y_i = k),  \quad
+s_{kj} = \sum_i x_{ij} I(y_i = k).
 \end{aligned}
 $$
 
@@ -115,10 +115,9 @@ p\left( \symbfit{y} \mid \symbfit{\theta} \right) \,
 &= B(\symbfit{d})^{-1}
    \left( \prod_k^K \left(\theta_k\right)^{
     d_k + n_k - 1
-   } \right) ,
+   } \right) .
 \end{aligned}
 $$
-where $n_k = \sum_i I(y_i = k)$.
 
 Now, let's solve for
 $$
@@ -204,7 +203,7 @@ $$
 p\left( \symbfit{\theta} \mid \symbfit{y} \right)
 = \text{Dirichlet}\left( \symbfit{\theta} \mid \symbfit{d}' \right) ,
 $$
-where $\symbfit{d}' = (d'_k)$ and $d'_k = d_k + \sum_i I(y_i = k)$.
+where $\symbfit{d}' = \left[d_k + \sum_i I(y_i = k)\right]$.
 
 \vspace{3em}
 
@@ -282,7 +281,6 @@ $$
 where
 $$
 \begin{aligned}
-s_{kj} &= \sum_i x_{ij} \, I(y_i = k) \\
 g_1(\symbf{X}) &=
   \left( \prod_i^N \Gamma(M_i + 1) \right)
   \left( \prod_i^N \prod_j^J \Gamma(x_{ij} + 1)^{-1} \right) \\
@@ -305,14 +303,14 @@ p\left(\symbf{X}, \symbfit{y}\right)
   g_1(\symbf{X}) \,
   g_2(\symbf{X}, \symbfit{y}, k) \,
   B(\symbfit{c}_k)^{-1} \,
-  \prod_j^J \eta_{yj}^{c_{yj} + s_j - 1} \,
+  \prod_j^J \eta_{yj}^{c_{yj} + s_{yj} - 1} \,
  d \symbfit{\eta}_k \\
 &=
  g_1(\symbf{X}) \,
  g_2(\symbf{X}, \symbfit{y}, k) \,
  B(\symbfit{c}_k)^{-1} \,
  \int_{\mathcal{\Eta}}
-  \prod_j^J \eta_{yj}^{c_{yj} + s_j - 1} \,
+  \prod_j^J \eta_{yj}^{c_{yj} + s_{yj} - 1} \,
  d \symbfit{\eta}_k \\
 &= 
  g_1(\symbf{X}) \,
@@ -321,7 +319,7 @@ p\left(\symbf{X}, \symbfit{y}\right)
  B(\symbfit{c}'_k) ,
 \end{aligned}
 $$
-where $\symbfit{c}'_k = (c'_{kj})$ and $c'_{kj} = c_{kj} + s_{kj}$.
+where $\symbfit{c}'_k = [c'_{kj}]$ and $c'_{kj} = c_{kj} + s_{kj}$.
 
 Putting the numerator and denominator together, we get
 $$
@@ -354,8 +352,7 @@ $$
 p\left( \symbfit{\eta}_k \mid \symbf{X}, \symbfit{y} \right)
 = \text{Dirichlet}\left( \symbfit{\eta}_k \mid \symbfit{c}' \right) ,
 $$
-where $\symbfit{c}'_k = (c'_{kj})$ and 
-$c'_{kj} = c_{kj} + \sum_i x_{ij} I(y_i = k)$.
+where $\symbfit{c}'_k = \left[c_{kj} + \sum_i x_{ij} I(y_i = k)\right]$.
 
 
 ## Model prediction
@@ -365,15 +362,15 @@ $c'_{kj} = c_{kj} + \sum_i x_{ij} I(y_i = k)$.
 To use our model for classification, we need to derive
 the posterior predictive distribution
 $$
-p \left( \tilde{y} \mid \tilde{\symbf{x}}, \symbf{X}, \symbfit{y} \right)
+p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)
 = \frac{
     p\left( 
-     \tilde{\symbf{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
+     \tilde{\symbfit{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
     \right)
     \,
     p\left( \tilde{y} \mid \symbfit{y} \right)
   }
-  { p\left( \tilde{x} \mid \symbf{X}, \symbfit{y} \right) } .
+  { p\left( \tilde{\symbfit{x}} \mid \symbf{X}, \symbfit{y} \right) } .
 $$
 
 In turn, we need to derive other posterior predictive distributions
@@ -408,9 +405,10 @@ p\left(
 p\left( \tilde{Y} = k \mid \symbfit{y} \right) .
 $$
 
-
 ### Derivation
 
+Let's begin by deriving the posterior predictive distribution for 
+$\tilde{y}$.
 $$
 \begin{aligned}
 p\left( \tilde{y} \mid \symbfit{y} \right)
@@ -454,10 +452,143 @@ $$
 As we showed above, $p\left(\symbfit{\theta} \mid \symbfit{y} \right)$ 
 is Dirichlet$\left(\theta \mid \symbfit{d}' \right)$. Therefore,
 $$
+p\left( \tilde{y} \mid \symbfit{y} \right)
+=
 \text{E}_{p\left( \theta_{\tilde{y}} \mid \symbfit{y} \right)}\left( 
   \theta_{\tilde{y}}
-\right) =
+\right)
+=
  \frac{d'_{\tilde{y}}}{\sum_k d'_k} .
+$$
+Since this quantity will be useful, we define 
+$\tilde{\theta}_k \; = \; p\left(\tilde{Y} = k \mid \symbfit{y}\right)$ 
+for all $k$.
+
+Now, let's derive the posterior predictive distribution for $\tilde{\symbfit{x}}$.
+Define $\tilde{m} = \sum_j \tilde{x}_j$.
+$$
+\begin{aligned}
+p\left( 
+ \tilde{\symbfit{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
+\right)
+&=
+\int
+p\left( \tilde{\symbfit{x}} \mid 
+ \tilde{y}, \symbfit{\eta}_{\tilde{y}} \right) \,
+p\left( \symbfit{\eta}_{\tilde{y}} \mid \symbf{X}, \symbfit{y} \right) \,
+d \symbfit{\eta}_{\tilde{y}} \\
+&= 
+\int_{\mathcal{\Eta}}
+ \left(
+  \Gamma(\tilde{m} + 1) \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \,
+  \eta_{\tilde{y}j}^{\tilde{x}_j}
+ \right)
+ \left(
+  B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+  \prod_j^J \eta_{\tilde{y}j}^{c'_{\tilde{y}j} - 1}
+ \right)
+d \symbfit{\eta}_{\tilde{y}} \\
+&= 
+\int_{\mathcal{\Eta}}
+ \Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+ \left(
+  \prod_j^J
+  \eta_{\tilde{y}j}^{\tilde{x}_j}
+ \right)
+ B(\symbfit{c}'_{\tilde{y}j})^{-1} \,
+ \prod_j^J \eta_{\tilde{y}j}^{c'_{\tilde{y}j} - 1}
+d \symbfit{\eta}_{\tilde{y}} \\
+&= 
+\Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+  B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+\int_{\mathcal{\Eta}}
+ \left(
+  \prod_j^J
+  \eta_{\tilde{y}j}^{\tilde{x}_j}
+ \right)
+ \left(
+  \prod_j^J \eta_{\tilde{y}j}^{c'_{\tilde{y}j} - 1}
+ \right)
+d \symbfit{\eta}_{\tilde{y}} \\
+&= 
+\Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+ B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+\int_{\mathcal{\Eta}}
+ \left(
+  \prod_j^J \eta_{\tilde{y}j}^{c'_{\tilde{y}j} + \tilde{x}_j - 1}
+ \right)
+d \symbfit{\eta}_{\tilde{y}} \\
+&= 
+\Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+ B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+ B(\symbfit{c}''_{\tilde{y}}) ,
+\end{aligned}
+$$
+where $c''_{\tilde{y}j} = c'_{\tilde{y}j} + \tilde{x}_j$.
+
+Now, let's derive the denominator:
+$$
+\begin{aligned}
+p\left( \tilde{x} \mid \symbf{X}, \symbfit{y} \right)
+&=
+\sum_{k=1}^K
+p\left( 
+ \tilde{\symbfit{x}} \mid \tilde{Y} = k, \symbf{X}, \symbfit{y}
+\right) \,
+p\left( \tilde{Y} = k \mid \symbfit{y} \right) \\
+&=
+\sum_{k=1}^K
+\Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+ B(\symbfit{c}'_{k})^{-1} \,
+ B(\symbfit{c}''_{k}) \,
+\tilde{\theta}_k \\
+&=
+\Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+\sum_{k=1}^K
+ B(\symbfit{c}'_{k})^{-1} \,
+ B(\symbfit{c}''_{k}) \,
+\tilde{\theta}_k .
+\end{aligned}
+$$
+
+We are now finally ready to derive the posterior predictive distribution of
+$\tilde{y}$:
+$$
+\begin{aligned}
+p \left( \tilde{y} \mid \tilde{\symbfit{x}}, \symbf{X}, \symbfit{y} \right)
+&= \frac{
+    p\left( 
+     \tilde{\symbfit{x}} \mid \tilde{y}, \symbf{X}, \symbfit{y}
+    \right)
+    \,
+    p\left( \tilde{y} \mid \symbfit{y} \right)
+  }
+  { p\left( \tilde{\symbfit{x}} \mid \symbf{X}, \symbfit{y} \right) } \\
+&= \frac{
+  \Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+   B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+   B(\symbfit{c}''_{\tilde{y}}) \,
+  \tilde{\theta}_{\tilde{y}} 
+ }
+ {
+  \Gamma(\tilde{m} + 1) \left( \prod_j^J \Gamma(\tilde{x}_j + 1)^{-1} \right)
+  \sum_{k=1}^K
+   B(\symbfit{c}'_{k})^{-1} \,
+   B(\symbfit{c}''_{k}) \,
+  \tilde{\theta}_k 
+ } \\
+&= \frac{
+   B(\symbfit{c}'_{\tilde{y}})^{-1} \,
+   B(\symbfit{c}''_{\tilde{y}}) \,
+  \tilde{\theta}_{\tilde{y}} 
+ }
+ {
+  \sum_{k=1}^K
+   B(\symbfit{c}'_{k})^{-1} \,
+   B(\symbfit{c}''_{k}) \,
+  \tilde{\theta}_k
+ } .
+\end{aligned}
 $$
 
 ## Questions
