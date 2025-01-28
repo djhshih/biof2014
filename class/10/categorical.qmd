@@ -30,6 +30,118 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 - Derive posterior predictive distributions for statistical models
 
 
+## Categorical distribution
+
+### Definition
+
+A random variable $X$ with support $\mathcal{X} = \{1, 2, \ldots, K\}$ has
+a categorical distribution if
+$$
+P \left( X = k \right) = \theta_k, \quad k \in \mathcal{X}.
+$$
+where $\theta_k$ is probability of success for outcome $k$ s.t. $\sum_k \theta_k = 1$.
+
+\bigskip
+
+Given $\symbfit{\theta} = \left[\theta_k\right]$, other representations are
+$$
+\begin{aligned}
+P \left( X = x \right) \; &= \; \prod_k^K \theta_k^{I(x = k)} \\
+p \left( X = x \right)
+ \; &= \; \text{Categorical}\left(x \mid \symbfit{\theta} \right) \\
+X \; &\sim \; \text{Categorical}\left(\symbfit{\theta}\right) \\
+X \; &\sim \; \symbfit{\theta} .
+\end{aligned}
+$$
+
+## Categorical distribution
+
+- Generalization of Bernoulli distribution
+- Representation for empirical probability mass function
+
+
+## Illustration
+
+
+## Multinomial distribution
+
+### Definition
+
+A random vector $\symbfit{X} = [X_1, \ldots, X_K]$ with support 
+$$
+\mathcal{X} = 
+ \left\{ [x_1, \ldots, x_K ] : x_k \ge 0, \sum_k x_k = N \right\}
+$$ 
+has a multinomial distribution if
+$$
+\begin{aligned}
+P \left(\symbfit{X} = \symbfit{x}\right)
+\; &= \;
+\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k} \\
+\; &= \;
+\frac{\Gamma(N + 1)}{\prod_k \Gamma(x_k + 1)} \prod_k \theta_k^{x_k} ,
+\end{aligned}
+$$
+where $\theta_k$ is probability of success for outcome $k$ s.t.
+$\sum_k \theta_k = 1$.
+
+Usually, each $x_k$ is a non-negative integer.
+
+## Multinomial distribution
+
+Given $\symbfit{\theta} = \left[\theta_k\right]$, we can also write
+$$
+\begin{aligned}
+p \left( X = x \right)
+ \; &= \;
+ \text{Multinomial}\left(\symbfit{x} \mid N, \symbfit{\theta} \right) \\
+X \; &\sim \; \text{Multinomial}\left( N, \symbfit{\theta} \right) .
+\end{aligned}
+$$
+
+
+## Multinomial theorem
+
+### Theorem
+
+Given positive integers $N$ and $K$. Let $\mathcal{A}$ be a set of
+vectors $\symbfit{x} = \left[ x_1, \ldots, x_K \right]$ s.t.
+each $x_k$ is a nonnegative integer and $\sum_k = N$.
+Then, for any real numbers $p_1, \ldots, p_K$,
+$$
+\left( \sum_k p_k \right)^N \; = \;
+\sum_{\symbfit{x} \in \mathcal{A}} \,
+ \frac{N!}{\prod_k x_k!} \, \prod_k p_k^{x_k} .
+$$
+
+Applying the multinomial theorem with on
+$\symbfit{\theta} = \left[\theta_1, \ldots, \theta_K\right]$,
+we get
+$$
+\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k}
+=
+\left( \sum_k \theta_k \right)^N 
+= 1^N ,
+$$
+since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
+satisfies Kolmogorov's axiom 2.
+
+
+## Derivation
+
+\
+
+---
+
+\
+
+## Illustration
+
+
+## Posterior predictive distribution
+
+TODO
+
 
 ## Summary
 
