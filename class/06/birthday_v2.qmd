@@ -60,3 +60,7 @@ Let $J$ be the number of days in a year.
 5. Compare $P\left( X > 2 \right)$ determined using the simple uniform model 
    we used previously vs. the probability that is estimated using the 
    empirical pmf.
+
+## Reference
+
+Blais 2014, section 2.4

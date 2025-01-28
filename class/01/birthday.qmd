@@ -82,3 +82,6 @@ ggplot(data.frame(x=x), aes(x)) + theme_classic() +
   geom_histogram(binwidth=1) + ylab("count") + ylim(0, S)
 ```
 
+## Reference
+
+Blais 2014, section 2.4
