@@ -409,7 +409,7 @@ $\rightarrow$ Measure theory $\rightarrow$ Statistics $\rightarrow$ Data modelli
 
 \bigskip
 
-Casella & Berger 2002, sections 4.1-4.2
+Casella & Berger 2002, sections 4.1-4.2.
 
 \bigskip
 
@@ -417,3 +417,4 @@ Casella & Berger 2002, sections 4.1-4.2
 
 - Apply theorems regarding joint, conditional, and marginal probabilities 
 - Recognize and explain Simpson's paradox
+

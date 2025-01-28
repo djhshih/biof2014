@@ -358,7 +358,7 @@ $$
 
 \bigskip
 
-Casella & Berger 2002, sections 1.4, 1.5, 1.6
+Casella & Berger 2002, sections 1.4, 1.5, 1.6.
 
 \bigskip
 
@@ -366,3 +366,4 @@ Casella & Berger 2002, sections 1.4, 1.5, 1.6
 
 - Recognize and define events and random variables
 - Implement code to sample values for a random variable
+

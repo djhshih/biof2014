@@ -84,4 +84,5 @@ ggplot(data.frame(x=x), aes(x)) + theme_classic() +
 
 ## Reference
 
-Blais 2014, section 2.4
+Blais 2014, section 2.4.
+

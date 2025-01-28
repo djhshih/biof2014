@@ -286,3 +286,4 @@ p \left( x_j \mid g, \mu_g \right)
 
 [1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC2832826/pdf/btq040.pdf
 [2]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3315723/pdf/bts053.pdf
+

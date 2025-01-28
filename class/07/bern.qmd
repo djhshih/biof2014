@@ -321,7 +321,7 @@ total number trials required for one success.
 
 \bigskip
 
-Casella & Berger 2002, sections 3.2, pages 86-91, 95-98
+Casella & Berger 2002, sections 3.2, pages 86-91, 95-98.
 
 \bigskip
 
@@ -329,3 +329,4 @@ Casella & Berger 2002, sections 3.2, pages 86-91, 95-98
 
 - Recognize and apply Bernoulli and binomial distributions in statistical models
 - Derive the binomial and negative binomial distributions
+
