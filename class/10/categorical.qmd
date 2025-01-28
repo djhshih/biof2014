@@ -1,0 +1,50 @@
+---
+title: "Categorical and multinomial distributions"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
+```
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply categorical and multinomial distributions in
+  statistical models
+- Derive the multinomial distribution
+- Derive posterior predictive distributions for statistical models
+
+
+
+## Summary
+
+"In God we trust; all others bring data." - W. Edwards Deming
+
+\bigskip
+
+Casella & Berger 2002, section 4.6, pages 177-182.
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply categorical and multinomial distributions in
+  statistical models
+- Derive the multinomial distribution
+- Derive posterior predictive distributions for statistical models
+
