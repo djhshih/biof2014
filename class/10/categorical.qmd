@@ -474,10 +474,10 @@ p\left( X_{N+1} = l \mid x_{1:N} \right)
 &= 
 \text{E}_{\text{Dirichlet}\left(\theta_l \mid [\alpha'_k] \right)}
  \left( \theta_l \right) \\
-&= \frac{\alpha'_l}{\sum_k \alpha'_k}
+&= \frac{\alpha^{(N)}_l}{\sum_k \alpha^{(N)}_k}
 \end{aligned}
 $$
-where $\alpha'_k = \alpha_k + \sum_i^N I(x_i = k)$.
+where $\alpha^{(N)}_k = \alpha_k + \sum_i^N I(x_i = k)$.
 
 
 
