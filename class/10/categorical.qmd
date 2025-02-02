@@ -60,7 +60,7 @@ $$
 - Representation for empirical probability mass function
 
 
-## Illustration
+## Example
 
 Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
 of a playing card drawn from a cut deck.
@@ -335,7 +335,7 @@ since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
 satisfies Kolmogorov's axiom 2.
 
 
-## Illustration
+## Example
 
 Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
 of a playing card drawn from a cut deck.
