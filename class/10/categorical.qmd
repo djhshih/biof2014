@@ -259,12 +259,13 @@ $Z_i = 1$, so we divide by $X_1!$.
 
 Similarly for $X_2, X_3, \ldots$
 
-Therefore, each $\symbfit{x}$ has $\frac{N!}{\prod_k x_k!}$ occurrences,
+Therefore, each $\symbfit{x}$ has 
+$\frac{N!}{x_1! \, x_2! \, \ldots \, x_K!}$ occurrences,
 which means that
 $$
 P\left( \symbfit{X} = \symbfit{x} \mid \symbfit{\theta} \right)
 \; = \;
-\frac{N!}{\prod_k x_k!} \,
+\frac{N!}{\prod_k^K x_k!} \,
 \prod_k^K \theta_k^{x_k} .
 $$
 
