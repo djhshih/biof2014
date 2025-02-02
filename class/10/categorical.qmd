@@ -114,6 +114,18 @@ $$
  \frac{N!}{\prod_k x_k!} \, \prod_k p_k^{x_k} .
 $$
 
+## Illustration
+
+
+## Derivation of the multinomial distribution
+
+\
+
+---
+
+\
+
+
 Applying the multinomial theorem with on
 $\symbfit{\theta} = \left[\theta_1, \ldots, \theta_K\right]$,
 we get
@@ -127,20 +139,35 @@ since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
 satisfies Kolmogorov's axiom 2.
 
 
-## Derivation
+## Posterior predictive distribution
 
-\
+Given data $\symbfit{x} = [x_i]$, if a model with parameter 
+$\theta \in \mathcal{\Theta}$
+has a posterior distribution $p\left(\theta \mid \symbfit{x}\right)$, 
+then the posterior prediction distribution for a new observation $\tilde{x}$ is
+$$
+\begin{aligned}
+p\left( \tilde{x} \mid \symbfit{x} \right)
+= 
+ \int_{\mathcal{\Theta}}
+ p\left( \tilde{x} \mid \theta \right) \,
+ p\left( \theta \mid \symbfit{x} \right) \,
+ d \theta ,
+\end{aligned}
+$$
+which follows from the application of the total law of probability.
 
----
-
-\
-
-## Illustration
+$p\left( \tilde{x} \mid \symbfit{x} \right)$ may be used as likelihood function
+to evaluate the probability of held-out observations $\tilde{x}_i$, 
+or as a sampling distribution to sample new observations $\tilde{x}_i$.
 
 
 ## Posterior predictive distribution
 
-TODO
+In Bayesian modelling, we often sample from 
+$p\left( \tilde{x} \mid \symbfit{x} \right)$ and evaluate how the
+empirical distribution of posterior predictive sample $[\tilde{x}_i]$ agrees with 
+the empirical distribution of $\symbfit{x}$.
 
 
 ## Summary
