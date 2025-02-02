@@ -63,80 +63,9 @@ $$
 ## Illustration
 
 
-## Multinomial distribution
 
-### Definition
+## Dirichlet-categorical model
 
-A random vector $\symbfit{X} = [X_1, \ldots, X_K]$ with support 
-$$
-\mathcal{X} = 
- \left\{ [x_1, \ldots, x_K ] : x_k \ge 0, \sum_k x_k = N \right\}
-$$ 
-has a multinomial distribution if
-$$
-\begin{aligned}
-P \left(\symbfit{X} = \symbfit{x}\right)
-\; &= \;
-\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k} \\
-\; &= \;
-\frac{\Gamma(N + 1)}{\prod_k \Gamma(x_k + 1)} \prod_k \theta_k^{x_k} ,
-\end{aligned}
-$$
-where $\theta_k$ is probability of success for outcome $k$ s.t.
-$\sum_k \theta_k = 1$.
-
-Usually, each $x_k$ is a non-negative integer.
-
-## Multinomial distribution
-
-Given $\symbfit{\theta} = \left[\theta_k\right]$, we can also write
-$$
-\begin{aligned}
-p \left( X = x \right)
- \; &= \;
- \text{Multinomial}\left(\symbfit{x} \mid N, \symbfit{\theta} \right) \\
-X \; &\sim \; \text{Multinomial}\left( N, \symbfit{\theta} \right) .
-\end{aligned}
-$$
-
-
-## Multinomial theorem
-
-### Theorem
-
-Given positive integers $N$ and $K$. Let $\mathcal{A}$ be a set of
-vectors $\symbfit{x} = \left[ x_1, \ldots, x_K \right]$ s.t.
-each $x_k$ is a nonnegative integer and $\sum_k = N$.
-Then, for any real numbers $p_1, \ldots, p_K$,
-$$
-\left( \sum_k p_k \right)^N \; = \;
-\sum_{\symbfit{x} \in \mathcal{A}} \,
- \frac{N!}{\prod_k x_k!} \, \prod_k p_k^{x_k} .
-$$
-
-## Illustration
-
-
-## Derivation of the multinomial distribution
-
-\
-
----
-
-\
-
-
-Applying the multinomial theorem with on
-$\symbfit{\theta} = \left[\theta_1, \ldots, \theta_K\right]$,
-we get
-$$
-\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k}
-=
-\left( \sum_k \theta_k \right)^N 
-= 1^N ,
-$$
-since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
-satisfies Kolmogorov's axiom 2.
 
 
 ## Posterior predictive distribution
@@ -168,6 +97,80 @@ In Bayesian modelling, we often sample from
 $p\left( \tilde{x} \mid \symbfit{x} \right)$ and evaluate how the
 empirical distribution of posterior predictive sample $[\tilde{x}_i]$ agrees with 
 the empirical distribution of $\symbfit{x}$.
+
+
+## Dirichlet-categorical model
+
+
+
+## Multiple categorical random variables
+
+
+
+## Multinomial distribution
+
+### Definition
+
+A random vector $\symbfit{X} = [X_1, \ldots, X_K]$ with support 
+$$
+\mathcal{X} = 
+ \left\{ [x_1, \ldots, x_K ] : x_k \ge 0, \sum_k x_k = N \right\}
+$$ 
+has a multinomial distribution if
+$$
+\begin{aligned}
+P \left(\symbfit{X} = \symbfit{x}\right)
+\; &= \;
+\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k} \\
+\; &= \;
+\frac{\Gamma(N + 1)}{\prod_k \Gamma(x_k + 1)} \prod_k \theta_k^{x_k} ,
+\end{aligned}
+$$
+where $\theta_k$ is probability of success for outcome $k$ s.t.
+$\sum_k \theta_k = 1$.
+
+Usually, each $x_k$ is a non-negative integer.
+
+
+## Multinomial distribution
+
+Given $\symbfit{\theta} = \left[\theta_k\right]$, we can also write
+$$
+\begin{aligned}
+p \left( X = x \right)
+ \; &= \;
+ \text{Multinomial}\left(\symbfit{x} \mid N, \symbfit{\theta} \right) \\
+X \; &\sim \; \text{Multinomial}\left( N, \symbfit{\theta} \right) .
+\end{aligned}
+$$
+
+
+## Multinomial theorem
+
+### Theorem
+
+Given positive integers $N$ and $K$. Let $\mathcal{A}$ be a set of
+vectors $\symbfit{x} = \left[ x_1, \ldots, x_K \right]$ s.t.
+each $x_k$ is a nonnegative integer and $\sum_k = N$.
+Then, for any real numbers $p_1, \ldots, p_K$,
+$$
+\left( \sum_k p_k \right)^N \; = \;
+\sum_{\symbfit{x} \in \mathcal{A}} \,
+ \frac{N!}{\prod_k x_k!} \, \prod_k p_k^{x_k} .
+$$
+
+
+Applying the multinomial theorem with on
+$\symbfit{\theta} = \left[\theta_1, \ldots, \theta_K\right]$,
+we get
+$$
+\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k}
+=
+\left( \sum_k \theta_k \right)^N 
+= 1^N ,
+$$
+since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
+satisfies Kolmogorov's axiom 2.
 
 
 ## Summary
