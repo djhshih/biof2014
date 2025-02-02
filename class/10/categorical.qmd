@@ -282,7 +282,7 @@ $$
 has a multinomial distribution if
 $$
 \begin{aligned}
-P \left(\symbfit{X} = \symbfit{x}\right)
+P \left(\symbfit{X} = \symbfit{x} \mid \symbfit{\theta} \right)
 \; &= \;
 \frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k} \\
 \; &= \;
@@ -300,7 +300,7 @@ Usually, each $x_k$ is a non-negative integer.
 Given $\symbfit{\theta} = \left[\theta_k\right]$, we can also write
 $$
 \begin{aligned}
-p \left( X = x \right)
+p \left( X = x \mid \symbfit{\theta} \right)
  \; &= \;
  \text{Multinomial}\left(\symbfit{x} \mid N, \symbfit{\theta} \right) \\
 X \; &\sim \; \text{Multinomial}\left( N, \symbfit{\theta} \right) .
