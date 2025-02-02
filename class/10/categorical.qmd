@@ -336,20 +336,6 @@ since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
 satisfies Kolmogorov's axiom 2.
 
 
-## Example
-
-Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
-of a playing card drawn from a cut deck.
-$$
-\begin{aligned}
-X &\sim \symbfit{\theta} \\
-\symbfit{\theta} &\sim \text{Dirichlet}\left(\symbfit{\alpha}\right)
-\end{aligned}
-$$
-
-Draw 8 cards and form the prior $p\left( \symbfit{\theta} \right)$.
-
-
 ## Posterior predictive distribution
 
 Given data $\symbfit{x} = [x_i]$, if a model with parameter 
@@ -381,6 +367,117 @@ empirical distribution of posterior predictive sample $[\tilde{x}_i]$ agrees wit
 the empirical distribution of $\symbfit{x}$.
 
 
+## Iterative update under categorical-Dirichlet model
+
+Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
+of a playing card drawn from a cut deck (i.e. $K = 4$).
+$$
+\begin{aligned}
+X &\sim \symbfit{\theta} \\
+\symbfit{\theta} &\sim \text{Dirichlet}\left(\symbfit{\alpha}\right)
+\end{aligned}
+$$
+
+Draw a card, which has suit $x_1$, and update
+$p\left( \symbfit{\theta} \mid x_1 \right)$.
+Put card back into the deck. Repeat for $x_2, \ldots x_N$.
+What is the probability distribution for the suit of the $N + 1$ card, $X_{N+1}$?
+
+---
+
+\bigskip
+$$
+\begin{aligned}
+p\left( \symbfit{\theta} \right)
+&= \text{Dirichlet}\left(\symbfit{\theta} \mid \left[\alpha_k\right]\right)
+\\
+p\left( \symbfit{\theta} \mid x_1 \right)
+&= p\left( x_1 \mid \theta \right) \, p\left( \theta \right) \,
+   p\left(x_1\right)^{-1} \\
+&= \text{Dirichlet}\left(\symbfit{\theta} \mid 
+ \left[\alpha_k + I(x_1 = k)\right]\right)
+\\
+p\left( \symbfit{\theta} \mid x_1, x_2 \right)
+&= p\left( x_2 \mid \theta, x_1 \right) \, p\left( \theta \mid x_1 \right) \,
+   p\left(x_2 \mid x_1 \right)^{-1} \\
+&= \text{Dirichlet}\left(\symbfit{\theta} \mid 
+ \left[\alpha_k + I(x_1 = k) + I(x_2 = k)\right]\right) \\
+&\ldots \\
+p\left( \symbfit{\theta} \mid x_{1:N} \right)
+&= \frac{p\left( x_N \mid \theta, x_{1:(N-1)} \right) \, 
+   p\left( \theta \mid x_{1:(N-1)} \right) }
+   { p\left(x_N \mid x_{1:(N-1)} \right) } \\
+&= \text{Dirichlet}\left(\symbfit{\theta} \mid 
+ \left[\alpha_k + y_k\right]\right) ,
+\end{aligned}
+$$
+where $y_k = \sum_i^N I(x_i = k)$.
+
+---
+
+\bigskip
+
+$$
+\begin{aligned}
+p\left( X_{N+1} = l \mid x_{1:N} \right)
+&= 
+\int_{\mathcal{\Theta}}
+ p\left( X_{N+1} = l \mid \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \mid x_{1:N} \right) \,
+d \symbfit{\theta} \\
+&=
+\int_{\mathcal{\Theta}}
+ \theta_l \,
+ p\left( \symbfit{\theta} \mid x_{1:N} \right) \,
+d \symbfit{\theta} \\
+&=
+\int_0^1
+ \int_{\mathcal{\Theta_{-l}}}
+  \theta_l \,
+  p\left( \symbfit{\theta} \mid x_{1:N} \right) \,
+ d \symbfit{\theta}_{-l} \,
+d \theta_l \\
+&=
+\int_0^1
+ \theta_l \,
+ \int_{\mathcal{\Theta_{-l}}}
+  p\left( \symbfit{\theta} \mid x_{1:N} \right) \,
+ d \symbfit{\theta}_{-l} \,
+d \theta_l \\
+&=
+\int_0^1
+ \theta_l \,
+ p\left( \theta_l \mid x_{1:N} \right) \,
+d \theta_l
+\quad (\text{total law of prob.}) \\
+&=
+\text{E}_{p\left( \theta_l \mid x_{1:N} \right)}\left( \theta_l \right)
+\quad (\text{def'n of expectation})
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+Under $\text{Dirichlet}\left(\symbfit{\theta} \mid \symbfit\alpha\right)$,
+$$
+\text{E}\left( \theta_l \right) = \frac{\alpha_l}{\sum_k \alpha_k} .
+$$
+
+Therefore,
+$$
+\begin{aligned}
+p\left( X_{N+1} = l \mid x_{1:N} \right)
+&=
+\text{E}_{p\left( \theta_l \mid x_{1:N} \right)}\left( \theta_l \right) \\
+&= 
+\text{E}_{\text{Dirichlet}\left(\theta_l \mid [\alpha'_k] \right)}
+ \left( \theta_l \right) \\
+&= \frac{\alpha'_l}{\sum_k \alpha'_k}
+\end{aligned}
+$$
+where $\alpha'_k = \alpha_k + \sum_i^N I(x_i = k)$.
 
 
 
