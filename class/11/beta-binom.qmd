@@ -1,0 +1,52 @@
+---
+title: "Beta-binomial and Dirichlet-multinomial models"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
+```
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply the beta-binomial model
+- Recognize and apply the Dirichlet-multinomial model
+
+
+## Beta-binomial model
+
+
+
+## Dirichlet-multinomial model
+
+
+
+## Conjugate prior
+
+
+
+## Summary
+
+Conjugate priors facilitate fast Bayesian updates.
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply the beta-binomial model
+- Recognize and apply the Dirichlet-multinomial model
