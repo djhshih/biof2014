@@ -62,49 +62,211 @@ $$
 
 ## Illustration
 
+Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
+of a playing card drawn from a cut deck.
+$$
+X \sim \symbfit{\theta}
+$$
 
+## Dirichlet distribution
+
+Define a random vector $\symbfit{X} = [X_1, \ldots, X_K]$ with $K \ge 2$ 
+such that
+$$
+X_k \in [0, 1] \quad \text{and} \quad \sum_k^K X_k = 1 .
+$$
+
+$\symbfit{X}$ has a Dirichlet distribution with parameter $\symbfit{\alpha}$ if
+$$
+f_{\symbfit{X}}(\symbfit{x}) 
+= \frac{1}{B\left(\symbfit{\alpha}\right)} \prod_k^K x_k^{\alpha_k - 1} ,
+$$
+where $\alpha_k > 0$ and $B\left(\symbfit{\alpha}\right)$ is the multivariate beta function:
+$$
+B\left(\symbfit{\alpha}\right) =
+\frac{ \prod_k^K \Gamma\left(\alpha_k\right) }
+{\Gamma\left( \sum_k^K \alpha_k \right)} .
+$$
 
 ## Dirichlet-categorical model
 
-
-
-## Posterior predictive distribution
-
-Given data $\symbfit{x} = [x_i]$, if a model with parameter 
-$\theta \in \mathcal{\Theta}$
-has a posterior distribution $p\left(\theta \mid \symbfit{x}\right)$, 
-then the posterior prediction distribution for a new observation $\tilde{x}$ is
+Given data $X \in \{1, \ldots, K\}$, define model
 $$
 \begin{aligned}
-p\left( \tilde{x} \mid \symbfit{x} \right)
-= 
- \int_{\mathcal{\Theta}}
- p\left( \tilde{x} \mid \theta \right) \,
- p\left( \theta \mid \symbfit{x} \right) \,
- d \theta ,
+X &\sim \symbfit{\theta} \\
+\symbfit{\theta} &\sim \text{Dirichlet}\left(\symbfit{\alpha}\right) ,
 \end{aligned}
 $$
-which follows from the application of the total law of probability.
+with parameter $\symbfit{\theta}$ and hyperparameter $\symbfit{\alpha}$.
 
-$p\left( \tilde{x} \mid \symbfit{x} \right)$ may be used as likelihood function
-to evaluate the probability of held-out observations $\tilde{x}_i$, 
-or as a sampling distribution to sample new observations $\tilde{x}_i$.
+The posterior distribution of $\symbfit{\theta}$ is
+$$
+p\left( \symbfit{\theta} \mid x \right)
+=
+\frac{p\left( x \mid \symbfit{\theta} \right) \, p\left(\symbfit{\theta}\right) }
+{p\left(x\right)}
+\quad
+(\text{Bayes' theorem}) ,
+$$
+where we need to solve 
+$p\left( x \mid \symbfit{\theta} \right) \, p\left(\symbfit{\theta}\right)$
+and $p\left(x\right)$.
 
+---
 
-## Posterior predictive distribution
+\bigskip
 
-In Bayesian modelling, we often sample from 
-$p\left( \tilde{x} \mid \symbfit{x} \right)$ and evaluate how the
-empirical distribution of posterior predictive sample $[\tilde{x}_i]$ agrees with 
-the empirical distribution of $\symbfit{x}$.
+We first solve the numerator:
+$$
+\begin{aligned}
+p\left( x \mid \symbfit{\theta} \right) \, p\left(\symbfit{\theta}\right)
+&= \theta_x \left(B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha_k -1} \right) \\
+&= \left( \prod_k \theta_k^{I(x = k)} \right)
+ B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha_k -1} \\
+&= B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha_k + I(x = k) - 1} \\
+&= B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha'_k - 1} ,
+\end{aligned}
+$$
+where $\alpha'_k = \alpha_k + I(x = k)$.
 
+---
 
-## Dirichlet-categorical model
+\bigskip
 
+Now, we solve the denominator:
+$$
+\begin{aligned}
+p\left(x\right)
+&=
+\int_{\mathcal{\Theta}}
+p\left( x \mid \symbfit{\theta} \right) \, p\left(\symbfit{\theta}\right) \,
+d \symbfit{\theta}
+\quad (\text{total law of prob.}) \\
+&= 
+\int_{\mathcal{\Theta}}
+B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha'_k - 1} 
+d \symbfit{\theta} \\
+&= 
+B(\symbfit{\alpha})^{-1}
+\int_{\mathcal{\Theta}}
+ \prod_k \theta_k^{\alpha'_k - 1} 
+d \symbfit{\theta} \\
+&= 
+B(\symbfit{\alpha})^{-1}
+B(\symbfit{\alpha}')
+\quad
+(\text{Dirichlet distribution integrates to 1})
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+Finally, we solve the posterior by substituting in the numerator and 
+the denominator.
+$$
+\begin{aligned}
+p\left( \symbfit{\theta} \mid x \right)
+&=
+\frac{
+B(\symbfit{\alpha})^{-1} \prod_k \theta_k^{\alpha'_k - 1} 
+}
+{ B(\symbfit{\alpha})^{-1} B(\symbfit{\alpha}') }
+=
+\frac{
+\prod_k \theta_k^{\alpha'_k - 1} 
+}
+{ B(\symbfit{\alpha}') } \\
+&= 
+\text{Dirichlet}\left(\theta \mid \symbfit{\alpha}'\right) ,
+\end{aligned}
+$$
+where $\alpha'_k = \alpha_k + I(x = k)$.
 
 
 ## Multiple categorical random variables
 
+Given observed iid data $Z_i \in \{1, \ldots, K\}$ 
+for $i \in \{1, \ldots, N\}$
+and known parameter $\symbfit{\theta}$, suppose
+$$
+Z_i \sim \symbfit{\theta} .
+$$
+
+In other words,
+$$
+\begin{aligned}
+P\left( Z_i = k \mid \symbfit{\theta} \right)
+\; &= \; \theta_k \\
+P\left( Z_i = z_i \mid \symbfit{\theta} \right) 
+\; &= \; \prod_k^K \theta_k^{I(z_i = k)} \\
+\prod_i P\left( Z_i = z_i \mid \symbfit{\theta} \right) 
+\; &= \; \prod_i^N \prod_k^K \theta_k^{\, I(z_i = k)} \\
+\; &= \; \prod_k^K \theta_k^{\, \sum_i^N I(z_i = k)} \\
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+For $k = 1 \ldots K$, define $x_k = \sum_i^N I(z_i = k)$. Then,
+$$
+\prod_i P\left( Z_i = z_i \mid \symbfit{\theta} \right) 
+\; = \; \prod_k^K \theta_k^{\, x_k} 
+$$
+
+Define random vector $\symbfit{X} = [X_k]$, 
+where $X_k = \sum_i^N I(Z_i = k)$.
+$$
+P\left( \symbfit{X} = \symbfit{x} \mid \symbfit{\theta} \right)
+\; \propto \; 
+\prod_k^K \theta_k^{\, x_k} ,
+$$
+where each $\symbfit{x}$ can arising from different number of 
+occurrences of each realization $\symbfit{z} = [z_i]$.
+
+---
+
+Example where $K = 4$ and $N = 6$:
+
+| $\symbfit{z}$ | $\symbfit{x}$ |
+|---------------|---------------|
+| [1 1 1 1 1 1] | [6 0 0 0]     |
+| [2 2 2 2 2 2] | [0 6 0 0]     |
+| $\ldots$      |               |
+| [1 1 1 2 2 2] | [3 3 0 0]     |
+| [1 2 1 1 2 2] | [3 3 0 0]     |
+| $\ldots$      | [3 3 0 0]     |
+| $\ldots$      |               |
+| [1 2 2 1 3 4] | [2 2 1 1]     |
+| [2 1 2 1 3 4] | [2 2 1 1]     |
+| [3 1 2 1 4 2] | [2 2 1 1]     |
+| [4 1 2 1 3 2] | [2 2 1 1]     |
+| $\ldots$      | [2 2 1 1]     |
+| $\ldots$      |               |
+
+---
+
+\bigskip
+
+There are $N!$ ways of drawing random vector $[Z_i]$, which consists of
+$N$ random variables.
+
+We cannot distinguish among all ways of arranging all the $Z_i$ such that
+$Z_i = 1$, so we divide by $X_1!$.
+
+Similarly for $X_2, X_3, \ldots$
+
+Therefore, each $\symbfit{x}$ has $\frac{N!}{\prod_k x_k!}$ occurrences,
+which means that
+$$
+P\left( \symbfit{X} = \symbfit{x} \mid \symbfit{\theta} \right)
+\; = \;
+\frac{N!}{\prod_k x_k!} \,
+\prod_k^K \theta_k^{x_k} .
+$$
 
 
 ## Multinomial distribution
@@ -171,6 +333,54 @@ $$
 $$
 since $\sum_k \theta_k = 1$. This proves that the multinomial distribution
 satisfies Kolmogorov's axiom 2.
+
+
+## Illustration
+
+Let $X = \{1, 2, 3, 4\}$ represent the suit (Club, Diamond, Heart, Spade)
+of a playing card drawn from a cut deck.
+$$
+\begin{aligned}
+X &\sim \symbfit{\theta} \\
+\symbfit{\theta} &\sim \text{Dirichlet}\left(\symbfit{\alpha}\right)
+\end{aligned}
+$$
+
+Draw 8 cards and form the prior $p\left( \symbfit{\theta} \right)$.
+
+
+## Posterior predictive distribution
+
+Given data $\symbfit{x} = [x_i]$, if a model with parameter 
+$\theta \in \mathcal{\Theta}$
+has a posterior distribution $p\left(\theta \mid \symbfit{x}\right)$, 
+then the posterior prediction distribution for a new observation $\tilde{x}$ is
+$$
+\begin{aligned}
+p\left( \tilde{x} \mid \symbfit{x} \right)
+= 
+ \int_{\mathcal{\Theta}}
+ p\left( \tilde{x} \mid \theta \right) \,
+ p\left( \theta \mid \symbfit{x} \right) \,
+ d \theta ,
+\end{aligned}
+$$
+which follows from the application of the total law of probability.
+
+$p\left( \tilde{x} \mid \symbfit{x} \right)$ may be used as likelihood function
+to evaluate the probability of held-out observations $\tilde{x}_i$, 
+or as a sampling distribution to sample new observations $\tilde{x}_i$.
+
+
+## Posterior predictive distribution
+
+In Bayesian modelling, we often sample from 
+$p\left( \tilde{x} \mid \symbfit{x} \right)$ and evaluate how the
+empirical distribution of posterior predictive sample $[\tilde{x}_i]$ agrees with 
+the empirical distribution of $\symbfit{x}$.
+
+
+
 
 
 ## Summary
