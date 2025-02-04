@@ -28,6 +28,42 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 - Recognize and apply the Dirichlet-multinomial model
 
 
+## Solving for the posterior
+
+Given observation $X$ and parameter $\theta$,
+solve for $p\left(\theta \mid x\right)$.
+$$
+\begin{aligned}
+p\left(x \mid \theta\right) \, p\left(\theta\right) 
+&= h(x) \, g(x, \theta) . \\
+p\left(x\right)
+&= \int_{\mathcal{\Theta}}
+    p\left(x \mid \theta\right) \, p\left(\theta\right) \, 
+   d\theta 
+ = h(x) \int_{\mathcal{\Theta}} \, g(x, \theta) \, d\theta .
+\end{aligned}
+$$
+
+Therefore, the posterior is
+$$
+\begin{aligned}
+p\left(\theta \mid x\right)
+&= \frac{ p\left(x \mid \theta\right) \, p\left(\theta\right) }
+        { p\left(x\right) } 
+ = \frac{ h(x) \, g(x, \theta) }
+        { h(x) \int_{\mathcal{\Theta}} g(x, \theta) \, d\theta } \\
+&= \frac{ g(x, \theta) }
+        { \int_{\mathcal{\Theta}} g(x, \theta) \, d\theta } \\
+&= c(x)^{-1} g(x, \theta) ,
+\end{aligned}
+$$
+where $c(x) = \int_{\mathcal{\Theta}} g(x, \theta) \, d\theta$.
+
+
+## Conjugate prior
+
+
+
 ## Beta-binomial model
 
 
@@ -36,7 +72,6 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 
 
 
-## Conjugate prior
 
 
 
