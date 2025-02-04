@@ -1,0 +1,78 @@
+---
+title: "Markov chain Monte Carlo"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
+```
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply the beta-binomial model
+- Recognize and apply the Dirichlet-multinomial model
+
+
+## Notation
+
+Many notations exist for specifying a statistical model.
+
+For a discrete random variable $X$, the following notations are equivalent:
+$$
+\begin{aligned}
+X &\sim g(\theta) \\
+X &\sim g( \cdot \mid \theta) \\
+X &\sim g(X \mid \theta) \\
+X \mid \theta &\sim g(X \mid \theta) \\
+P\left(X = x \mid \theta \right) &= g(x \mid \theta) \\
+p\left(x \mid \theta \right) &= g(x \mid \theta) \\
+p\left(x \mid \theta \right) &= g(x ; \theta) \\
+f_X(x) &= g(x \mid \theta) \\
+\end{aligned}
+$$
+
+## Notation
+
+We will mostly use:
+$$
+\begin{aligned}
+X &\sim g(\theta) \\
+p\left(x \mid \theta \right) &= g(x \mid \theta)
+\end{aligned}
+$$
+
+
+## Dirichlet-multinomial model
+
+
+
+## Conjugate prior
+
+
+
+## Summary
+
+Conjugate priors facilitate fast Bayesian updates.
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply the beta-binomial model
+- Recognize and apply the Dirichlet-multinomial model
+
