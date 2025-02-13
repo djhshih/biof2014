@@ -9,9 +9,6 @@ format:
           \usepackage{amsmath}
           \usepackage{amssymb}
           \usepackage{amsthm}
-          \usepackage{bm}
-          \usepackage{bbm}
-          \usepackage[english]{babel}
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
@@ -249,32 +246,34 @@ So, we need to define $f_X(x)$ differently for continuous random variables.
 
 ## $P_X(x = x)$ for continuous random variable
 
-For a continuous RV $X$, $P_X(X = x) \; = \; 0$ 
-for all $x \in \mathcal{X}$.
+For a continuous random variable $X$, 
+$P_X(X = x) \; = \; 0, \forall \, x \in \mathcal{X}$.
+
+### Illustration
 
 
 ## $P_X(x = x)$ for continuous random variable
 
-For a continuous RV $X$, $P_X(X = x) \; = \; 0$ 
-for all $x \in \mathcal{X}$.
+For a continuous random variable $X$, 
+$P_X(X = x) \; = \; 0, \forall \, x \in \mathcal{X}$.
 
 ### Proof
 
 Recall from set theory that
 $$
 \begin{aligned}
-(1) &\quad A \subset B \; \Rightarrow \; P(A) \le P(B)  \\
+(1) &\quad A \subseteq B \; \Rightarrow \; P(A) \le P(B)  \\
 (2) &\quad P(A \cap B) = P(B) - P(B \cap A^c)
 \end{aligned}
 $$
 
-For any $\epsilon \ge 0$, we have
+For any $\epsilon > 0$, we have
 $$
-\{r \in \mathcal{X} : r = x\} \subset \{r \in \mathcal{X} : x - \epsilon < r \le x \} .
+\{r \in \mathcal{X} : r = x\} \subseteq \{r \in \mathcal{X} : x - \epsilon < r \le x \} .
 $$
 As short-hand, we will write
 $$
-\{ X = x \} \; \subset \; \{ x - \epsilon < X \le x \} .
+\{ X = x \} \; \subseteq \; \{ x - \epsilon < X \le x \} .
 $$
 
 By (1), 
