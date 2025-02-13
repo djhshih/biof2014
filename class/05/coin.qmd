@@ -119,7 +119,8 @@ domain.x <- unique(values.x);
 In the random variable space $\mathcal{X}$, we also need to have a probability
 function, $P_X$, which is induced by the random variable $X$, according to
 $$
-P_X \left( X = x_i \right) \; = \; P \left( \mathcal{\{ s_j \in S : X(s_j) = x_i \}} \right),
+P_X \left( X = x_i \right) \; = \; 
+P \left( \{ s_j \in \mathcal{S} : X(s_j) = x_i \} \right),
 $$
 where $P$ is the probability function of the sample space that we have already
 defined above as `probs.S`.
