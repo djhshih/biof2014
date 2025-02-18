@@ -52,7 +52,7 @@ Useful as an expression of ignorance.
 Other possible notations are
 $$
 \begin{aligned}
-p\left(X = x \mid N\right) &= \text{Uniform}\left( N\right) \\
+p\left(X = x \mid N\right) &= \text{Uniform}\left( x \mid N\right) \\
 X &\sim \text{Uniform}\left(N\right) \\
 \end{aligned}
 $$
@@ -94,7 +94,7 @@ the induced probability function $P_X$ must be defined properly so that
 it satisifies Kolmogorov's axioms.
 
 
-## Proof: $\text{Uniform}(N)$ is a probability distribution
+## Proof: $\text{Uniform}(x \mid N)$ is a probability distribution
 
 Prove that $P_X(x) = \text{Uniform}(N)$ satisifies Kolmogorov's axioms 
 of probability.
@@ -111,7 +111,7 @@ Finally, $\frac{K}{N} > 0$ since $N > 0$ and $K > 0$.
 Therefore, $P_X(\mathcal{A}) \ge 0$ for any $\mathcal{A} \subseteq \mathcal{X}$.
 
 
-## Proof: $\text{Uniform}(N)$ is a probability distribution
+## Proof: $\text{Uniform}(x \mid N)$ is a probability distribution
 
 ### Unit measure
 
@@ -119,14 +119,14 @@ Given $\mathcal{X} = \{x_1, \ldots, x_N\}$,
 $$
 \begin{aligned}
 P_X\left( \mathcal{X} \right) 
- &= P_X\left( \{s_1, \ldots, s_N\} \right) \\
- &= \sum_{i=1}^N P(s_i) \quad (\text{additivity}) \\
+ &= P_X\left( \{x_1, \ldots, x_N\} \right) \\
+ &= \sum_{i=1}^N P_X(x_i) \quad (\text{additivity}) \\
  &= \sum_{i=1}^N \frac{1}{N} = \frac{N}{N} = 1
 \end{aligned}
 $$
 
 
-## Proof: $\text{Uniform}(N)$ is a probability distribution
+## Proof: $\text{Uniform}(x \mid N)$ is a probability distribution
 
 Recall that, for a discrete random variable $X$,
 $$
@@ -165,14 +165,14 @@ $$
 \begin{aligned}
 P_X(\mathcal{A}) 
  &= P_X\left( \bigcup_{k=1}^K a_k \right) \\
- &= P\left( \bigcup_{k=1}^K \{ s_k \in \mathcal{S} : X(s_k) == a_k \} \right) 
+ &= P\left( \bigcup_{k=1}^K \{ s_k \in \mathcal{S} : X(s_k) = a_k \} \right) 
   \quad (\text{definition of }P_X) \\
- &= \sum_{k=1}^K P\left( \{s_k \in \mathcal{S} : X(s_k) == a_k \} \right)
+ &= \sum_{k=1}^K P\left( \{s_k \in \mathcal{S} : X(s_k) = a_k \} \right)
   \quad (\text{additivity of }P) \\
  &= \sum_{k=1}^K P_X( a_k )
   \quad (\text{definition of }P_X) \\
- &= \sum {k=1}^K \frac{1}{N}
-  \quad (\text{definition of Discrete}(x \mid N)) \\
+ &= \sum_{k=1}^K \frac{1}{N}
+  \quad (\text{definition of Uniform}(x \mid N)) \\
  &= \frac{K}{N}
 \end{aligned}
 $$
@@ -184,17 +184,17 @@ Similarly as above, we can also show $P_X(\mathcal{B}) = \frac{L}{N}$.
 $$
 \begin{aligned}
 P_X \left( \mathcal{A} \cup \mathcal{B} \right)
- &= P_X \left( \left(\bigcup_{k=1}^K a_k\right) \cup \left(\bigcup_{l=1}^L b_k\right) \right)
+ &= P_X \left( \left(\bigcup_{k=1}^K a_k\right) \cup \left(\bigcup_{l=1}^L b_l\right) \right)
  &= P\left(
-   \bigcup_{k=1}^K \{s_k \in \mathcal{S} : X(s_k) == a_k \} \cup 
-   \bigcup_{l=1}^L \{s_k \in \mathcal{S} : X(s_k) == b_l \}
+   \bigcup_{k=1}^K \{s_k \in \mathcal{S} : X(s_k) = a_k \} \cup 
+   \bigcup_{l=1}^L \{s_k \in \mathcal{S} : X(s_k) = b_l \}
   \right) 
   \quad (\text{definition of }P_X) \\
  &= P\left(
-   \bigcup_{k=1}^{K+L} \{s_k \in \mathcal{S} : X(s_k) == c_k \}
+   \bigcup_{k=1}^{K+L} \{s_k \in \mathcal{S} : X(s_k) = c_k \}
   \right)
   \quad (\text{definition of }c_k) \\
- &= \sum_{k=1}^{K+L} P\left( \{s_k \in \mathcal{S} : X(s_k) == c_k \} \right)
+ &= \sum_{k=1}^{K+L} P\left( \{s_k \in \mathcal{S} : X(s_k) = c_k \} \right)
   \quad (\text{additivity of }P) \\
  &= \sum_{k=1}^{K+L} P_X( c_k )
   \quad (\text{definition of }P_X) \\
@@ -206,6 +206,8 @@ P_X \left( \mathcal{A} \cup \mathcal{B} \right)
 $$
 
 ---
+
+\bigskip
 
 Therefore, for any $\mathcal{A}, \mathcal{B} \subseteq \mathcal{X}$
 s.t. $\mathcal{A} \cap \mathcal{B} = \emptyset$,
@@ -388,7 +390,7 @@ $$
 $$
 
 The Glivenko-Cantelli theorem states that $\hat{F}_N(x)$ converges
-to $F(x)$. That is, as $N \rightarrow 0$, with probability 1,
+to $F(x)$. That is, as $N \rightarrow \infty$, with probability 1,
 $$
 \sup_{x \in \mathcal{X}} \left| \hat{F}_N(x) - F(x) \right| = 0 ,
 $$

@@ -33,7 +33,8 @@ using real world data.
 The UK publishes the average frequency of births on each day of the year
 from 1995 to 2024. We can download it with
 ```
-curl -o uk-daily-births.csv https://www.ons.gov.uk/visualisations/nesscontent/dvc307/line_chart/data.csv
+curl -o uk-daily-births.csv \
+https://www.ons.gov.uk/visualisations/nesscontent/dvc307/line_chart/data.csv
 ```
 
 So, let's use this data to construct the empirical 
@@ -57,7 +58,7 @@ Let $J$ be the number of days in a year.
    is born on each day within a year.
 4. Implement a simulation that generates the number of people who
    share the same birthday based on the empirical pmf.
-5. Compare $P\left( X > 2 \right)$ determined using the simple uniform model 
+5. Compare $P\left( X \ge 2 \right)$ determined using the simple uniform model 
    we used previously vs. the probability that is estimated using the 
    empirical pmf.
 
