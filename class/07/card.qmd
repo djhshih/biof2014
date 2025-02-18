@@ -36,7 +36,7 @@ set.seed(1234);
 5. Place all cards back into the deck, and repeat steps 1-5 for 10 rounds.
 6. Collect the realizations from all groups together. 
    If there are 12 groups, there now should be 120 samples of $X$.
-7. Plot a histogram with a binsize of 1 (i.e. empirical probability mass 
+7. Plot a histogram with a bin size of 1 (i.e. empirical probability mass 
    function) of $X$.
 
 We've just create a distribution known as the hypergeometric distribution!
