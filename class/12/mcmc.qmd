@@ -24,8 +24,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 
 ## Intended learning outcomes {.c}
 
-- Recognize and apply the beta-binomial model
-- Recognize and apply the Dirichlet-multinomial model
+- Implement statistical models in Stan
 
 
 ## Notation
@@ -56,23 +55,55 @@ p\left(x \mid \theta \right) &= g(x \mid \theta)
 \end{aligned}
 $$
 
+## Markov chain Monte Carlo (MCMC)
 
-## Dirichlet-multinomial model
+MCMC is a class of algorithms for drawing samples from a **target** distribution.
+
+\bigskip
+
+Initialize a sample $x_0$.
+
+For $t \in \{1, 2, \ldots \}$:
+
+  - Draw sample $x'$ from a **proposal** distribution given $x_t$
+  - Accept sample with some probability by setting $x_{t+1} \leftarrow x'$.  
+    Otherwise, $x_{t+1} \leftarrow x_t$.
+
+Discard 'warm-up samples' $\{x_0, x_1, x_k\}$ for some cutoff $k$.
+
+\bigskip
+
+If the sampler is set up correctly,
+the distribution of the samples $\{x_{k+1}, x_{k+2}, \ldots\}$ 
+will eventually converge to the target distribution.
+
+
+## Gibbs sampling
+
+Gibbs sampler always accepts.
+
+
+## Metropolis-Hastings algorithm
 
 
 
-## Conjugate prior
+## Hamiltonian Monte Carlo
 
+A variant of MCMC that uses Hamiltonian dynamics.
+
+Used in the `stan` sampler.
+
+Betancourt 2017. A conceptual introduction to Hamiltonian Monte Carlo.
+https://arxiv.org/abs/1701.02434
 
 
 ## Summary
 
-Conjugate priors facilitate fast Bayesian updates.
+MCMC converges almost surely, as long as you are willing to wait indefinitely.
 
 \bigskip
 
+
 ### Intended learning outcomes {.c}
 
-- Recognize and apply the beta-binomial model
-- Recognize and apply the Dirichlet-multinomial model
-
+- Implement statistical models in Stan
