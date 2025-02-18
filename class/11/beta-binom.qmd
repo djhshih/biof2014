@@ -60,19 +60,78 @@ $$
 where $c(x) = \int_{\mathcal{\Theta}} g(x, \theta) \, d\theta$.
 
 
+## Solving for the posterior, simplified
+
+Given observation $X$ and parameter $\theta$,
+solve for $p\left(\theta \mid x\right)$.
+
+The posterior is
+$$
+\begin{aligned}
+p\left(\theta \mid x\right)
+&\propto p\left(x \mid \theta\right) \, p\left(\theta\right) \\
+&= h(x) \, g(x, \theta) \\
+&\propto g(x, \theta)
+\end{aligned}
+$$
+
+Therefore,
+$$
+\begin{aligned}
+p\left(\theta \mid x\right)
+&= c(x)^{-1} g(x, \theta) ,
+\end{aligned}
+$$
+where $c(x) = \int_{\mathcal{\Theta}} g(x, \theta) \, d\theta$.
+
+\bigskip
+
+If $p\left(\theta\right)$ is a **conjugate prior**, then
+$c(x)$ can be solved easily.
+
+
 ## Conjugate prior
 
+If $p\left(\theta\right)$ is conjugate to $p\left(x \mid \theta\right)$,
+then $p\left(\theta \mid x\right)$ will be in the same probability
+distribution family.
+
+In this case, we call $p\left(\theta\right)$ a **conjugate prior**.
+For example,
+
+| $p\left(\theta\right)$ | $p\left(x \mid \theta\right)$ |
+|--------------|--------------------|
+| beta         |  Bernoulli         |
+| beta         |  binomial          |
+| Dirichlet    |  categorical       |
+| Dirichlet    |  multinomial       |
+| gamma        |  Poisson           |
+| normal-gamma |  univariate normal |
 
 
 ## Beta-binomial model
 
+$$
+X \sim \text{Binomial}\left( N, \theta \right), \quad
+\theta \sim \text{Beta}\left(a, b\right)
+$$
+
+
+---
+
+\
 
 
 ## Dirichlet-multinomial model
 
+$$
+X \sim \text{Multinomial}\left( N, \symbfit{\theta} \right), \quad
+\symbfit{\theta} \sim \text{Dirichlet}\left( \symbfit{d} \right)
+$$
 
+---
 
-
+\
 
 
 ## Summary
