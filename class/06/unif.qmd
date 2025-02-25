@@ -345,7 +345,7 @@ Given $X \sim \text{Uniform}(a, b)$, find $\text{E} \left(X^2\right)$.
 
 ### Definition
 
-The *variance* of a random variable $g(X)$ is
+The *variance* of a random variable $X$ is
 $$
 \text{Var} \left( X \right) \triangleq
  \text{E} \left[ \left( X - \text{E}\left(X\right) \right)^2 \right] .

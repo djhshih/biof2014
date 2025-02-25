@@ -20,7 +20,7 @@ classoption: t
 
 ## Intended learning outcomes {.c}
 
-- Apply theorems regarding joint, conditional, and marginal probabilities 
+- Apply definitions and theorems regarding joint, conditional, and marginal probabilities 
 - Recognize and explain Simpson's paradox
 
 
@@ -415,6 +415,6 @@ Casella & Berger 2002, sections 4.1-4.2.
 
 ### Intended learning outcomes {.c}
 
-- Apply theorems regarding joint, conditional, and marginal probabilities 
+- Apply definitions and theorems regarding joint, conditional, and marginal probabilities 
 - Recognize and explain Simpson's paradox
 
