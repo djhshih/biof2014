@@ -31,8 +31,8 @@ classoption: t
 A random variable $X$ with domain $\mathcal{X} = \{0, 1\}$ has a Bernoulli distribution if
 $$
 \begin{aligned}
-P \left( X = 0 \mid \theta \right) &\; = \; \theta \\
-P \left( X = 1 \mid \theta \right) &\; = \; 1 - \theta
+P \left( X = 1 \mid \theta \right) &\; = \; \theta \\
+P \left( X = 0 \mid \theta \right) &\; = \; 1 - \theta
 \end{aligned}
 $$
 where $\theta \in [0, 1]$ is the probability of success.
