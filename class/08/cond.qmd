@@ -89,7 +89,7 @@ Given a discrete random vector $(X, Y)$ with joint pmf $f_{X, Y}(x, y)$,
 the marginal pmfs of $X \in \mathcal{X}$ and $Y \in \mathcal{Y}$ are given by
 $$
 f_X(x) = \sum_{y \in \mathcal{Y}} f_{X, Y}(x, y) \quad
-f_Y(x) = \sum_{x \in \mathcal{X}} f_{X, Y}(x, y)
+f_Y(y) = \sum_{x \in \mathcal{X}} f_{X, Y}(x, y)
 $$
 
 This theorem follows from the law of total probability.
@@ -119,7 +119,7 @@ $$
 \mathcal{A} &= \mathcal{A} \cap \mathcal{S}
  = \mathcal{A} \cap \left( \bigcup_i \mathcal{B}_i \right)
  = \bigcup_i \mathcal{A} \cap B_i \\
-P\left( A \right) 
+P\left( \mathcal{A} \right) 
  &= P\left( \bigcup_i \mathcal{A} \cap B_i \right)
  = \sum_i P\left( \mathcal{A} \cap \mathcal{B_i} \right)
  \quad (\text{additivity axiom}) \quad \blacksquare
@@ -128,7 +128,7 @@ $$
 
 ## Proof: Marginal pmf
 
-Define $\mathcal{B}_y = \{s \in \mathcal{S}: Y(t) = y\}$.
+Define $\mathcal{B}_y = \{s \in \mathcal{S}: Y(s) = y\}$.
 
 Since $Y$ is a map from $\mathcal{S}$ to $\mathcal{Y}$, there exists
 some $y$ for every $s \in \mathcal{S}$.
@@ -191,7 +191,7 @@ the marginal pdf of $X$ and $Y$ are given by
 $$
 \begin{aligned}
 f_X(x) &= \int_{-\infty}^{\infty} f(x, y) \, dy \quad x \in \mathcal{X}, \\
-f_Y(y) &= \int_{-\infty}^{\infty} f(x, y) \, dy \quad y \in \mathcal{Y}.
+f_Y(y) &= \int_{-\infty}^{\infty} f(x, y) \, dx \quad y \in \mathcal{Y}.
 \end{aligned}
 $$
 
