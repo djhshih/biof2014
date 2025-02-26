@@ -37,7 +37,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 A random variable $X$ with support $\mathcal{X} = \{1, 2, \ldots, K\}$ has
 a categorical distribution if
 $$
-P \left( X = k \right) = \theta_k, \quad k \in \mathcal{X}.
+P \left( X = k \mid \symbfit{\theta} \right) = \theta_k, \quad k \in \mathcal{X}.
 $$
 where $\theta_k$ is probability of success for outcome $k$ s.t. $\sum_k \theta_k = 1$.
 
@@ -46,8 +46,9 @@ where $\theta_k$ is probability of success for outcome $k$ s.t. $\sum_k \theta_k
 Given $\symbfit{\theta} = \left[\theta_k\right]$, other representations are
 $$
 \begin{aligned}
-P \left( X = x \right) \; &= \; \prod_k^K \theta_k^{I(x = k)} \\
-p \left( X = x \right)
+P \left( X = x \mid \symbfit{\theta} \right) 
+ \; &= \; \prod_k^K \theta_k^{I(x = k)} \\
+p \left( X = x \mid \symbfit{\theta} \right)
  \; &= \; \text{Categorical}\left(x \mid \symbfit{\theta} \right) \\
 X \; &\sim \; \text{Categorical}\left(\symbfit{\theta}\right) \\
 X \; &\sim \; \symbfit{\theta} .
