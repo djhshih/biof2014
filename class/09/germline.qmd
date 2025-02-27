@@ -137,7 +137,7 @@ p \left( x_j \mid G = 1 \right)
 e_j & \text{ if } x_j = 0 \\
 1 - e_j & \text{ if } x_j = 1
 \end{cases}
-\quad &&= \; e_j^{1 - x_j} e_j^{x_j} .
+\quad &&= \; e_j^{1 - x_j} (1 - e_j)^{x_j} .
 \end{aligned}
 $$
 
@@ -289,7 +289,7 @@ p\left( z_j = 0 \mid G = 2, M = 3 \right) =
 p\left( z_j = 1 \mid G = 2, M = 3 \right) =  \\
 p\left( z_j = 0 \mid G = 3, M = 3 \right) = 
 \quad\quad\quad &
-p\left( z_j = 1 \mid G = 3, M = 3 \right) =  
+p\left( z_j = 1 \mid G = 3, M = 3 \right) =  .
 \end{aligned}
 $$
 
@@ -307,7 +307,7 @@ for the likelihood $p \left( x_j \mid g, m \right)$.
 5. Under the general model, which probability rule was applied at
    each step in the derivation of $p \left( x_j \mid g, m \right)$?
 6. Derive a general expression for $p(z_j \mid g, m)$.
-   derive a general expression for
+7. Derive $p(g \mid x, m)$.
 
 
 [1]: https://en.wikipedia.org/wiki/FASTQ_format
