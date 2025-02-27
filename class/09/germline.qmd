@@ -279,17 +279,17 @@ Do you recognize the pattern?
 $$
 \begin{aligned}
 p\left( z_j = 0 \mid G = 0, M = 3 \right) = 
-\quad\quad &
+\quad\quad\quad &
 p\left( z_j = 1 \mid G = 0, M = 3 \right) =  \\
 p\left( z_j = 0 \mid G = 1, M = 3 \right) = 
-\quad\quad &
+\quad\quad\quad &
 p\left( z_j = 1 \mid G = 1, M = 3 \right) =  \\
 p\left( z_j = 0 \mid G = 2, M = 3 \right) = 
-\quad\quad &
+\quad\quad\quad &
 p\left( z_j = 1 \mid G = 2, M = 3 \right) =  \\
 p\left( z_j = 0 \mid G = 3, M = 3 \right) = 
-\quad\quad &
-p\left( z_j = 1 \mid G = 3, M = 3 \right) =  .
+\quad\quad\quad &
+p\left( z_j = 1 \mid G = 3, M = 3 \right) =  
 \end{aligned}
 $$
 

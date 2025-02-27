@@ -179,7 +179,7 @@ $$
 
 Therefore,
 $$
-p\left( \theta \mid x \right) = 
+p\left( \theta \mid x \right)
  = \frac{ p\left( x \mid \theta \right) \, p\left( \theta \right) }
    { p\left( x \right) }
  = \frac{ \left(\theta^x (1 - \theta)^{1 - x}\right) (1) }
