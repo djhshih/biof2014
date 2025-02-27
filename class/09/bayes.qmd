@@ -80,7 +80,7 @@ $$
     P\left( X = +1 \mid Y = 1 \right) P\left( Y = 1 \right)
     + P\left( X = +1 \mid Y = 0 \right) P\left( Y = 0 \right)
    } \\
- &= \frac{ (0.9)(0.01) }{ (0.9)(0.01) + (1 - 0.4)(1 - 0.01)}
+ &= \frac{ (0.9)(0.01) }{ (0.9)(0.01) + (1 - 0.6)(1 - 0.01)}
  \approx 0.022 ,
 \end{aligned}
 $$
@@ -225,8 +225,8 @@ $$
 \begin{aligned}
 x \ge 0 \text{ and } x \le 0 \quad &\Rightarrow \quad 
  \text{Beta}\left(x \mid \alpha, \beta \right) \ge 0 \\
-\int_0^1 \text{Beta}\left(x \mid \alpha, \beta\right)
- &= B(\alpha, \beta)^{-1} \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \\
+\int_0^1 \text{Beta}\left(x \mid \alpha, \beta\right) 
+ &= B(\alpha, \beta)^{-1} \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} dx \\
  &= B(\alpha, \beta)^{-1} B(\alpha, \beta)  = 1.
 \end{aligned}
 $$
@@ -298,7 +298,7 @@ Define $y = \sum_i x_i$.
 $$
 \begin{aligned}
 p\left(\mathbold{x} \mid \theta \right)
- &= \prod_i p\left(x_i \right)
+ &= \prod_i p\left(x_i \mid \theta \right)
  = \prod_i \theta^{x_i} (1 - \theta)^{1 - x_i}
  = \theta^y (1 - \theta)^{N - y} \\
 p\left( \theta \right)
