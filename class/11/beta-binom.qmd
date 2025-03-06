@@ -115,6 +115,14 @@ $$
 X \sim \text{Binomial}\left( N, \theta \right), \quad
 \theta \sim \text{Beta}\left(a, b\right)
 $$
+$$
+\text{Binomial}\left( x \mid N, \theta \right) =
+\binom{N}{x} \theta^x \, (1 - \theta)^{N - x}
+$$
+$$
+\text{Beta}\left(x \mid \alpha, \beta\right) =
+ B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1}
+$$
 
 
 ---
@@ -125,8 +133,16 @@ $$
 ## Dirichlet-multinomial model
 
 $$
-X \sim \text{Multinomial}\left( N, \symbfit{\theta} \right), \quad
+\symbfit{X} \sim \text{Multinomial}\left( N, \symbfit{\theta} \right), \quad
 \symbfit{\theta} \sim \text{Dirichlet}\left( \symbfit{d} \right)
+$$
+$$
+\text{Multinomial} \left(\symbfit{x} \mid N, \symbfit{\theta} \right)
+= \frac{\Gamma(N + 1)}{\prod_k \Gamma(x_k + 1)} \prod_k \theta_k^{x_k}
+$$
+$$
+\text{Dirichlet}\left(\symbfit{x} \mid \symbfit{\alpha} \right) 
+= \frac{1}{B\left(\symbfit{\alpha}\right)} \prod_k^K x_k^{\alpha_k - 1}
 $$
 
 ---

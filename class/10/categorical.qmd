@@ -39,11 +39,13 @@ a categorical distribution if
 $$
 P \left( X = k \mid \symbfit{\theta} \right) = \theta_k, \quad k \in \mathcal{X}.
 $$
-where $\theta_k$ is probability of success for outcome $k$ s.t. $\sum_k \theta_k = 1$.
+where $\symbfit{\theta} = \left[\theta_k\right]$ and 
+$\theta_k$ is the probability of success for outcome $k$ 
+s.t. $\sum_k \theta_k = 1$.
 
 \bigskip
 
-Given $\symbfit{\theta} = \left[\theta_k\right]$, other representations are
+Other representations are
 $$
 \begin{aligned}
 P \left( X = x \mid \symbfit{\theta} \right) 
