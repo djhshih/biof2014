@@ -15,6 +15,8 @@ format:
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
+          \usepackage{algorithm}
+          \usepackage{algpseudocode}
 classoption: t  
 ---
 
@@ -55,36 +57,190 @@ p\left(x \mid \theta \right) &= g(x \mid \theta)
 \end{aligned}
 $$
 
+## Inverse transform sampling
+
+We can sample $U \sim \text{Uniform}\left(0, 1\right)$ using a pseudorandom number generator.
+
+We want to sample $X \sim F_X$.
+
+Derive an invertible transform $T : [0, 1] \rightarrow \mathcal{R}$  
+such that $T(U) \sim F_X$.
+
+$$
+\begin{aligned}
+F_X(x) &= P\left(X \le x\right)     &\quad \text{(def'n of CDF)} \\
+ &= P\left(T(U) \le x \right)       &\quad \text{(def'n of T)} \\
+ &= P\left(U \le T^{-1}(x) \right)  &\quad \text{(T is invertible)} \\
+ &= T^{-1}(x)                       &\quad (U \sim \text{Uniform})
+\end{aligned}
+$$
+
+Therefore, $T(x) = F^{-1}_X(x)$ .
+
+
+## Inverse transform sampling
+
+Sample $X \sim F$.
+
+\bigskip
+
+\begin{algorithmic}
+\Procedure{sample}{$F^{-1}$}
+\State draw $u \sim \text{Uniform}\left(0, 1\right)$
+\State \textbf{return} $F^{-1}(u)$
+\EndProcedure
+\end{algorithmic}
+
+
+## Probabilistic acceptance
+
+Accept $x$ with probabiliby $a$; otherwise, accept $x'$.
+
+\bigskip
+
+\begin{algorithmic}
+\Procedure{accept}{$x, a, x'$}
+\State draw $u \sim \text{Uniform}\left(0, 1\right)$
+\If{$u \le a$}
+ \State \textbf{return} $x$
+\Else
+ \State \textbf{return} $x'$
+\EndIf
+\EndProcedure
+\end{algorithmic}
+
+
+## Rejection sampling
+
+We have proposal distribution $q$, and we want to sample from target distribution $p$.
+
+The support of $q$ must contain the support of $p$.
+
+Choose $M > 0$ s.t. $M q(x) \ge p(x) \; \forall x$.
+
+Use $X \sim q$ to sample $Y \sim p$.
+
+\bigskip
+
+\begin{algorithmic}
+
+\Procedure{rejection}{$q, p, M$}  \Comment proposal $q$, target $p$
+
+\While{$y = \emptyset$}
+ \State draw $x \sim q$
+ \State $a \gets \frac{ p(x) }{ M q(x)}$
+ \State $y$ \gets \Call{accept}{$x, a, \emptyset$}
+\EndWhile
+
+\State return $y$
+
+\EndProcedure
+
+\end{algorithmic}
+
+
 ## Markov chain Monte Carlo (MCMC)
 
-MCMC is a class of algorithms for drawing samples from a **target** distribution.
+MCMC is a class of algorithms for drawing samples $\symbfit{\theta}$ from a **target** distribution
+$p(\symbfit{\theta} \mid x)$ using an unnormalized density s.t.
+$$
+p(\symbfit{\theta} \mid x) \propto \bar{p}(\theta \mid x) .
+$$
 
 \bigskip
 
-Initialize a sample $x_0$.
+\begin{algorithmic}
+\Procedure{mcmc}{$q, \bar{p}, k, T$}  \Comment proposal $q$, target $\bar{p}$, cutoff $k$
 
-For $t \in \{1, 2, \ldots \}$:
+\State initialize $\symbfit{\theta}^{(0)}$
 
-  - Draw sample $x'$ from a **proposal** distribution given $x_t$
-  - Accept sample with some probability by setting $x_{t+1} \leftarrow x'$.  
-    Otherwise, $x_{t+1} \leftarrow x_t$.
+\For{$t = 1 \ldots T $}
+ \State draw $\symbfit{\theta} \sim q(\symbfit{\theta} \mid \symbfit{\theta}^{(t)})$
+ \State compute acceptance probability $a$ using $\bar{p}(\symbfit{\theta})$
+ \State $\symbfit{\theta}^{(t+1)}$ \gets 
+  \Call{accept}{$\symbfit{\theta}, a, \symbfit{\theta}^{(t)}$}
+\EndFor
 
-Discard 'warm-up samples' $\{x_0, x_1, x_k\}$ for some cutoff $k$.
+\State \textbf{return} $\symbfit{\symbfit{\theta}}^{(k:T)}$
 
-\bigskip
+\EndProcedure
 
-If the sampler is set up correctly,
-the distribution of the samples $\{x_{k+1}, x_{k+2}, \ldots\}$ 
-will eventually converge to the target distribution.
+\end{algorithmic}
 
+For sufficiently large $T$, $\symbfit{\symbfit{\theta}}^{(k:T)}$ 
+will eventually converge to $p\left(\symbfit{\theta} \mid x \right)$.
 
-## Gibbs sampling
+---
 
-Gibbs sampler always accepts.
+\
 
 
 ## Metropolis-Hastings algorithm
 
+$$
+p_{\text{fwd}} = 
+    \frac{ \bar{p}\left(\symbfit{\theta} \mid x\right) }
+         { q\left(\symbfit{\theta} \mid \symbfit{\theta}^{({t})}\right) }
+$$
+$$
+p_{\text{rev}} = 
+    \frac{ \bar{p}\left(\symbfit{\theta}^{(t)} \mid x\right) }
+         { q\left(\symbfit{\theta}^{({t})} \mid \symbfit{\theta}\right) }
+$$
+
+\bigskip
+$$
+\begin{aligned}
+a &= \min 
+ \left( 1, \frac{ p_{\text{fwd}} }{ p_{\text{rev}} } \right)
+\\
+ &= \min 
+ \left( 1, 
+  \frac{
+   \bar{p}\left(\symbfit{\theta} \mid x\right) \; 
+    q\left(\symbfit{\theta}^{({t})} \mid \symbfit{\theta}\right) 
+  }
+  {
+   \bar{p}\left(\symbfit{\theta}^{(t)} \mid x\right) \; 
+   q\left(\symbfit{\theta} \mid \symbfit{\theta}^{({t})}\right)
+  }
+ \right)
+\end{aligned}
+$$
+
+---
+
+\
+
+
+## Gibbs sampling
+
+Gibbs sampler always accepts ($a = 1$).
+
+Define proposal $q$ based on the full conditional distributions.
+
+For parameters $(\theta, \phi)$, we want to
+sample from $p\left(\theta, \phi \mid x\right)$.
+
+\bigskip
+
+\begin{algorithmic}
+\Procedure{gibbs}{$p, k, T$}  \Comment full conditional $p$, cutoff $k$
+
+\State initialize $(\theta^{(0)}, \phi^{(0)})$
+
+\For{$t = 1 \ldots T $}
+ \State draw $\theta \sim  p\left( \theta \mid x, \phi \right)$
+ \State $\theta^{(t+1)} \gets \theta$
+ \State draw $\phi   \sim  p\left( \phi \mid x, \theta \right)$
+ \State $\phi^{(t+1)} \gets \phi$
+\EndFor
+
+\State \textbf{return} $(\symbfit{\theta}^{(k:T)}, \symbfit{\phi}^{(k:T)})$
+
+\EndProcedure
+
+\end{algorithmic}
 
 
 ## Hamiltonian Monte Carlo
