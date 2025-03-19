@@ -1,0 +1,51 @@
+---
+title: "RNA quantification"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{fixmath}
+          \usepackage[english]{babel}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Problem
+
+You are performing an *in vitro* transcription assay, and you measure
+the number of RNA molecules produced in multiple experiments, each with
+different recording time intervals.
+
+You record the following results:
+
+| time interval (min) | number of RNA molecules |
+|:-------------------:|:-----------------------:|
+|         1           |            6            |
+|         1           |            8            |
+|         1           |            2            |
+|         2           |           11            |
+|         2           |           13            |
+|         2           |           14            |
+|         3           |           14            |
+|         3           |           17            |
+|         3           |           13            |
+
+What is the transcription rate in
+terms of number of RNA molecules transcribed per minute?
+
+
+## Tasks
+
+1. Implement a quantification model in [Stan][1] to estimate
+   the posterior distribution of the transcription rate.
+
+2. Derive the posterior distribution of the transcription rate.
+
+
+[1]: https://mc-stan.org/
+

@@ -1,0 +1,203 @@
+---
+title: "Poisson distribution"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply Poisson distributions in statistical models
+- Derive the Poisson distributions
+
+
+## Recall: Binomial distribution
+
+### Definition
+
+A random variable $X$ has a binomial distribution if
+$$
+\begin{aligned}
+P\left( X = x \mid N, \theta \right) \; = \;
+\binom{N}{x} \theta^x \, (1 - \theta)^{N - x}, \quad x \in \{0, 1, \ldots, N\}
+\end{aligned}
+$$
+where $\theta \in [0, 1]$ is the probability of success.
+
+\bigskip
+
+### Definition
+
+$e^x$ is defined by the product limit:
+$$
+e^x = \lim_{n \rightarrow \infty} \left(1 + \frac{x}{n}\right)^n
+$$
+
+
+## Infinite trials with fixed number of successes
+
+Consider a unit interval.
+
+Suppose we expect $\lambda$ number of success events to occur.
+
+What is the distribution of the observed number of successes $X$?
+
+Split the interval into $N$ segments and regard each segment as a Bernoulli trial.
+
+What happens as $N \rightarrow \infty$?
+
+---
+
+\bigskip
+
+What happens to Binomial$\left(N, \theta\right)$ as 
+$N \rightarrow \infty$ while $\lambda$ is fixed?
+
+$$
+\text{Binomial}\left(x \mid N, \theta\right)
+ = \binom{N}{x} \theta^x \, (1 - \theta)^{N - x}
+$$
+
+Substituting $\theta = \frac{\lambda}{N}$,
+$$
+\begin{aligned}
+\text{Binomial}\left(x \mid N, \frac{\lambda}{N}\right)
+ &= 
+  \frac{N!}{x! \, (N - x)!}
+  \left(\frac{\lambda}{N}\right)^x
+  \left(1 - \frac{\lambda}{N}\right)^{N - x}
+ \\
+ &= 
+  \frac{\lambda^x}{x!}
+  \frac{N!}{(N - x)! N^x}
+  \left(1 - \frac{\lambda}{N}\right)^{N}
+  \left(1 - \frac{\lambda}{N}\right)^{-x}
+\end{aligned}
+$$
+
+
+---
+
+\bigskip
+
+Take the limit of each term separately:
+$$
+\lim_{N \rightarrow \infty} \frac{N!}{(N - x)! N^x} = 1
+$$
+
+$$
+\lim_{N \rightarrow \infty} 
+ \left(1 - \frac{\lambda}{N}\right)^{N}
+ = e^{-\lambda}
+ \quad \text{(def'n of $e$)}
+$$
+
+$$
+\lim_{N \rightarrow \infty}
+ \left(1 - \frac{\lambda}{N}\right)^{N}
+ = 1
+$$
+
+Therefore,
+$$
+\lim_{N \rightarrow \infty}
+\text{Binomial}\left(x \mid N, \frac{\lambda}{N}\right)
+ = \frac{\lambda^x}{x!} e^-\lambda
+$$
+
+## Poisson distribution
+
+### Definition
+
+A random variable $X$ has a Poisson distribution if
+$$
+\begin{aligned}
+P\left( X = x \mid \lambda \right) \; = \;
+ \frac{\lambda^x}{x!} e^{-\lambda},
+ \quad x \in \{0, 1, \ldots \}
+\end{aligned}
+$$
+where $\lambda > 0$ is the success rate within a unit interval.
+
+$X$ represents success count within the unit interval.
+
+## Is Poisson$\left(x \mid \lambda \right)$ proper?
+
+### Non-negativity
+
+\vspace{5em}
+
+
+### Unit measure
+
+We need to prove
+$$
+\sum_{x=0}^{\infty} \text{Poisson}\left(x \mid \lambda\right) = 1
+$$
+$$
+\sum_{x=0}^{\infty} e^{\lambda} \frac{\lambda^x}{x!}  = 1
+$$
+
+---
+
+\bigskip
+
+In other words, prove
+$$
+\sum_{x=0}^{\infty} \frac{\lambda^x}{x!} = e^{\lambda} 
+$$
+
+Apply Taylor expansion on $e^{\lambda}$. 
+
+$$
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x)}{n!} (x - a)^n
+$$
+
+
+## Multiple observations with variable intervals
+
+$\text{Poisson}(x \mid \lambda)$ assumes a unit interval.
+
+Suppose we count events $X_i$ for different intervals.
+
+If every interval $i$ has the same length, then we have
+$$
+X_i \sim \text{Poisson}\left( \lambda \right)
+$$
+
+If the intervals have length $t_i$, then
+$$
+X_i \sim \text{Poisson}\left( t_i \lambda \right)
+$$
+
+
+## Summary
+
+"La vie n'est bonne qu'à deux choses: à faire des mathématiques et à les
+professer."  
+- Siméon Poisson
+
+\bigskip
+
+Casella & Berger 2002, sections 3.2, pages 92-94.
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply Poisson distributions in statistical models
+- Derive the Poisson distributions
+
