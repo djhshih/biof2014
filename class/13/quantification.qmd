@@ -21,7 +21,7 @@ You are performing an *in vitro* transcription assay, and you measure
 the number of RNA molecules produced in multiple experiments, each with
 different recording time intervals.
 
-You record the following results using cell line A:
+You record the following results in a cell line:
 
 | time interval (min) | number of RNA molecules |
 |:-------------------:|:-----------------------:|
@@ -32,9 +32,6 @@ You record the following results using cell line A:
 |         2           |           14            |
 |         3           |           14            |
 |         3           |           17            |
-
-What is the transcription rate in
-terms of number of RNA molecules transcribed per minute?
 
 You performed the experiment again after treating the cells with
 a compound.
@@ -47,16 +44,20 @@ a compound.
 |         5           |            9            |
 
 
+What is the transcription rate in
+terms of number of RNA molecules transcribed per minute
+before and after compound treatment?
+
+
 ## Tasks
 
 1. Implement a quantification model in [Stan][1] to estimate
    the posterior distribution of the transcription rates in
-   before and after compound treatment.
+   under different treatment conditions.
 
-2. Derive the posterior distribution of the transcription rates
-   before and after compound treatment.
+2. Derive the posterior distribution of the transcription rates.
    
-3. What effect does the compound have?
+3. What effect does the compound have on transcription rate?
 
 
 [1]: https://mc-stan.org/
