@@ -47,15 +47,17 @@ e^x = \lim_{n \rightarrow \infty} \left(1 + \frac{x}{n}\right)^n
 $$
 
 
-## Infinite trials with fixed number of successes
+## Counting events within a unit interval
 
-Consider a unit interval.
+Suppose we expect $\lambda > 0$ events to occur within
+a unit interval $[0, 1)$.
 
-Suppose we expect $\lambda$ number of success events to occur.
-
-What is the distribution of the observed number of successes $X$?
+What is the distribution of the number of event occurrences $X$?
 
 Split the interval into $N$ segments and regard each segment as a Bernoulli trial.
+
+$N$ has to be sufficiently large so that at most one event is
+observed per segment.
 
 What happens as $N \rightarrow \infty$?
 
@@ -125,16 +127,17 @@ $$
 A random variable $X$ has a Poisson distribution if
 $$
 \begin{aligned}
-P\left( X = x \mid \lambda \right) \; = \;
- \frac{\lambda^x}{x!} e^{-\lambda},
+P\left( X = x \mid \mu \right) \; = \;
+ \frac{\mu^x}{x!} e^{-\mu},
  \quad x \in \{0, 1, \ldots \}
 \end{aligned}
 $$
-where $\lambda > 0$ is the success rate within a unit interval.
+where $\mu > 0$ is the constant rate of event occurrences per unit interval.
 
-$X$ represents success count within the unit interval.
+$X$ represents count of event occurrences within the unit interval.
 
-## Is Poisson$\left(x \mid \lambda \right)$ proper?
+
+## Is Poisson$\left(x \mid \mu \right)$ proper?
 
 ### Non-negativity
 
@@ -145,43 +148,182 @@ $X$ represents success count within the unit interval.
 
 We need to prove
 $$
-\sum_{x=0}^{\infty} \text{Poisson}\left(x \mid \lambda\right) = 1
+\sum_{x=0}^{\infty} \text{Poisson}\left(x \mid \mu\right) = 1
 $$
 $$
-\sum_{x=0}^{\infty} e^{\lambda} \frac{\lambda^x}{x!}  = 1
+\sum_{x=0}^{\infty} e^{\mu} \frac{\mu^x}{x!}  = 1
 $$
 
 ---
 
 \bigskip
 
-In other words, prove
+In other words, we need to prove
 $$
-\sum_{x=0}^{\infty} \frac{\lambda^x}{x!} = e^{\lambda} 
-$$
-
-Apply Taylor expansion on $e^{\lambda}$. 
-
-$$
-f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x)}{n!} (x - a)^n
+\sum_{x=0}^{\infty} \frac{\mu^x}{x!} = e^{\mu} 
 $$
 
-
-## Multiple observations with variable intervals
-
-$\text{Poisson}(x \mid \lambda)$ assumes a unit interval.
-
-Suppose we count events $X_i$ for different intervals.
-
-If every interval $i$ has the same length, then we have
+Recall the Taylor expansion:
 $$
-X_i \sim \text{Poisson}\left( \lambda \right)
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x - a)^n
 $$
 
-If the intervals have length $t_i$, then
+Apply Taylor expansion on $e^{\mu}$ completes the proof.
+
+
+## Counting events within a variable interval
+
+Let $X$ be the event count within a unit interval ($t = 1$).
+
+Then, we showed that
 $$
-X_i \sim \text{Poisson}\left( t_i \lambda \right)
+X \sim \text{Poisson}(\mu) .
 $$
+
+If $t \neq 1$, then
+$$
+X \sim \text{Poisson}\left( t \mu \right) .
+$$
+
+
+## Recall: Geometric distribution
+
+A random variable $X$ has a geometric distribution if
+$$
+P\left( X = x \mid \theta \right) \; = \;
+ \theta (1 - \theta)^{x - 1},
+ \quad x \in \{1, 2, \ldots\} ,
+$$
+where $\theta$ is the probability of success, and $X$ represents the
+total number trials required for one success.
+
+---
+
+\bigskip
+
+Recall the cumulative distribution function
+$$
+P\left(X \le x \mid \theta \right) 
+= \sum_{k=0}^{x} P\left( X = k \mid \theta \right)
+$$
+
+For the geometric distribution,
+$$
+P\left(X \le x \mid \theta \right) 
+= \sum_{k=1}^{x} \theta (1 - \theta)^{k - 1}
+= 1 - (1 - \theta)^x
+\quad \text{(geometric series)} .
+$$
+
+Therefore, for a geometric random variable $X$,
+$$
+P\left( X > x \mid \theta \right)
+ \; = \;
+ 1 - P\left( X \le x \mid \theta \right)
+ \; = \;
+ (1 - \theta)^x .
+$$
+
+## Waiting time until an event
+
+Suppose we expect to wait $\mu$ amount of time until an event.
+
+What the distribution of the waiting time $T$ until the event?
+
+1. Find $P\left( T > t \right)$
+2. Find $F_T(t) = P\left( T \le t \right)$
+3. Find $f_T(t) = \frac{d}{d t} F_T(t)$
+
+---
+
+\bigskip
+
+Divide waiting time into small intervals with size $\tau$.
+
+Let $X$ represent the number of trials before event occurs. Then,
+$$
+t = x \tau, \quad \theta = \frac{\tau}{\mu},
+$$
+where $\theta$ is the probability of event occurrence within a trial.
+
+$$
+\begin{aligned}
+P\left( X > x \right) 
+ &= P\left( X > \frac{t}{\tau} \right) \\
+ &= \left(1 - \frac{\tau}{\mu} \right)^{t \tau^{-1}} \\
+ &= \left(1 - \frac{\lambda}{m} \right)^{t m},
+ \quad m = \tau^{-1}, \; \lambda = \mu^{-1}
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+As $\tau \rightarrow 0$, $m \rightarrow \infty$ and
+$$
+\lim_{m \rightarrow \infty}
+ \left(1 - \frac{\lambda}{m} \right)^{t m}
+  = e^{-\lambda t}
+  \quad \text{(Product limit def'n of $e$)} .
+$$
+
+Therefore,
+$$
+P\left(T > t\right) 
+ = \lim_{\tau \rightarrow 0} P\left(X \tau > t \right)
+ = e^{-\lambda t}
+$$
+
+$$
+F_T(t) = P\left( T \le t \right) 
+= 1 - P\left( T > t \right)
+= 1 - e^{-\lambda t}
+$$
+
+$$
+f_T(t) = \frac{d}{d t} F_T(t)
+= \lambda e^{-\lambda t} .
+$$
+
+
+## Exponential distribution
+
+A random variable $X > 0$ has an exponential distribution if
+$$
+f_X\left( x \right) = \lambda e^{-\lambda x} ,
+$$
+where $\lambda > 0$ is the rate parameter.
+
+$\text{E}(X) = \frac{1}{\lambda}$.
+
+---
+
+\bigskip
+
+If $X$ is event count that follows
+$$
+X \sim \text{Poisson}\left( \mu \right) ,
+$$
+
+then the time $T$ between events follows
+$$
+T \sim \text{Exponential}\left( \frac{1}{\mu} \right) .
+$$
+
+
+## Gamma distribution
+
+
+A random variable $X > 0$ has a Gamma distribution if
+$$
+f_X\left( x \right) 
+= \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x} ,
+$$
+where $\lambda > 0$ is the rate parameter and
+$\alpha > 0$ is a shape parameter.
+
+Gamma distribution is a conjugate prior to the Poisson likelihood.
 
 
 ## Summary
@@ -192,7 +334,7 @@ professer."
 
 \bigskip
 
-Casella & Berger 2002, sections 3.2, pages 92-94.
+Casella & Berger 2002, sections 3.2, pages 92-94, 99-102.
 
 \bigskip
 
@@ -200,4 +342,3 @@ Casella & Berger 2002, sections 3.2, pages 92-94.
 
 - Recognize and apply Poisson distributions in statistical models
 - Derive the Poisson distributions
-
