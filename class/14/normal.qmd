@@ -1,0 +1,416 @@
+---
+title: "Normal distribution"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+          \DeclareMathOperator*{\argmax}{argmax}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Derive the normal distribution
+- Explain and apply the Chebychev's inequality, laws of large numbers, and the central limit theorem
+- Recognize and apply normal distributions in statistical models
+
+
+## Measurement error
+
+Given a measured quantity $X$ of an unknown true value of a quantity $\mu$, the measurement error is
+
+$$
+E = X - \mu .
+$$
+
+If we have repeated measurements (iid) $X_1, X_2, \ldots$, we can compute their mean as our estimator of $\mu$:
+$$
+\bar{X}_n = \frac{1}{n} \sum_i X_i ,
+$$
+and the errors are
+$$
+E_i = X_i - \mu .
+$$
+
+How good is $\bar{X}_n$ as an estimator?
+
+
+## Law of large numbers
+
+### Theorem
+
+Let $X_1, X_2, \ldots$ be iid random variables with 
+$E(X_i) = \mu$ and $Var(X_i) = \sigma^2 < \infty$.
+Then, for every $\epsilon > 0$,
+$$
+\lim_{n \rightarrow \infty}
+ P\left( | \bar{X}_n - \mu | < \epsilon \right) = 1.
+$$
+i.e. $\bar{X}_n$ **converges in probability** to $\mu$.
+
+\bigskip
+
+A stronger version of the theorem states that
+$$
+P\left(
+ \lim_{n \rightarrow \infty} | \bar{X}_n - \mu | < \epsilon
+\right) = 1.
+$$
+i.e. $\bar{X}_n$ **converges almost surely** to $\mu$.
+
+\bigskip
+
+So, eventually, $\bar{X}_n$ will become a good estimate of $\mu$.
+
+##
+
+\bigskip
+
+To prove the (weak) law of large numbers, we can use 
+Chebychev's inequality, which states that
+$$
+P \left( | X - \mu | \ge k \sigma \right) \le \frac{1}{k^2} ,
+$$
+for any $k > 0$ and any random variable $X$ with mean $\mu$ and 
+variance $\sigma^2 < \infty$.
+
+Since $\text{Var}(X) = \sigma^2$, 
+$\text{Var}(X_n) = \text{Var}(\frac{1}{n} \sum_i X_i) = \frac{\sigma^2}{n}$.
+
+Set $k = \frac{\epsilon \sqrt{n}}{\sigma}$. By Chebychev's inequality,
+for every $\epsilon > 0$,
+$$
+\begin{aligned}
+P\left( | \bar{X}_n - \mu | \ge k \sqrt{\frac{\sigma^2}{n}} \right) 
+ &\le \frac{1}{k^2}
+\\
+P\left( | \bar{X}_n - \mu | \ge \epsilon \right) 
+ &\le \frac{\sigma^2}{n \epsilon^2} .
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+Therefore,
+$$
+\lim_{n \rightarrow \infty}
+ P\left( | \bar{X}_n - \mu | \ge \epsilon \right) 
+ \le 
+\lim_{n \rightarrow \infty}
+ \frac{\sigma^2}{n \epsilon^2} 
+ = 0 .
+$$
+
+Finally,
+$$
+\lim_{n \rightarrow \infty}
+P\left( | \bar{X}_n - \mu | \ge \epsilon \right)
+ =
+\lim_{n \rightarrow \infty}
+ 1 - P\left( | \bar{X}_n - \mu | \ge \epsilon \right) 
+ = 1 . \quad \blacksquare
+$$
+
+
+## Assumptions about error
+
+From real-world measurements, scientists have noticed that measurement errors tends to follow two assumptions:
+
+1. Errors are symmetrically distributed about zero.
+2. Small errors occur more frequently than large errors.
+
+Carl Gauss used these assumptions and calculus to discover the 
+normal distribution.
+
+
+## Normal distribution
+
+### Definition
+
+A random variable $X$ has a normal (Gaussian) distribution if
+$$
+f_X\left( x \mid \mu, \tau^{-1} \right) 
+ = \sqrt{ \frac{\tau}{2 \pi } } \,
+ \exp \left( -\frac{\tau}{2} (x - \mu)^2 \right)
+$$
+where $\mu$ is the mean parameter and $\tau$ is the inverse-variance parameter (also known as the precision).
+
+
+## Deriving the normal distribution
+
+Given repeated iid measurements $X_i$, which have measurement errors
+$$
+E_i = X_i - \mu .
+$$
+
+These errors are iid:
+$$
+E_i \sim f,
+$$
+where $f$ is unknown, and we **want** to derive it.
+
+\bigskip
+
+To do so, we will determine its mathematical properties based on
+some assumptions.
+
+Assuming symmetric errors, $f$ is even:
+$$
+f(-e) = f(e), \quad  f'(-e) = - f'(e).
+$$
+
+---
+
+\bigskip
+
+We will assume that we can estimate the true value $\mu$
+using the maximum likelihood method:
+$$
+\hat{\mu} = \argmax_m f_{\symbfit{E}}(\symbfit{e} \mid m)
+$$
+
+Since errors $E_i$ are iid,
+$$
+f_{\symbfit{E}}(\symbfit{e})
+ = \prod_i f(e_i) 
+ = \prod_i f(x_i - \mu)
+$$
+where we abbreviate the conditioning on $m$.
+
+We know from the law of large numbers, $\bar{X}$ will be 
+a good estimate for $\mu$ as $n \rightarrow \infty$.
+Therefore, we assume that
+$$
+\argmax_m f_{\symbfit{E}}(\symbfit{e} \mid m)
+= \bar{x}.
+$$
+
+---
+
+\bigskip
+
+Since log$(\cdot)$ is a montone function,
+$$
+\argmax_m \prod_i f(e_i) 
+ = \argmax_m \sum_i \log f(e_i) .
+$$
+
+So, we will maximize the log likelihood
+$$
+\ell(m) = \sum_i \log f(e_i) .
+$$
+by taking derivative and finding the root
+$$
+\frac{d \, \ell(m)}{d e} = \sum_i \frac{f'(e_i)}{f(e_i)}
+= 0 .
+$$
+
+---
+
+\bigskip
+
+Define
+$$
+g(e) = \frac{f'(e)}{f(e)} .
+$$
+
+So,
+$$
+\begin{aligned}
+0 &= \sum_i g(e_i) \\
+  &= \sum_i g(x_i - m)        \quad (\text{definition of } e_i) \\
+  &= \sum_i g(x_i - \bar{x})  
+  \quad (\bar{x} \text{ is maximum likelihood estimator}) \quad (1)
+\end{aligned}
+$$
+
+Equation (1) holds for any measurements $X_i$. 
+
+---
+
+\bigskip
+
+Suppose, for some constant $b$,
+$$
+x_1 = \mu, \quad x_i = \mu - n b, \; i > 1 
+$$
+
+Then,
+$$
+\bar{x} = \mu - (n - 1)b
+$$
+
+Substituting this back into (1),
+$$
+\begin{aligned}
+0 &= \sum_i g[x_i - (\mu - (n - 1)b)]   \\
+  &= g[\mu - (\mu - (n - 1)b)] + 
+   \sum_{i > 1} g[(\mu - n b) - (\mu - (n - 1)b)] \\
+  &= g[(n - 1)b] + \sum_{i > 1} g[-b] \\
+  &= g[(n - 1)b] + (n - 1) g[-b]
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+Therefore,
+$$
+g[(n - 1)b] = -(n - 1) g[-b]
+$$
+
+where
+$$
+\begin{aligned}
+g[-b] &= \frac{f'[-b]}{f[-b]} = \frac{-f'[b]}{f[b]}  
+\quad (f \text{ is even}) \\
+ &= -g[b]
+\end{aligned}
+$$
+
+So, now
+$$
+g[(n - 1)b] = (n - 1) g[b] .
+$$
+
+This means that $g$ has a linear form:
+$$
+g(e) = k \, e
+$$
+
+---
+
+\bigskip
+
+Integrating both sides,
+$$
+\begin{aligned}
+\int g(e) = \int k \, e \, de \\
+\int \frac{f'(e)}{f(e)} = \int k \, e \, de \\
+\log f(e) = \frac{k}{2} e^2 + c
+\end{aligned}
+$$
+
+Exponentiating both sides,
+$$
+f(e) = \exp\left( \frac{k}{2} e^2 + c \right) 
+ = C \exp\left( \frac{k}{2} e^2 \right)
+$$
+
+---
+
+\bigskip
+
+Since we assume that smaller errors are more likely, $k < 0$.
+So, let us define
+$$
+\tau = -k .
+$$
+
+Now, we need to solve for constant $C > 0$.
+
+Since $f$ is a probability density function, it must satisfy unit measure:
+$$
+\begin{aligned}
+\int_{-\infty}^{\infty} f(e) \, de &= 1 \\
+\int_{-\infty}^{\infty} \exp\left( -\frac{\tau}{2} e^2 \right) \, de
+ &= \frac{1}{C}
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+We know that, for $a > 0$,
+$$
+\int_{-\infty}^{\infty} \exp\left( -a x^2 \right) \, dx
+= \sqrt{\frac{\pi}{a}}.
+$$
+
+Therefore,
+$$
+C = \sqrt{ \frac{\tau}{2 \pi} }
+$$
+
+Finally, we have derived the pdf of $E_i$ as
+$$
+f_E(e) = \sqrt{ \frac{\tau}{2 \pi} } 
+ \exp\left( -\frac{\tau}{2} e^2 \right) ,
+$$
+which is a normal distribution centered at 0.
+
+---
+
+\bigskip
+
+Since $E_i = X_i - \mu$, we can perform a variable transformation to
+get the distribution of $X_i$
+$$
+f_X(x) = \sqrt{ \frac{\tau}{2 \pi} } 
+ \exp\left( -\frac{\tau}{2} (x - \mu)^2 \right) . \quad \blacksquare
+$$
+
+Remark: Variable transformation also involves the Jacobian 
+(which happens to be 1 here), and we will be covered this later.
+
+
+## Central limit theorem
+
+### Theorem
+
+Let $X_1, X_2, \ldots$ be a sequence of iid random variables with
+$\text{E}(X_i) = \mu$ and $0 < \text{Var}(X_i) = \sigma^2 < \infty$.
+Define
+$$
+Z = \frac{(\bar{X}_n - \mu)}{\sigma / \sqrt{n}} .
+$$
+Then, for any $z$,
+$$
+\lim_{n \rightarrow \infty}
+ F_Z(z) = \Psi(z) ,
+$$
+where $\Psi(z)$ is the cdf of $\text{Normal}(0, 1)$ given by
+$$
+\Psi(z) = 
+ \int_{-\infty}^{z} 
+  \frac{1}{\sqrt{2 \pi}} \exp\left( -\frac{1}{2} t^2 \right) 
+ \, dt .
+$$
+
+In other words, $F_Z(z)$ **converges in distribution** to 
+$\text{Normal}(0, 1)$.
+
+
+## Summary
+
+"It is not knowledge, but the act of learning, not the possession of but the act of getting there, which grants the greatest enjoyment."
+- Carl Friedrich Gauss
+
+\bigskip
+
+Casella & Berger 2002, sections 5.5
+
+https://notarocketscientist.xyz/posts/2023-01-27-how-gauss-derived-the-normal-distribution/
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Derive the normal distribution
+- Explain and apply the Chebychev's inequality, laws of large numbers, and the central limit theorem
+- Recognize and apply normal distributions in statistical models
