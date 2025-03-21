@@ -20,8 +20,8 @@ classoption: t
 
 ## Intended learning outcomes {.c}
 
-- Recognize and apply Poisson distributions in statistical models
-- Derive the Poisson distributions
+- Recognize and apply Poisson, exponential, and gamma distributions in statistical models
+- Derive the Poisson and exponential distributions
 
 
 ## Recall: Binomial distribution
@@ -340,5 +340,5 @@ Casella & Berger 2002, sections 3.2, pages 92-94, 99-102.
 
 ### Intended learning outcomes {.c}
 
-- Recognize and apply Poisson distributions in statistical models
-- Derive the Poisson distributions
+- Recognize and apply Poisson, exponential, and gamma distributions in statistical models
+- Derive the Poisson and exponential distributions
