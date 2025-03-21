@@ -265,8 +265,8 @@ where $x$ and $y$ are variables; $m$ and $b$ are constants.
 
 $$
 p \left(Y = y \mid \mu, \tau \right) =
- (2 \pi)^{-\frac{1}{2}} \tau^{-\frac{1}{2}} \,
- \exp \left( -\frac{1}{2} \tau^{-1} (y - \mu)^2 \right)
+ (2 \pi)^{-\frac{1}{2}} \tau^{\frac{1}{2}} \,
+ \exp \left( -\frac{1}{2} \tau (y - \mu)^2 \right)
 $$
 where $Y$ is a *random* variable and $y$ its *realized value*; 
 $\mu$ and $\tau$ are parameters.
