@@ -166,7 +166,7 @@ of freedom.
 The exponential family is a set of distributions that follow the form:
 $$
 f( x \mid \symbfit{\theta} ) 
- = h(\symbfit{x}) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(\symbfit{x}) - A(\theta) \right) ,
+ = h(\symbfit{x}) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(\symbfit{x}) - A(\symbfit{\theta}) \right) ,
 $$
 where $\symbfit{\theta}$ is the parameter vector,
 $h(\symbfit{x})$, $\symbfit{\eta}(\symbfit{\theta})$,
@@ -184,9 +184,9 @@ $\symbfit{T}(\symbfit{x})$ is a vector of sufficient statistics.
 $$
 \begin{aligned}
 \text{Normal}( x \mid \symbfit{\theta} ) 
- &= h(x) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(x) - A(\theta) \right) \\
+ &= h(x) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(x) - A(\symbfit{\theta}) \right) \\
 h(x) &= (2 \pi)^{-\frac{1}{2}} \\
-A(\theta) &= \frac{1}{2}\mu^2 \tau - \frac{1}{2} \log \tau \\
+A(\symbfit{\theta}) &= \frac{1}{2}\mu^2 \tau - \frac{1}{2} \log \tau \\
 \symbfit{\eta}(\symbfit{\theta}) &=
  \begin{bmatrix}
   \mu \tau \\
@@ -207,9 +207,9 @@ $$
 $$
 \begin{aligned}
 \text{Normal}( x \mid \symbfit{\eta} ) 
- &= h(x) \, \exp\left( \symbfit{\eta}^\top \symbfit{T}(x) - A(\theta) \right) \\
+ &= h(x) \, \exp\left( \symbfit{\eta}^\top \symbfit{T}(x) - A(\symbfit{\eta}) \right) \\
 h(x) &= (2 \pi)^{-\frac{1}{2}} \\
-A(\theta) &= 
+A(\symbfit{\eta}) &= 
  - \frac{\eta_1^2}{4 \eta_2} - \frac{1}{2} \log(-2 \eta_2)
 \\
 \symbfit{\eta} &=
