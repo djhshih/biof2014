@@ -1,0 +1,239 @@
+---
+title: "Normal models"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+          \DeclareMathOperator*{\argmax}{argmax}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Recognize and apply normal distributions in statistical models
+
+
+## Recall: Normal distribution
+
+### Definition
+
+A random variable $X$ has a normal (Gaussian) distribution if
+$$
+f_X\left( x \mid \mu, \tau^{-1} \right) 
+ = \sqrt{ \frac{\tau}{2 \pi } } \,
+ \exp \left( -\frac{\tau}{2} (x - \mu)^2 \right)
+$$
+where $\mu$ is the mean parameter and $\tau$ is the inverse-variance parameter.
+
+
+## Known mean and known variance
+
+Given observed random variables $(X_i)_{i=1}^N$, known mean $\mu$,
+and known inverse-variance $\tau$, we can define
+$$
+X_i \sim \text{Normal}\left( \mu, \tau^{-1} \right) .
+$$
+
+
+## Known mean and unknown variance
+
+Given observed random variables $(X_i)_{i=1}^N$ and known mean $\mu$,
+we can define
+$$
+\begin{aligned}
+\tau &\sim \text{Gamma}\left( \alpha, \beta \right) \\
+X_i \mid \tau &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
+\end{aligned}
+$$
+where $\alpha$ and $\beta$ are fixed hyperparameters.
+
+Using Bayes' theorem, we can derive the posterior:
+$$
+p\left( \tau \mid \symbfit{x} \right)
+ = \text{Gamma}\left(\alpha + \frac{N}{2},
+  \; \beta + \frac{r}{2} \right) , \quad
+ r = \sum_i (x_i - \mu)^2 .
+$$
+
+
+## Unknown mean and known variance
+
+Given observed random variables $(X_i)_{i=1}^N$
+and known inverse-variance $\tau$,
+we can define
+$$
+\begin{aligned}
+\mu &\sim \text{Normal}\left( \nu, \lambda^{-1} \right) \\
+X_i \mid \mu &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
+\end{aligned}
+$$
+where $\nu$ and $\lambda$ are fixed hyperparameter.
+
+Using Bayes' theorem, we can derive the posterior:
+$$
+p\left( \mu \mid \symbfit{x} \right)
+ = \text{Normal}\left(
+  \frac{\lambda \nu + \tau s}{\lambda + \tau N},
+  (\lambda + \tau N)^{-1}
+ \right) , \quad
+ s = \sum_i x_i .
+$$
+
+This involves completing the square.
+
+
+## Unknown mean and unknown variance
+
+Given observed random variables $(X_i)_{i=1}^N$,
+we can define
+$$
+\begin{aligned}
+\mu \mid \tau &\sim
+ \text{Normal}\left( \nu, (\lambda \tau)^{-1} \right) \\
+\tau &\sim \text{Gamma}\left( \alpha, \beta \right) \\
+X_i \mid \mu, \tau &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
+\end{aligned}
+$$
+where $\nu$, $\lambda$, $\alpha$, and $\beta$ are fixed hyperparameters.
+
+The joint prior on $(\mu, \tau)$ is conjugate to the normal likelihood
+with unknown mean and variance:
+$$
+\begin{aligned}
+p\left( \mu, \tau \right)
+ = p\left( \mu \mid \tau\right) p\left( \tau \right)
+ = \text{NormalGamma}\left( \nu, \lambda, \alpha, \beta \right) .
+\end{aligned}
+$$
+
+
+
+## Heteroscedastic normals
+
+Given observed random variables $(X_i)_{i=1}^N$ and
+known mean $\mu$, we can define
+$$
+\begin{aligned}
+\tau_i &\sim \text{Gamma}\left( \frac{\nu}{2}, \frac{\nu}{2} \right) \\
+X_i  &\sim \text{Normal}\left( \mu, \tau_i^{-1} \right) .
+\end{aligned}
+$$
+
+Notice that $X_i$ are independent but not identically distributed.
+
+We can marginalize each $\tau_i$ out by integration:
+$$
+p\left( X_i \mid \mu \right)
+= \int_0^{\infty} p\left( X_i \mid \mu, \tau_i \right) \, d \tau_i ,
+$$
+which will give
+$$
+p\left( X_i \mid \mu \right) = \text{StudentT}\left( \mu, \nu \right) .
+$$
+
+
+## Student's t distribution
+
+### Definition
+
+A random variable $X$ has a Student's $t$ distribution if
+$$
+f_X\left( x \mid \mu, \nu \right) 
+ = (\pi \nu)^{-\frac{1}{2}}
+  \frac{\Gamma\left( \frac{\nu + 1}{2} \right)}
+       {\Gamma\left( \frac{\nu}{2} \right)}
+  \left(
+   1 + \frac{(x - \mu)^2}{\nu}
+  \right)^{- \frac{\nu + 1}{2}}
+$$
+where $\mu$ is the mean parameter and $\nu > 0$ is the degree 
+of freedom.
+
+
+## Exponential family
+
+The exponential family is a set of distributions that follow the form:
+$$
+f( x \mid \symbfit{\theta} ) 
+ = h(\symbfit{x}) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(\symbfit{x}) - A(\theta) \right) ,
+$$
+where $\symbfit{\theta}$ is the parameter vector,
+$h(\symbfit{x})$, $\symbfit{\eta}(\symbfit{\theta})$,
+$\symbfit{T}(\symbfit{x})$, and $A(\theta)$ are functions for
+each distribution.
+
+
+$\symbfit{\eta}(\symbfit{\theta})$ is a vector of natural parameters.
+
+$\symbfit{T}(\symbfit{x})$ is a vector of sufficient statistics.
+
+
+## Normal distribution in exponential family form
+
+$$
+\begin{aligned}
+\text{Normal}( x \mid \symbfit{\theta} ) 
+ &= h(x) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(x) - A(\theta) \right) \\
+h(x) &= (2 \pi)^{-\frac{1}{2}} \\
+A(\theta) &= \frac{1}{2}\mu^2 \tau - \frac{1}{2} \log \tau \\
+\symbfit{\eta}(\symbfit{\theta}) &=
+ \begin{bmatrix}
+  \mu \tau \\
+  -\frac{1}{2} \tau
+ \end{bmatrix}
+ \\
+\symbfit{T}(x) &=
+ \begin{bmatrix}
+  x \\
+  x^2 
+ \end{bmatrix}
+\end{aligned}
+$$
+
+
+## Normal distribution with natural parameters
+
+$$
+\begin{aligned}
+\text{Normal}( x \mid \symbfit{\eta} ) 
+ &= h(x) \, \exp\left( \symbfit{\eta}^\top \symbfit{T}(x) - A(\theta) \right) \\
+h(x) &= (2 \pi)^{-\frac{1}{2}} \\
+A(\theta) &= 
+ - \frac{\eta_1^2}{4 \eta_2} - \frac{1}{2} \log(-2 \eta_2)
+\\
+\symbfit{\eta} &=
+ \begin{bmatrix}
+  \eta_1 \\
+  \eta_2 
+ \end{bmatrix}
+ \\
+\symbfit{T}(x) &=
+ \begin{bmatrix}
+  x \\
+  x^2 
+ \end{bmatrix}
+\end{aligned}
+$$
+
+
+## Summary
+
+"The theory of probabilities is nothing more than common sense reduced to calculus."
+- Pierre-Simon Laplace
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Recognize and apply normal distributions in statistical models
