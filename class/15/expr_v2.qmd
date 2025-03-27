@@ -38,3 +38,11 @@ Download `expr_pancan_ccg.rds` from Moodle.
 3. Design a statistical model in Stan to compare the expression of a 
    specific gene in a tumour sample against its matched adjacent
    normal tissue (e.g. paired analysis).
+
+## Resources
+
+1. https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/
+
+2. https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/tissue-source-site-codes
+
+3. https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/sample-type-codes
