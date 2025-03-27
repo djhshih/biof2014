@@ -34,7 +34,7 @@ f_X\left( x \mid \mu, \tau^{-1} \right)
  = \sqrt{ \frac{\tau}{2 \pi } } \,
  \exp \left( -\frac{\tau}{2} (x - \mu)^2 \right)
 $$
-where $\mu$ is the mean parameter and $\tau$ is the inverse-variance parameter.
+where $\mu$ is the mean parameter and $\tau > 0$ is the inverse-variance parameter.
 
 
 ## Known mean and known variance
@@ -56,7 +56,7 @@ $$
 X_i \mid \tau &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
 \end{aligned}
 $$
-where $\alpha$ and $\beta$ are fixed hyperparameters.
+where $\alpha > 0$ and $\beta > 0$ are fixed hyperparameters.
 
 Using Bayes' theorem, we can derive the posterior:
 $$
@@ -78,7 +78,7 @@ $$
 X_i \mid \mu &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
 \end{aligned}
 $$
-where $\nu$ and $\lambda$ are fixed hyperparameter.
+where $\nu$ and $\lambda > 0$ are fixed hyperparameter.
 
 Using Bayes' theorem, we can derive the posterior:
 $$
@@ -105,7 +105,8 @@ $$
 X_i \mid \mu, \tau &\sim \text{Normal}\left( \mu, \tau^{-1} \right) ,
 \end{aligned}
 $$
-where $\nu$, $\lambda$, $\alpha$, and $\beta$ are fixed hyperparameters.
+where $\nu$, $\lambda > 0$, $\alpha > 0$, and $\beta > 0$ 
+are fixed hyperparameters.
 
 The joint prior on $(\mu, \tau)$ is conjugate to the normal likelihood
 with unknown mean and variance:
@@ -117,6 +118,23 @@ p\left( \mu, \tau \right)
 \end{aligned}
 $$
 
+---
+
+\bigskip
+
+Using Bayes' theorem, we can derive the posterior of 
+$$
+\begin{aligned}
+p\left( \mu, \tau \mid \symbfit{x} \right)
+ &= \text{NormalGamma}\left(\nu', \lambda', \alpha', \beta' \right) \\
+\nu' &= \frac{\nu \lambda + s}{\lambda + N} \\
+\lambda' &= \lambda + N \\
+\alpha' &= \alpha + \frac{N}{2} \\
+\beta' &= \beta + 
+ \frac{1}{2}\left( \lambda \nu^2 - \lambda' \nu'^2 + r \right) \\
+r &= \sum_i (x_i - \mu)^2 .
+\end{aligned} 
+$$
 
 
 ## Heteroscedastic normals
@@ -185,19 +203,21 @@ $$
 \begin{aligned}
 \text{Normal}( x \mid \symbfit{\theta} ) 
  &= h(x) \, \exp\left( \symbfit{\eta}(\symbfit{\theta})^\top \symbfit{T}(x) - A(\symbfit{\theta}) \right) \\
-h(x) &= (2 \pi)^{-\frac{1}{2}} \\
-A(\symbfit{\theta}) &= \frac{1}{2}\mu^2 \tau - \frac{1}{2} \log \tau \\
+h(x) &= (2 \pi)^{-\frac{1}{2}} ,
+\quad
+A(\symbfit{\theta}) = \frac{1}{2}\mu^2 \tau - \frac{1}{2} \log \tau 
+\\
 \symbfit{\eta}(\symbfit{\theta}) &=
  \begin{bmatrix}
   \mu \tau \\
   -\frac{1}{2} \tau
- \end{bmatrix}
- \\
-\symbfit{T}(x) &=
+ \end{bmatrix} ,
+\quad
+\symbfit{T}(x) =
  \begin{bmatrix}
   x \\
   x^2 
- \end{bmatrix}
+ \end{bmatrix} .
 \end{aligned}
 $$
 
@@ -207,22 +227,30 @@ $$
 $$
 \begin{aligned}
 \text{Normal}( x \mid \symbfit{\eta} ) 
- &= h(x) \, \exp\left( \symbfit{\eta}^\top \symbfit{T}(x) - A(\symbfit{\eta}) \right) \\
-h(x) &= (2 \pi)^{-\frac{1}{2}} \\
-A(\symbfit{\eta}) &= 
- - \frac{\eta_1^2}{4 \eta_2} - \frac{1}{2} \log(-2 \eta_2)
+ &= h(x) \, \exp\left( \symbfit{\eta}^\top \symbfit{T}(x) - A(\symbfit{\eta}) \right)
+\\
+h(x) &= (2 \pi)^{-\frac{1}{2}} ,
+\quad
+A(\symbfit{\eta}) = 
+ - \frac{\eta_1^2}{4 \eta_2} - \frac{1}{2} \log(-2 \eta_2) 
 \\
 \symbfit{\eta} &=
  \begin{bmatrix}
   \eta_1 \\
   \eta_2 
- \end{bmatrix}
- \\
-\symbfit{T}(x) &=
+ \end{bmatrix} ,
+\quad
+\symbfit{T}(x) =
  \begin{bmatrix}
   x \\
   x^2 
- \end{bmatrix}
+ \end{bmatrix} ,
+\quad
+\symbfit{\theta}(\symbfit{\eta}) =
+ \begin{bmatrix}
+  -\frac{\eta_1}{2 \eta_2} \\
+  -\frac{1}{2 \eta_2}
+ \end{bmatrix} .
 \end{aligned}
 $$
 
