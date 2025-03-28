@@ -144,7 +144,7 @@ known mean $\mu$, we can define
 $$
 \begin{aligned}
 \tau_i &\sim \text{Gamma}\left( \frac{\nu}{2}, \frac{\nu}{2} \right) \\
-X_i  &\sim \text{Normal}\left( \mu, \tau_i^{-1} \right) .
+X_i \mid \mu, \tau_i &\sim \text{Normal}\left( \mu, \tau_i^{-1} \right) .
 \end{aligned}
 $$
 
@@ -153,7 +153,9 @@ Notice that $X_i$ are independent but not identically distributed.
 We can marginalize each $\tau_i$ out by integration:
 $$
 p\left( X_i \mid \mu \right)
-= \int_0^{\infty} p\left( X_i \mid \mu, \tau_i \right) \, d \tau_i ,
+= \int_0^{\infty} p\left( X_i \mid \mu, \tau_i \right) \,
+ p\left( \tau_i \right) \, 
+ d \tau_i ,
 $$
 which will give
 $$
