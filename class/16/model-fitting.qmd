@@ -1,0 +1,219 @@
+---
+title: "Model fitting and parameter estimation"
+author: "David J. H. Shih"
+format:
+  beamer:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{bm}
+          \usepackage{bbm}
+          \usepackage[english]{babel}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+          \DeclareMathOperator*{\argmax}{argmax}
+classoption: t  
+---
+
+## Intended learning outcomes {.c}
+
+- Fit models to data by estimating model parameters
+
+
+## Model fitting
+
+Use data $\symbfit{x}$ to estimate parameters $\symbfit{\theta}$ of the model.
+
+### Maximum likelihoood estimation (MLE)
+$$
+\hat{\symbfit{\theta}} 
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{x} \mid \symbfit{\theta} \right) .
+$$
+
+### Maximum *a posteriori* (MAP)
+$$
+\hat{\symbfit{\theta}} 
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{\theta} \mid \symbfit{x} \right)
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{x} \mid \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right) .
+$$
+
+### Full Bayesian
+$$
+p\left( \symbfit{\theta} \mid \symbfit{x} \right)
+ = \frac{
+  p\left( \symbfit{x} \mid \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+ }{
+  p\left( \symbfit{x} \right)
+ } .
+$$
+
+## Generating new samples
+
+Use $\hat{\symbfit{\theta}}$ or 
+$p\left( \symbfit{\theta} \mid \symbfit{x} \right)$ to generate 
+a new data point $\tilde{x}$.
+
+### With point estimate from MLE or MAP
+$$
+\tilde{x} \sim 
+ p\left( \tilde{x} \mid \hat{\symbfit{\theta}} \right) .
+$$
+
+### With posterior predictive distribution
+$$
+\begin{aligned}
+p\left( \tilde{x} \mid \symbfit{x} \right)
+ &= \int_{\symbfit{\Theta}}
+  p\left( \tilde{x} \mid \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \mid \symbfit{x} \right) \,
+ d \symbfit{\theta}  \\
+\tilde{x}
+ &\sim p\left( \tilde{x} \mid \symbfit{x} \right) .
+\end{aligned}
+$$
+
+### With posterior distribution
+$$
+\symbfit{\theta}
+ \sim p(\symbfit{\theta} \mid \symbfit{x}), \quad
+\tilde{x}
+ \sim p\left( \tilde{x} \mid \symbfit{\theta} \right) .
+$$
+
+## Predictive models
+
+Use data $(\symbfit{x}, \symbfit{y})$ to estimate parameters 
+$\symbfit{\theta}$ of the model and to predict new outcome
+$\hat{y}$ given new data point $\tilde{x}$.
+
+### Discriminative model with MLE
+$$
+\begin{aligned}
+\hat{\symbfit{\theta}} 
+ &= \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{y} \mid \symbfit{x} , \symbfit{\theta} \right)
+\\
+\hat{y}
+ &= \argmax_y p\left( y \mid \tilde{x}, \hat{\symbfit{\theta}} \right)
+\end{aligned}
+$$
+
+### Discriminative model with MAP
+$$
+\begin{aligned}
+\hat{\symbfit{\theta}} 
+ &= \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{y} \mid \symbfit{x}, \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+\\
+\hat{y} &= \argmax_y 
+ p\left( y \mid \tilde{x}, \hat{\symbfit{\theta}} \right)
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+### Generative model with MLE
+$$
+\begin{aligned}
+\hat{\symbfit{\theta}} 
+ &= \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{x} \mid \symbfit{\theta}, \symbfit{y} \right)
+\\
+\hat{y}
+ &= \argmax_y p\left( \tilde{x} \mid \hat{\symbfit{\theta}}, y \right)
+\end{aligned}
+$$
+
+### Generative model with MAP
+
+$$
+\begin{aligned}
+\hat{\symbfit{\theta}} 
+ &= \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{\theta} \mid \symbfit{x} , \symbfit{y} \right)
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{x} \mid \symbfit{\theta}, \symbfit{y} \right) \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+\\
+\hat{y}
+ &= \argmax_y p\left( y \mid \tilde{x}, \hat{\symbfit{\theta}} \right)
+ = \argmax_y p\left( \tilde{x} \mid \hat{\symbfit{\theta}}, y \right) \,
+  p\left( y \right)
+\end{aligned}
+$$
+
+---
+
+\bigskip
+
+### Full Bayesian discriminative model
+$$
+\begin{aligned}
+p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ &= \frac{
+  p\left( \symbfit{y} \mid \symbfit{x}, \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+ }{
+  p\left( \symbfit{y} \mid \symbfit{x} \right)
+ }
+\\
+p\left( \tilde{y} \mid \tilde{x} \right)
+ &= \int_{\symbfit{\Theta}}
+ p\left( \tilde{y} \mid \tilde{x}, \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ d \symbfit{\theta}
+\end{aligned}
+$$
+
+### Full Bayesian generative model
+$$
+\begin{aligned}
+p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ &= \frac{
+  p\left( \symbfit{x} \mid \symbfit{\theta}, \symbfit{y} \right) \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+ }{
+  p\left( \symbfit{x} \mid \symbfit{y} \right)
+ }
+\\
+p\left( \tilde{x} \mid \tilde{y} \right)
+ &= \int_{\symbfit{\Theta}}
+ p\left( \tilde{x} \mid \symbfit{\theta}, \tilde{y} \right) \,
+ p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ d \symbfit{\theta}
+\\
+p\left( \tilde{y} \mid \tilde{x} \right)
+ &= \frac{
+  p\left( \tilde{x} \mid \tilde{y} \right) \,
+  p\left( \tilde{y} \right)
+ }{
+  p\left( \tilde{x} \right)
+ }
+\end{aligned}
+$$
+
+
+## Summary
+
+"All Models Are Wrong, Some are Useful."
+- George Box
+
+\bigskip
+
+### Intended learning outcomes {.c}
+
+- Fit models to data by estimating model parameters
