@@ -85,8 +85,15 @@ $$
 for any $k > 0$ and any random variable $X$ with mean $\mu$ and 
 variance $\sigma^2 < \infty$.
 
+Since $\text{E}(X) = \mu$,
+$\text{E}(\bar{X}_n) = \text{E}(\frac{1}{n} \sum_i X_i) = \mu$.
+
 Since $\text{Var}(X) = \sigma^2$, 
-$\text{Var}(X_n) = \text{Var}(\frac{1}{n} \sum_i X_i) = \frac{\sigma^2}{n}$.
+$\text{Var}(\bar{X}_n) = \text{Var}(\frac{1}{n} \sum_i X_i) = \frac{\sigma^2}{n}$.
+
+---
+
+\bigskip
 
 Set $k = \frac{\epsilon \sqrt{n}}{\sigma}$. By Chebychev's inequality,
 for every $\epsilon > 0$,
@@ -99,10 +106,6 @@ P\left( | \bar{X}_n - \mu | \ge \epsilon \right)
  &\le \frac{\sigma^2}{n \epsilon^2} .
 \end{aligned}
 $$
-
----
-
-\bigskip
 
 Therefore,
 $$
@@ -117,7 +120,7 @@ $$
 Finally,
 $$
 \lim_{n \rightarrow \infty}
-P\left( | \bar{X}_n - \mu | \ge \epsilon \right)
+P\left( | \bar{X}_n - \mu | < \epsilon \right)
  =
 \lim_{n \rightarrow \infty}
  1 - P\left( | \bar{X}_n - \mu | \ge \epsilon \right) 
