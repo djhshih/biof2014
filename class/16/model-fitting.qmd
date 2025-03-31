@@ -214,6 +214,9 @@ $$
 
 \bigskip
 
+Blais 2014, chapter 6.
+
+
 ### Intended learning outcomes {.c}
 
 - Fit models to data by estimating model parameters

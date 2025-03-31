@@ -259,7 +259,9 @@ MCMC converges almost surely, as long as you are willing to wait indefinitely.
 
 \bigskip
 
+Blais 2014, chapter 11.
 
 ### Intended learning outcomes {.c}
 
 - Implement statistical models in Stan
+
