@@ -171,11 +171,110 @@ $$
 $$
 
 
+## Full Bayesian
+
+### Basic model
+$$
+p\left( \symbfit{\theta} \mid \symbfit{x} \right)
+ = \frac{
+  p\left( \symbfit{x} \mid \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+ }{
+  p\left( \symbfit{x} \right)
+ } .
+$$
+
+### Discriminative model
+$$
+p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ = \frac{
+  p\left( \symbfit{y} \mid \symbfit{x}, \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+ }{
+  p\left( \symbfit{y} \mid \symbfit{x} \right)
+ } .
+$$
+
+### Generative model
+$$
+p\left( \symbfit{\theta} \mid \symbfit{x}, \symbfit{y} \right)
+ = \frac{
+  p\left( \symbfit{x} \mid \symbfit{\theta}, \symbfit{y} \right) \,
+  p\left( \symbfit{\theta} \mid \symbfit{y} \right)
+ }{
+  p\left( \symbfit{x} \mid \symbfit{y} \right)
+ } .
+$$
+
+
 ## Maximum likelihood
 
+$$
+L\left( \theta \right) = p\left( \symbfit{x} \mid \theta \right)
+\quad
+\text{or}
+\quad
+L\left( \theta \right) = p\left( \symbfit{y} \mid \symbfit{x}, \theta \right)
+\quad
+\text{or}
+\quad
+L\left( \theta \right) = p\left( \symbfit{x} \mid \symbfit{y}, \theta \right)
+$$
+
+$$
+p\left( \symbfit{x} \mid \theta \right)
+ = \prod_i p\left( x_i \mid \theta \right)
+$$
+
+$$
+\ell(\theta) = \log L\left( \theta \right)
+$$
+
+$$
+\log p\left( \symbfit{x} \mid \theta \right)
+ = \sum_i \log p\left( x_i \mid \theta \right)
+$$
+
+$$
+\frac{ d \ell(\theta) }{ d \theta } = 0
+$$
 
 
 ## Maximum *a posteriori*
+
+$$
+\begin{aligned}
+p\left( \theta \mid \symbfit{x} \right)
+ &\propto p\left( \symbfit{x} \mid \theta \right) \, p\left( \theta \right)
+\\ &\text{or} \\
+p\left( \theta \mid \symbfit{y}, \symbfit{x} \right)
+ &\propto p\left( \symbfit{y} \mid \symbfit{x}, \theta \right) \, p\left( \theta \right)
+\quad
+\\ &\text{or} \\
+p\left( \theta \mid \symbfit{x}, \symbfit{y} \right)
+ &\propto p\left( \symbfit{x} \mid \symbfit{y}, \theta \right) \, p\left( \theta \mid y \right)
+\end{aligned}
+$$
+
+$$
+\ell(\theta) = \log p\left( \theta \mid \symbfit{x} \right)
+$$
+
+$$
+\log p\left( \symbfit{x} \mid \theta \right)
+ = \sum_i \log p\left( x_i \mid \theta \right)
+$$
+
+$$
+\frac{ d \ell(\theta) }{ d \theta } = 0
+$$
+
+
+## MLE vs. MAP vs. full Bayesian
+
+MLE is an approximation of MAP with a uniform prior.
+
+MAP is an approximation of the posterior.
 
 
 ## Summary
