@@ -92,7 +92,7 @@ $$
 
 ## Summary
 
-"All Models Are Wrong, Some are Useful."
+"All models are wrong. Some are useful."
 - George Box
 
 \bigskip
