@@ -56,6 +56,22 @@ p\left( \symbfit{\theta} \mid \symbfit{x} \right)
  } .
 $$
 
+
+## Parameter estimates
+
+### Point estimate
+
+\vspace{3em}
+
+### Posterior for discrete random variable
+
+\vspace{5em}
+
+### Posterior for continuous random variable
+
+\vspace{5em}
+
+
 ## Generating new samples
 
 Use $\hat{\symbfit{\theta}}$ or 
@@ -88,6 +104,78 @@ $$
 \tilde{x}
  \sim p\left( \tilde{x} \mid \symbfit{\theta} \right) .
 $$
+
+
+## Fitting discriminative models
+
+Use data $(\symbfit{x}, \symbfit{y})$ to estimate parameters 
+$\symbfit{\theta}$ of the model and to predict new outcome
+$\hat{y}$ given new data point $\tilde{x}$.
+
+### MLE
+$$
+\hat{\symbfit{\theta}} 
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{y} \mid \symbfit{x} , \symbfit{\theta} \right) .
+$$
+
+### MAP 
+$$
+\hat{\symbfit{\theta}} 
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ = \argmax_{\symbfit{\theta}}
+  p\left( \symbfit{y} \mid \symbfit{x}, \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right) .
+$$
+
+### Full Bayesian
+$$
+p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ = \frac{
+  p\left( \symbfit{y} \mid \symbfit{x}, \symbfit{\theta} \right) \,
+  p\left( \symbfit{\theta} \right)
+ }{
+  p\left( \symbfit{y} \mid \symbfit{x} \right)
+ } .
+$$
+
+
+## Predicting new outcomes
+
+### With point estimate from MLE or MAP
+$$
+\hat{y}
+ = \argmax_y p\left( y \mid \tilde{x}, \hat{\symbfit{\theta}} \right) .
+$$
+
+### With posterior predictive distribution
+$$
+\begin{aligned}
+p\left( \tilde{y} \mid \tilde{x} \right)
+ &= \int_{\symbfit{\Theta}}
+ p\left( \tilde{y} \mid \tilde{x}, \symbfit{\theta} \right) \,
+ p\left( \symbfit{\theta} \mid \symbfit{y}, \symbfit{x} \right)
+ d \symbfit{\theta} ,
+\\
+\tilde{y} &\sim p\left( \tilde{y} \mid \tilde{x} \right) .
+\end{aligned}
+$$
+
+### With posterior distribution
+$$
+\symbfit{\theta}
+ \sim p\left(\symbfit{\theta} \mid \symbfit{y}, \symbfit{x}\right), \quad
+\tilde{y}
+ \sim p\left( \tilde{y} \mid \tilde{x}, \symbfit{\theta} \right) .
+$$
+
+
+## Maximum likelihood
+
+
+
+## Maximum *a posteriori*
 
 
 ## Summary
