@@ -131,8 +131,7 @@ p\left( \mu, \tau \mid \symbfit{x} \right)
 \lambda' &= \lambda + N \\
 \alpha' &= \alpha + \frac{N}{2} \\
 \beta' &= \beta + 
- \frac{1}{2}\left( \lambda \nu^2 - \lambda' \nu'^2 + r \right) \\
-r &= \sum_i (x_i - \mu)^2 .
+ \frac{1}{2}\left( \lambda \nu^2 - \lambda' \nu'^2 + \sum_i x_i^2 \right) .
 \end{aligned} 
 $$
 
