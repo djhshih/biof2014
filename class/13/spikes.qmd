@@ -17,11 +17,11 @@ format:
 
 ## Problem
 
-You are measuring spike trains from a neuron, and you measure
+You are measuring spike trains from a neuron, and you measured
 the number of spikes observed in multiple experiments, each with
 different recording time intervals.
 
-You record the following results:
+You recorded the following results:
 
 | time interval (min) | number of spikes        |
 |:-------------------:|:-----------------------:|
