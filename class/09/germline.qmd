@@ -250,12 +250,12 @@ Similar to the haploid model, $p \left( z_j \mid g , M = 1 \right)$
 is given by
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, M = 1 \right) = 1 
+p\left( Z_j = 0 \mid G = 0, M = 1 \right) = 1 
 \quad\quad &
-p\left( z_j = 1 \mid G = 0, M = 1 \right) = 0 \\
-p\left( z_j = 0 \mid G = 1, M = 1 \right) = 0
+p\left( Z_j = 1 \mid G = 0, M = 1 \right) = 0 \\
+p\left( Z_j = 0 \mid G = 1, M = 1 \right) = 0
 \quad\quad &
-p\left( z_j = 1 \mid G = 1, M = 1 \right) = 1 .
+p\left( Z_j = 1 \mid G = 1, M = 1 \right) = 1 .
 \end{aligned}
 $$
 
@@ -263,13 +263,13 @@ Similar to the diploid model, $p \left( z_j \mid G , M = 2 \right)$
 is given by
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, M = 2 \right) = 1 
+p\left( Z_j = 0 \mid G = 0, M = 2 \right) = 1 
 \quad\quad &
-p\left( z_j = 1 \mid G = 0, M = 2 \right) = 0 \\
-p\left( z_j = 0 \mid G = 1, M = 2 \right) = \frac{1}{2}
+p\left( Z_j = 1 \mid G = 0, M = 2 \right) = 0 \\
+p\left( Z_j = 0 \mid G = 1, M = 2 \right) = \frac{1}{2}
 \quad\quad &
-p\left( z_j = 1 \mid G = 1, M = 2 \right) = \frac{1}{2} \\
-p\left( z_j = 0 \mid G = 2, M = 2 \right) = 0
+p\left( Z_j = 1 \mid G = 1, M = 2 \right) = \frac{1}{2} \\
+p\left( Z_j = 0 \mid G = 2, M = 2 \right) = 0
 \quad\quad &
 p\left( z_j = 1 \mid G = 2, M = 2 \right) = 1 .
 \end{aligned}
@@ -278,18 +278,18 @@ $$
 Do you recognize the pattern?
 $$
 \begin{aligned}
-p\left( z_j = 0 \mid G = 0, M = 3 \right) = 
+p\left( Z_j = 0 \mid G = 0, M = 3 \right) = 
 \quad\quad\quad &
-p\left( z_j = 1 \mid G = 0, M = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 1, M = 3 \right) = 
+p\left( Z_j = 1 \mid G = 0, M = 3 \right) =  \\
+p\left( Z_j = 0 \mid G = 1, M = 3 \right) = 
 \quad\quad\quad &
-p\left( z_j = 1 \mid G = 1, M = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 2, M = 3 \right) = 
+p\left( Z_j = 1 \mid G = 1, M = 3 \right) =  \\
+p\left( Z_j = 0 \mid G = 2, M = 3 \right) = 
 \quad\quad\quad &
-p\left( z_j = 1 \mid G = 2, M = 3 \right) =  \\
-p\left( z_j = 0 \mid G = 3, M = 3 \right) = 
+p\left( Z_j = 1 \mid G = 2, M = 3 \right) =  \\
+p\left( Z_j = 0 \mid G = 3, M = 3 \right) = 
 \quad\quad\quad &
-p\left( z_j = 1 \mid G = 3, M = 3 \right) =  .
+p\left( Z_j = 1 \mid G = 3, M = 3 \right) =  .
 \end{aligned}
 $$
 
