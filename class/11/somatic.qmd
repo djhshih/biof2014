@@ -251,7 +251,7 @@ p \left( x_j \mid g \right)
    p \left( \mu_g \right) \, d \mu_g \\
 p \left( x_j \mid g, \mu_g \right)
 &= \sum_{c=0}^1 \sum_{z=0}^1
-  p\left(x_j, g, \mu_g, c, z \right) .
+  p\left(x_j, c, z \mid g, \mu_g \right) .
 \end{aligned}
 $$
 
