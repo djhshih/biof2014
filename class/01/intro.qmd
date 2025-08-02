@@ -1,5 +1,5 @@
 ---
-title: "BIOF2014"
+title: "BIOF2014: Statistical Modelling in Bioinformatics"
 author: "David J. H. Shih"
 format: beamer
 ---
