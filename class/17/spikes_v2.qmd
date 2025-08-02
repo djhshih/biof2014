@@ -1,0 +1,60 @@
+---
+title: "Neuronal Spike Trains, Revisited"
+author: "BIOF2014"
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{fixmath}
+          \usepackage[english]{babel}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+## Problem
+
+You are measuring spike trains from a neuron, and you measured
+the number of spikes observed in multiple experiments, each with
+different recording time intervals.
+
+You recorded the following results:
+
+| time interval (min) | number of spikes        |
+|:-------------------:|:-----------------------:|
+|         1           |            6            |
+|         1           |            8            |
+|         1           |            2            |
+|         2           |           11            |
+|         2           |           14            |
+|         3           |           14            |
+|         3           |           17            |
+
+You performed the experiment again after treating the neuron with
+a compound.
+
+| time interval (min) | number of spikes        |
+|:-------------------:|:-----------------------:|
+|         1           |            1            |
+|         2           |            3            |
+|         4           |            6            |
+|         5           |            9            |
+
+
+What is the spiking rate per minute
+before and after compound treatment?
+
+
+## Tasks
+
+1. Consider the following hypotheses: 
+
+- compound treatment increases the spiking rate;
+- compound treatment decreases the spiking rate;
+- compound treatment changes the spiking rate.
+
+Test each hypothesis.
+
