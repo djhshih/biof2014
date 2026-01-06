@@ -37,23 +37,6 @@ in the exam.
 Plagiarism will *not* be tolerated.
 
 
-## ChatGPT
-
-As per university policy, instructors should make assessments
-'ChatGPT-proof'.
-
-ChatGPT is excellent at writing meaningless fluff, and it is mediocre at logic.
-It is often overfitted to the questions in the training set.
-
-ChatGPT can be useful for correcting grammar, improving writing, and perhaps
-as a second opinion.
-
-ChatGPT does poorly (0-50%) on most statistical questions.
-
-ChatGPT answers are often vague. Their derivations seem helpful on the surface
-but lack mathematical rigor and contain hallucinated/magical steps.
-
-
 ## Marking scheme
 
 ### Derivation and calculation questions
@@ -87,13 +70,13 @@ but lack mathematical rigor and contain hallucinated/magical steps.
 
 | Criterion                                 | Weight |
 |-------------------------------------------|--------|
-| Code novelty\*                            | 20%    |
-| Commit pattern                            | 20%    |
-| Model performance, training               | 20%    |
-| Model performance, test                   | 40%    |
+| Code novelty\*                            |  20%   |
+| Commit pattern                            |  20%   |
+| Model performance, development            |  20%   |
+| Model performance, production             |  40%   |
 
-\* >90\% similarity with another submission results in a grade of zero
-for the entire project.
+\* >90\% similarity with another submission from any time 
+results in a grade of zero for the entire project.
 
 
 ## Late submissions
@@ -115,4 +98,22 @@ Notations are invented to make expressions less ambiguous and more concise!
 
 In the bioinformatics field, method descriptions are atrocious because few 
 people learned the proper notations, which make communications very difficult.
+
+
+## ChatGPT
+
+As per university policy, instructors should make assessments
+'ChatGPT-proof'.
+
+ChatGPT is excellent at writing meaningless fluff, and it is mediocre at logic.
+It is often overfitted to the questions in the training set.
+
+ChatGPT can be useful for correcting grammar, improving writing, and perhaps
+as a second opinion.
+
+ChatGPT does poorly (0-50%) on most statistical questions.
+
+ChatGPT answers are often vague. Their derivations seem helpful on the surface
+but lack mathematical rigor and contain hallucinated/magical steps.
+
 
