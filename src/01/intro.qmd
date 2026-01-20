@@ -1,10 +1,11 @@
 ---
 title: "BIOF2014: Statistical Modelling in Bioinformatics"
 author: "David J. H. Shih"
-format: beamer
+format: pdf
 ---
 
 ```{r setup, include=FALSE}
+options(warn=-1)
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 ```
 
@@ -21,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 - Stochastic models account for randomness in real-world phenomenons
 
 
-## A world with absolute certainty: Newtonian physics
+## Example of a deterministic system: Newtonian physics
 
 All variables are measurable to arbitrary precision.
 
@@ -35,7 +36,7 @@ F_{1 \rightarrow 2} &= F_{2 \rightarrow 1}
 $$
 
 
-## A world with uncertainty: quantum mechanics
+## Example of a stochastic system: quantum mechanics
 
 At the atomic scale, some quantum variables cannot be measured 
 precisely at the same time.
@@ -47,26 +48,13 @@ $$
 $$
 where $h$ is Planck's constant.
 
-<!--
 
-## Iterated function application -- Definition
+## A simple deterministic system
 
-For $n > 1$, let $f_{n+1}(x) = f( f_n(x) )$. Let $f_1(x) = f(x)$.
+Statistics is useful for modeling systems with high uncertainty or with
+stochasticity. What about deterministic systems?
 
-For example,
-
-$$
-\begin{aligned}
-f_2(x) &= f( f(x) )          \\
-f_3(x) &= f( f( f(x) ) )     \\
-f_4(x) &= f( f( f( f(x)  ) ) \\
-&\ldots
-\end{aligned}
-$$
-
--->
-
-## A simple deterministic model
+Let's consider the following deterministic system.
 
 Let $x \in (0, 1)$ be a quantity of interest
 (e.g. position of a particle).
@@ -79,7 +67,6 @@ We model the dynamics of $x$ under continuous time $t \ge 0$ by
 $$
 \frac{dx}{dt} = f(x) .
 $$
----
 
 We simplify the model to discrete time $t \in \{0, 1, 2, \ldots \}$ by
 $$
@@ -87,13 +74,38 @@ $$
 $$
 We can simplify further by setting $\Delta t = 1$, giving
 $$
-x_{t + 1} = g(x_t) \triangleq x_t + f(x_t).
+x_{t + 1} = x_t + f(x_t) ,
 $$
+which is equivalent to
+$$
+x_{t + 1} = g(x_t),
+$$
+where
+$$
+g(x) \triangleq r x (1 - x) .
+$$
+
+### Iterated function applications
+
+For $t > 1$, let $f_{t+1}(x) = f( f_t(x) )$. Let $f_1(x) = f(x)$.
+
+For example,
+$$
+\begin{aligned}
+x_2 &= f_2(x_0) = f( f(x_0) )          \\
+x_3 &= f_3(x_0) = f( f( f(x_0) ) )     \\
+x_4 &= f_4(x_0) = f( f( f( f(x_0)  ) ) \\
+&\ldots \\
+x_t &= f_t(x_0) = f( \ldots f( f(x_0) ) \ldots )
+\end{aligned}
+$$
+
 
 Also,
 $$
 x_\infty \triangleq \lim_{t \rightarrow \infty} x_t
 $$
+
 
 
 ## Simulation under deterministic model
@@ -117,8 +129,6 @@ trace_plot <- function(g, x0, T=100) {
 }
 ```
 
----
-
 ```{r, fig.width=6, fig.height=1.5}
 g <- function(x) logistic_map(x, r=1.0);
 trace_plot(g, x0=0.3)
@@ -127,8 +137,6 @@ trace_plot(g, x0=0.3)
 ```{r, fig.width=6, fig.height=1.5}
 trace_plot(g, x0=0.6)
 ```
-
----
 
 ```{r, fig.width=6, fig.height=1.5}
 g <- function(x) logistic_map(x, r=2.0);
@@ -139,8 +147,6 @@ trace_plot(g, x0=0.3)
 trace_plot(g, x0=0.6)
 ```
 
----
-
 ```{r, fig.width=6, fig.height=1.5}
 g <- function(x) logistic_map(x, r=3.0);
 trace_plot(g, x0=0.3)
@@ -150,8 +156,6 @@ trace_plot(g, x0=0.3)
 trace_plot(g, x0=0.6)
 ```
 
----
-
 ```{r, fig.width=6, fig.height=1.5}
 g <- function(x) logistic_map(x, r=4.0);
 trace_plot(g, x0=0.3)
@@ -160,8 +164,6 @@ trace_plot(g, x0=0.3)
 ```{r, fig.width=6, fig.height=1.5}
 trace_plot(g, x0=0.6)
 ```
-
----
 
 ```{r, echo=TRUE}
 iterate <- function(g, x0, T=100) {
@@ -183,8 +185,6 @@ simulate <- function(g, x0) {
 
 ```
 
----
-
 ```{r, echo=TRUE}
 predict_plot <- function(g, x0) {
   d <- simulate(g, x0);
@@ -199,16 +199,12 @@ step <- 0.02;
 x0 <- seq(0 + step, 1 - step, by=step);
 ```
 
----
-
-```{r, fig.width=3, fig.height=3, out.width="60%"}
+```{r, fig.width=3, fig.height=3, out.width="40%"}
 g <- function(x) logistic_map(x, r=2.0);
 predict_plot(g, x0)
 ```
 
----
-
-```{r, fig.width=3, fig.height=3, out.width="60%"}
+```{r, fig.width=3, fig.height=3, out.width="40%"}
 g <- function(x) logistic_map(x, r=4.0);
 predict_plot(g, x0)
 ```
@@ -225,7 +221,7 @@ In the field of differential equations, periodic and chaotic systems
 are *pathological*.
 
 
-## A simple stochastic model
+## Probabilistic view of the deterministic system
 
 
 ```{r, fig.width=6, fig.height=1.5, out.width="80%"}
@@ -299,15 +295,6 @@ Electron are distributed in different *cloud* orbitals around a nucleus.
 - Data science
 - Bioinformatics
 - ...
-
-
-## Analogy
-
-Newton physics: equations of particles  
-Quantum mechanics: equations of wavefunctions  
-
-Algebra: equations of variables  
-Statistics: equations of probability distributions  
 
 
 ## Summary
