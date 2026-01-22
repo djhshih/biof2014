@@ -85,7 +85,7 @@ $$
 $$
 
 Operators such as $\sum$ (sum), $\prod$ (product), $\int$ (integration), etc.
-can take a set that an index is enumerating. For example, the sum and
+can take a set that the index enumerates over. For example, the sum and
 product of $x_i$ over all index value $i$ in set $A$ are
 $$
 \sum_{i \in A} x_i \quad \text{and} \quad \prod_{i \in A} x_i .
