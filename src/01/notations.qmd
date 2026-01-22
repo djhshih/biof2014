@@ -42,16 +42,16 @@ We will adopt the mathematical notation used in the following textbook.
 | $P(A, B)$         | joint probability that both events $A$ and $B$ occur   |
 | $P(A \mid B)$     | conditional probability that event $A$ occurs given that $B$ occurred  |
 | $X \in \mathcal{X}$  | random variable $X$ with domain $\mathcal{X}$       |
-| $P_X(X = x)$      | probability that random variable $X$ takes on a realized value $x$; often abbreviated as $P(X = x) or P(x)$ |
+| $P_X(X = x)$      | probability that random variable $X$ takes on a realized value $x$; often abbreviated as $P(X = x)$ or $P(x)$ |
 | $F_X(x \mid \theta)$ | cumulative distribution function (cdf) of random variable $X$ with parameter $\theta$ |
 | $f_X(x \mid \theta)$ | probability density function (pdf) if $X$ is continuous; probability mass function (pmf) if $X$ is discrete |
 | $f(x, y)$         | joint pdf/pmf on random variable $X$ and $Y$           |
 | $f(x \mid y)$     | conditional pdf/pmf of $X$ given $Y$                   |
-| $\text{E}[ X ]$ | expectation of random variable X under $f_X(x)$        |
-| $\text{Var}[ X ]$ | variance of X under $f_X(x)$                         |
+| $\text{E}[ X ]$   | expectation of random variable X under $f_X(x)$        |
+| $\text{Var}[ X ]$ | variance of X under $f_X(x)$                           |
 | $X \sim f(\theta)$ | $X$ is distributed according to $f_X(x \mid \theta)$  |
 | $X \sim F(\theta)$ | same as above                                         |
-| $X \sim Y$         | random variable $X$ is distributed according to $f_Y$ |
+| $X \sim Y$        | random variable $X$ is distributed according to $f_Y$  |
 | $X \sim \text{Bernoulli}(\theta)$ | $X$ is distributed according to a Bernoulli distribution with parameter $\theta$, and similarly for other distributions |
 
 Uppercase English letters $X, Y, Z, \ldots$ denote random variables
@@ -74,7 +74,7 @@ Bolded letters $\mathbf{x}$ and $\mathbf{X}$ denote vectors and matrices.
 |-------------------|--------------------------------------------------------|
 | $p(x)$            | pdf/pmf of random variable $X$                         |
 | $p(x, y)$         | joint pdf/pmf of random variables $X$ and $Y$          |
-| $p(x, \mid y)$    | conditional pdf/pmf of $X$ given $Y$                   |
+| $p(x \mid y)$     | conditional pdf/pmf of $X$ given $Y$                   |
 
 
 ## Operators
