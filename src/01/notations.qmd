@@ -51,7 +51,7 @@ We will adopt the mathematical notation used in the following textbook.
 | $\text{Var}[ X ]$ | variance of X under $f_X(x)$                           |
 | $X \sim f(\theta)$ | $X$ is distributed according to $f_X(x \mid \theta)$  |
 | $X \sim F(\theta)$ | same as above                                         |
-| $X \sim Y$        | random variable $X$ is distributed according to $f_Y$  |
+| $X \sim Y$        | random variable $X$ follows the distribution of $Y$    |
 | $X \sim \text{Bernoulli}(\theta)$ | $X$ is distributed according to a Bernoulli distribution with parameter $\theta$, and similarly for other distributions |
 
 Uppercase English letters $X, Y, Z, \ldots$ denote random variables
