@@ -1,6 +1,6 @@
 ---
 title: "Coin Flipping"
-author: "BIOF2014"
+author: "David J. H. Shih"
 format: pdf
 ---
 
