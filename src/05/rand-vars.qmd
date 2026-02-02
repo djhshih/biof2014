@@ -2,7 +2,7 @@
 title: "Random variables"
 author: "David J. H. Shih"
 format:
-  beamer:
+  pdf:
     include-in-header:
       - text: |
           \usepackage{amsfonts}
@@ -42,8 +42,6 @@ P\left(\mathcal{E} \right)
 \end{aligned}
 $$
 
-## Event
-
 Further, if $P\left(s_i\right) = P\left(s_j\right)$ 
 for all $s_i, s_j \in \mathcal{S}$, then
 $$
@@ -54,13 +52,36 @@ where $|\mathcal{A}|$ is the number of elements in a set $\mathcal{A}$.
 
 ## Example
 
-Sequence: Toss a coin 2 times.
+Sequence: Toss a coin 2 times independently.
+
+Assume that the coin toss results in either head ($H$) or tail ($T$).
 
 Define event $\mathcal{E}$ as the occurrence of one head:
 $$
 \mathcal{E} = \{ HT, TH \}
 $$
 Derive $P\left( \mathcal{E} \right)$.
+
+### Answer
+
+$$
+\begin{aligned}
+P\left( \mathcal{E} \right) 
+&= P\left( HT \cup TH \right)
+ &\quad (\text{expansion}) \\
+&= P\left( HT \right) + P\left( TH \right)
+ &\quad (\sigma\text{-additivity}) \\
+&= P\left( H \right) P\left(T\right) + 
+ P\left(T\right) P\left(H \right)
+ &\quad (\text{independence}) \\
+&= 2 \; P\left(H\right) P\left(T\right)
+ \\
+&= 2 \; P\left(H\right) P\left(H^c\right)
+ &\quad (\text{assumption}) \\
+&= 2 \; P\left(H\right) (1 - P\left(H\right))
+ &\quad (\text{complement rule}) \\
+\end{aligned}
+$$
 
 
 ## Randomness
@@ -91,17 +112,23 @@ real numbers with domain $\mathcal{X} = \{x_1, \ldots, x_N\}$.
 
 ### Illustration
 
-
-## Random variable
-
 Each realization $x_i \in \mathcal{X}$ corresponds to an event 
 $\mathcal{E}_i \subseteq \mathcal{S}$
 such that
 $$
 P_X \left( X = x_i \right) \; = \; P \left( \mathcal{E_i} \right),
 $$
-where $\mathcal{E_i} = \{ s_j \in S : X(s_j) = x_i \}$ and 
+where $\mathcal{E}_i = \{ s_j \in \mathcal{S} : X(s_j) = x_i \}$ and 
 $P_X$ is the *induced* probability function on $\mathcal{X}$.
+
+\bigskip
+
+English equivalent of the equation:
+
+"The probability that the random variable $X$ equals a value $x_i$ is given 
+under the induced probability function $P_X$ by the probability of the event 
+$\mathcal{E}_i$, which is the set of all outcomes $s_j$ in the sample space 
+$\mathcal{S}$ such that random variable $X$ maps $s_j$ to $x_i$."
 
 \bigskip
 
@@ -109,7 +136,7 @@ Remark: We often abbreviate $P_X\left(X = x_i\right)$ as
 $P_X\left(x_i\right)$ or $P\left(x_i\right)$.
 
 
-## Example 1
+### Example 1
 
 Sequence: Toss a coin 1 time.
 
@@ -129,9 +156,9 @@ What event does each possible value of $X$ correspond to?
 : {tbl-colwidths="[30,60]"}
 
 
-## Example 2
+### Example 2
 
-Sequence: Toss a coin 2 times.
+Sequence: Toss a coin 2 times independently.
 
 Define random variable $X$ as the number of heads.
 
@@ -149,9 +176,9 @@ What event does each possible value of $X$ correspond to?
 : {tbl-colwidths="[30,60]"}
 
 
-## Random variable
+## Uncountable sample space
 
-Previously, we assumed that sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$,   
+So far, we assumed that sample space $\mathcal{S} = \{s_1, \ldots, s_J\}$,   
 i.e. $\mathcal{S}$ is (countable and) finite.
 
 We also assumed that $\mathcal{X} = \{x_1, \ldots, x_N\}$ is finite.
@@ -187,13 +214,13 @@ $$
 \end{aligned}
 $$
 
-## Examples of cdf
+### Examples of cdf
 
-### continuous function
+#### Continuous function
 
 \vspace{80pt}
 
-### step function
+#### Step function
 
 \vspace{80pt}
 
@@ -208,7 +235,7 @@ $$
 f_X(x) \; \triangleq \; P_X\left( X = x \right) \quad \text{ for all } x.
 $$
 
-## Example
+### Example
 
 Sequence: Toss a fair coin 3 independent times.
 
@@ -239,20 +266,10 @@ $$
 
 However, $P_X(X = x) \; = \; 0$ for all $x \in \mathcal{X}$ here.
 
-\bigskip
-
 So, we need to define $f_X(x)$ differently for continuous random variables.
 
 
-## $P_X(X = x)$ for continuous random variable
-
-For a continuous random variable $X$, 
-$P_X(X = x) \; = \; 0, \forall \, x \in \mathcal{X}$.
-
-### Illustration
-
-
-## $P_X(X = x)$ for continuous random variable
+### Lemma
 
 For a continuous random variable $X$, 
 $P_X(X = x) \; = \; 0, \forall \, x \in \mathcal{X}$.
@@ -280,8 +297,6 @@ By (1),
 $$
 P\left( X = x \right) \; \le \; P \left(x - \epsilon < X \le x \right) .
 $$
-
----
 
 By definition,
 $$
@@ -329,7 +344,7 @@ $$
 $$
 
 
-## Notation for sampling
+## Notation
 
 If a random variable $X$ has a cdf $F_X(x)$, we write
 $$
@@ -357,7 +372,7 @@ $$
 
 \bigskip
 
-Casella & Berger 2002, sections 1.4, 1.5, 1.6.
+Casella & Berger 2002, sections 1.4--1.6 (pages 27--37).
 
 \bigskip
 
