@@ -12,10 +12,9 @@ format:
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
-classoption: t  
 ---
 
-## Intended learning outcomes {.c}
+## Intended learning outcomes
 
 - Recognize and define events and random variables
 - Implement code to sample values for a random variable
@@ -383,7 +382,7 @@ Exercises (page 37) 1.1, 1.6, 1.44--1.48, 1.52--1.55.
 
 \bigskip
 
-### Intended learning outcomes {.c}
+### Intended learning outcomes
 
 - Recognize and define events and random variables
 - Implement code to sample values for a random variable
