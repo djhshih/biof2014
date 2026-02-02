@@ -172,7 +172,7 @@ probs.S[s.idx]
 2. Our sampling implementation is a very explicit, direct implementation of
    the mathematical framework for a random variable. In practice,
    we can sample $X$ directly based on the pmf or pdf $f_X(x)$.
-   To emphasize, explict direct implementation of mathematical models
+   Explict direct implementation of mathematical models
    can be computationally inefficient, so this is why we need to do
    **mathematical derivations** to simplify the model before we implement it!
 
