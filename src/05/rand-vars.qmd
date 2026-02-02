@@ -110,7 +110,7 @@ a probability function $P$,
 a **random variable** $X$ is a function that maps from $\mathcal{S}$ onto 
 real numbers with domain $\mathcal{X} = \{x_1, \ldots, x_N\}$.
 
-### Illustration
+### Induced probability function
 
 Each realization $x_i \in \mathcal{X}$ corresponds to an event 
 $\mathcal{E}_i \subseteq \mathcal{S}$
@@ -125,9 +125,10 @@ $P_X$ is the *induced* probability function on $\mathcal{X}$.
 
 English equivalent of the equation:
 
-"The probability that the random variable $X$ equals a value $x_i$ is given 
-under the induced probability function $P_X$ by the probability of the event 
-$\mathcal{E}_i$, which is the set of all outcomes $s_j$ in the sample space 
+"Under the induced probability function $P_X$, the probability that the 
+random variable $X$ equals a value $x_i$ is given by the probability 
+of the event $\mathcal{E}_i$,
+which is the set of all outcome $s_j$ in the sample space 
 $\mathcal{S}$ such that random variable $X$ maps $s_j$ to $x_i$."
 
 \bigskip
@@ -138,11 +139,7 @@ $P_X\left(x_i\right)$ or $P\left(x_i\right)$.
 
 ### Example 1
 
-Sequence: Toss a coin 1 time.
-
-Define random variable $X$ as the number of heads.
-
-What event does each possible value of $X$ correspond to?
+Define random variable $X$ as tomorrow's weather.
 
 | $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$   |
 |-------|----------------------------------------------------|
@@ -158,11 +155,9 @@ What event does each possible value of $X$ correspond to?
 
 ### Example 2
 
-Sequence: Toss a coin 2 times independently.
+Consider a sequence of 3 coin flips.
 
 Define random variable $X$ as the number of heads.
-
-What event does each possible value of $X$ correspond to?
 
 | $x_i$ | $\mathcal{E}_i = \{ s_j \in S : X(s_j) = x_i \}$   |
 |-------|----------------------------------------------------|
@@ -214,7 +209,7 @@ $$
 \end{aligned}
 $$
 
-### Examples of cdf
+### Examples
 
 #### Continuous function
 
@@ -343,6 +338,16 @@ $$
 \frac{d}{dx} F_X(x) = f_X(x) .
 $$
 
+### Theorem
+
+A function $f_X(x)$ is a pmf of a random variable $X$ if and only if
+a. f_X(x) \ge 0 \text{for all} x.
+b. \sum_x f_X(x) = 1.
+
+A function $f_X(x)$ is a pdf of a random variable $X$ if and only if
+a. f_X(x) \ge 0 \text{for all} x.
+b. \int_{-\infty}^\infty f_X(x) dx = 1.
+
 
 ## Notation
 
@@ -373,6 +378,8 @@ $$
 \bigskip
 
 Casella & Berger 2002, sections 1.4--1.6 (pages 27--37).
+
+Exercises (page 37) 1.1, 1.6, 1.44--1.48, 1.52--1.55.
 
 \bigskip
 
