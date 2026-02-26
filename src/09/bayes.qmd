@@ -193,7 +193,7 @@ $$
 
 Finally,
 $$
-p\left( \theta \mid x \right) = \frac{1}{2} \, \theta^x (1- \theta)^{1 - x} .
+p\left( \theta \mid x \right) = 2 \, \theta^x (1- \theta)^{1 - x} .
 $$
 
 Plot $p\left( \theta \right)$, $p\left( \theta \mid X = 0 \right)$, 
