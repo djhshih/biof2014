@@ -2,7 +2,7 @@
 title: "Bayes' Theorem"
 author: "David J. H. Shih"
 format:
-  beamer:
+  pdf:
     include-in-header:
       - text: |
           \usepackage{amsfonts}
@@ -15,10 +15,10 @@ format:
           \usepackage{fixmath}
           \usepackage{mathrsfs}
           \usepackage{mathtools}
-classoption: t  
 ---
 
 ```{r setup, include=FALSE}
+options(warn=-1)
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 ```
 
@@ -67,8 +67,6 @@ which is equal to the disease prevalence.
 
 If the disease prevalence is 1%, we would set $P \left( Y = 1 \right) \; = \; 0.01$.
 
----
-
 \bigskip
 
 If the test result is positive, then the post-test probability of disease is
@@ -86,8 +84,6 @@ $$
 $$
 which is higher than probability of disease before the test.
 This value is also called positive predictive value.
-
----
 
 \bigskip
 
@@ -163,6 +159,8 @@ Sampling distribution $p\left( X \mid \theta \right)$
 
 Likelihood $L(\theta) = p\left( x \mid \theta \right)$
 
+\vspace{8em}
+
 
 ## Uniform-Bernoulli model (single sample)
 
@@ -192,12 +190,6 @@ p\left( x \right) = \int_{\mathcal{\Theta}}
  = \int_{\mathcal{\Theta}} \theta^x (1 - \theta)^{1 - x}
  = \frac{1}{2} .
 $$
-
----
-
----
-
-\bigskip
 
 Finally,
 $$
@@ -244,44 +236,31 @@ plot_dbeta <- function(alpha, beta) {
 }
 ```
 
----
-
-\bigskip
-
-```{r, fig.width=3, fig.height=3, out.width="50%"}
+```{r, fig.width=3, fig.height=3, out.width="25%"}
 plot_dbeta(1, 1)
 ```
-
 $$
-\text{Beta}\left(x \mid \alpha, \beta\right)
- = B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1} ,
+\text{Beta}\left(x \mid 1, 1\right)
+ = B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1}
+ = 1
 $$
 
-
----
-
-\bigskip
-
-```{r, fig.width=3, fig.height=3, out.width="50%"}
+```{r, fig.width=3, fig.height=3, out.width="25%"}
 plot_dbeta(3, 1)
 ```
-
 $$
-\text{Beta}\left(x \mid \alpha, \beta\right)
- = B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1} ,
+\text{Beta}\left(x \mid 3, 1\right)
+ = B(3, 1)^{-1} x^2
+ = 3 x^2
 $$
 
----
-
-\bigskip
-
-```{r, fig.width=3, fig.height=3, out.width="50%"}
+```{r, fig.width=3, fig.height=3, out.width="25%"}
 plot_dbeta(1, 3)
 ```
-
 $$
-\text{Beta}\left(x \mid \alpha, \beta\right)
- = B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1} ,
+\text{Beta}\left(x \mid 1, 3\right)
+ = B(1, 3)^{-1} (1 - x)^{2}
+ = 3 (1 - x)^2
 $$
 
 
@@ -317,10 +296,6 @@ p\left( \mathbold{x} \right)
 \end{aligned}
 $$
 
----
-
-\bigskip
-
 Therefore,
 $$
 \begin{aligned}
@@ -350,12 +325,12 @@ $$
 "A Bayesian is skeptical about everything except that he's a Bayesian."
 - Geoffrey Hinton (original source unknown)
 
-\bigskip
-
 Blais 2014, chapters 4-5.
 
-\bigskip
+Casella & Berger 2002, section 1.3 (pages 20--24)  
+Exercises (page 41) 1.33, 1.34, 1.36, 1.37, 1.41
 
 ### Intended learning outcomes {.c}
 
 - Apply Bayes' theorems in data modelling
+
