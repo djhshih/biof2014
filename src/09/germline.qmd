@@ -236,7 +236,7 @@ Applying the rules of probability,
 $$
 \begin{aligned}
 p \left( x_j \mid g, m \right) 
-&= \sum_{z_j \in \{0, 1\}} p \left( x_j, z_j, g, m \right)
+&= \sum_{z_j \in \{0, 1\}} p \left( x_j, z_j \mid g, m \right)
    &\quad ( \text{justification?} ) \\
 &= \sum_{z_j \in \{0, 1\}} 
    p \left( x_j \mid z_j \right) p \left( z_j \mid g, m \right)
@@ -271,7 +271,7 @@ p\left( Z_j = 0 \mid G = 1, M = 2 \right) = \frac{1}{2}
 p\left( Z_j = 1 \mid G = 1, M = 2 \right) = \frac{1}{2} \\
 p\left( Z_j = 0 \mid G = 2, M = 2 \right) = 0
 \quad\quad &
-p\left( z_j = 1 \mid G = 2, M = 2 \right) = 1 .
+p\left( Z_j = 1 \mid G = 2, M = 2 \right) = 1 .
 \end{aligned}
 $$
 
