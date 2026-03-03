@@ -209,7 +209,7 @@ $$
 $$
 where $B(\alpha, \beta)$ is the beta function defined by
 $$
-B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dt .
+B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx .
 $$
 
 Clearly, Beta $\left( x \mid \alpha, \beta \right)$ is a distribution:
