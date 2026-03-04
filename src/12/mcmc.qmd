@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 
 ## Intended learning outcomes {.c}
 
-- Implement statistical models in Stan
+- Describe Markov chain Monte Carlo algorithms
 
 
 ## Notation
@@ -263,5 +263,5 @@ Blais 2014, chapter 11.
 
 ### Intended learning outcomes {.c}
 
-- Implement statistical models in Stan
+- Describe Markov chain Monte Carlo algorithms
 
