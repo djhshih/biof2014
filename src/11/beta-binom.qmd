@@ -24,8 +24,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center");
 
 ## Intended learning outcomes {.c}
 
-- Recognize and apply the beta-binomial model
-- Recognize and apply the Dirichlet-multinomial model
+- Derive and apply posterior distributions
 
 
 ## Solving for the posterior
@@ -158,5 +157,5 @@ Conjugate priors facilitate fast Bayesian updates.
 
 ### Intended learning outcomes {.c}
 
-- Recognize and apply the beta-binomial model
-- Recognize and apply the Dirichlet-multinomial model
+- Derive and apply posterior distributions
+
