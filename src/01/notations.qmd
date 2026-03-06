@@ -2,6 +2,7 @@
 title: "Statistical Notations"
 author: "BIOF2014"
 format: pdf
+pdf-engine: pdflatex
 ---
 
 We will adopt the mathematical notation used in the following textbook.
@@ -18,6 +19,7 @@ We will adopt the mathematical notation used in the following textbook.
 | ${N \choose k}$   | binomial coefficient ($N$ choose $k$)                  |
 | $B(a, b)$         | beta function                                          |
 | $\Gamma(a)$       | gamma function                                         |
+| $\Gamma_K(a)$     | multivariate gamma function                            |
 
 
 ## Set theory
@@ -32,6 +34,23 @@ We will adopt the mathematical notation used in the following textbook.
 | $A \cap B$        | intersection of set $A$ and set $B$                    |
 | $A \cup B$        | union of set $A$ and $B$                               |
 | $A^c$             | complement of set A                                    |
+
+
+## Linear algebra
+
+| notation          | interpretation                                         |
+|-------------------|--------------------------------------------------------|
+| $\mathbf{x}$  | a column vector                                            |
+| $\mathbf{x}^{\top} \mathbf{y}$ | dot product                               |
+| $\mathbf{x} \mathbf{y}^{\top}$ | outer product                             |
+| $\mathbf{X}$  | a matrix                                                   |
+| $\mathbf{X}^{\top}$ | transpose of $\mathbf{X}$                            |
+| $\mathbf{X}^{-1}$ | inverse of $\mathbf{X}$                                |
+| $|\mathbf{X}|$| determinant of $\mathbf{X}$                                |
+| $\text{tr}(\mathbf{X})$| trace of $\mathbf{X}$                             |
+| $\mathbf{X} \mathbf{Y}$| matrix product                                    |
+| $\mathbf{X} \odot \mathbf{Y}$| element-wise product                        |
+| $\mathbf{X} \otimes \mathbf{Y}$| Kronecker product                         |
 
 
 ## Probability theory
@@ -72,9 +91,9 @@ Bolded letters $\mathbf{x}$ and $\mathbf{X}$ denote vectors and matrices.
 
 | notation          | interpretation                                         |
 |-------------------|--------------------------------------------------------|
-| $p(x)$            | pdf/pmf of random variable $X$                         |
-| $p(x, y)$         | joint pdf/pmf of random variables $X$ and $Y$          |
-| $p(x \mid y)$     | conditional pdf/pmf of $X$ given $Y$                   |
+| $p(x)$            | $f_X(X = x)$; pdf or pmf                               |
+| $p(x, y)$         | $f_{X, Y}(X = x, Y = y)$; joint pdf or pmf              | 
+| $p(x \mid y)$     | $f_{X \mid Y}(X = x \mid Y = y)$; conditional pdf or pmf |
 
 
 ## Operators
