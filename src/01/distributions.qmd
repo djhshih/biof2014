@@ -1,0 +1,115 @@
+---
+title: "Common probability mass functions and probability density functions"
+author: "BIOF2014"
+pdf-engine: pdflatex
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{amsfonts}
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{amsthm}
+          \usepackage{fixmath}
+          \usepackage{mathrsfs}
+          \usepackage{mathtools}
+---
+
+For $x \in \{0, 1\}$ and $\theta \in [0, 1]$,
+$$
+\text{Bernoulli}\left( x \mid \theta \right) =
+ \theta^x (1 - \theta)^{1 - x} .
+$$
+
+For $x \in [0, 1], \alpha > 0$, and $\beta > 0$,
+$$
+\text{Beta}\left( x \mid \alpha, \beta \right) =
+ B(\alpha, \beta)^{-1} x^{\alpha - 1} (1 - x)^{\beta - 1} .
+$$
+
+For $x \ge 0$,
+$$
+\text{Exp}\left( x \mid \lambda \right) =
+ \lambda e^{- \lambda x}
+$$
+
+For $x \ge 0, \alpha > 0$, and $\beta > 0$,
+$$
+\text{Gamma}\left( x \mid \alpha, \beta \right) =
+ \Gamma(\alpha)^{-1} \beta^\alpha x^{\alpha - 1} e^{-\beta x} .
+$$
+
+For $x \in \{0, 1, \ldots, N\}$ and $\theta \in [0, 1]$,
+$$
+\text{Binomial}\left( x \mid N, \theta \right) =
+ \binom{N}{x} \theta^x (1 - \theta)^{N - x} .
+$$
+
+For $x \in \{0, 1, \ldots\}$ and $\theta \in [0, 1]$,
+$$
+\text{Geometric}\left( x \mid \theta \right) =
+ (1 - \theta)^x \theta .
+$$
+
+For $x \in \{0, 1, \ldots\}$, $R \in \{1, 2, \ldots\}$, and $\theta \in [0, 1]$,
+$$
+\text{NegativeBinomial}\left( x \mid R, \theta \right) =
+ \binom{R + x - 1}{x} (1 - \theta)^x \theta^R .
+$$
+
+For $x \in \{1, 2, \ldots, K\}$ and $\boldsymbol{\theta} = [ \theta_k ]$
+such that $\sum_k \theta_k = 1$,
+$$
+\text{Categorical}\left( x \mid \boldsymbol{\theta} \right) =
+ \theta_x
+$$
+
+For $\boldsymbol{x} = [ x_k ]$ such that $x_k \in \{0, 1, \ldots, N\}$ and $\sum_k x_k = N$, 
+as well as $\boldsymbol{\theta} = [ \theta_k ]$ such that $\sum_k \theta_k = 1$,
+$$
+\text{Multinomial}\left( \boldsymbol{x} \mid N, \boldsymbol{\theta} \right) =
+\frac{N!}{\prod_k x_k!} \prod_k \theta_k^{x_k} .
+$$
+
+For $\boldsymbol{x} \in [0, 1]^K$ such that $\sum_k x_k = 1$ and $K \ge 2$, as
+well as $\boldsymbol{\alpha} = [ \alpha_k ]$,
+$$
+\text{Dirichlet}\left( \boldsymbol{x} \mid \boldsymbol{\alpha} \right) =
+ \frac{ \prod_k \Gamma(\alpha_i) }{ \Gamma\left(\sum_k \alpha_k \right) }
+ \prod_k x_k^{\alpha_k - 1} .
+$$
+
+For $x \in \{0, 1, \ldots\}$ and $\lambda > 0$,
+$$
+\text{Poisson}\left( x \mid \lambda \right) =
+ \frac{1}{x!} \lambda^x e^{-\lambda} .
+$$
+
+For $\tau > 0$,
+$$
+\text{Normal}\left(x \mid \mu, \tau^{-1} \right) =
+ (2 \pi)^{-\frac{1}{2}} \tau^{\frac{1}{2}}
+  \exp\left( -\frac{1}{2} \tau (x - \mu)^2 \right) .
+$$
+
+For $\boldsymbol{x}, \boldsymbol{\mu} \in \mathcal{R}^K$ and
+inverse covariance matrix $\boldsymbol{\Lambda} \in \mathcal{R}^{K \times K}$,
+$$
+\text{Normal}\left(\boldsymbol{x} \mid \boldsymbol{\mu}, \boldsymbol{\Lambda}^{-1} \right) =
+ (2 \pi)^{-\frac{K}{2}} |\boldsymbol{\Lambda}|^{\frac{1}{2}}
+  \exp\left(
+   -\frac{1}{2} (\boldsymbol{x} - \boldsymbol{\mu})^\top
+   \boldsymbol{\Lambda} (\boldsymbol{x} - \boldsymbol{\mu})
+  \right) ,
+$$
+
+Given positive definite matrix $\boldsymbol{\Lambda} \in \mathcal{R}^{K \times
+K}$ and $\nu > 0$,
+$$
+\text{Wishart}\left( \boldsymbol{\Lambda}, \nu \right) =
+ 2^{-\frac{\nu K}{2}} |\boldsymbol{\Lambda}|^{-\frac{\nu}{2}}
+ \Gamma_K\left(\frac{\nu}{2}\right)^{-1}
+ |\boldsymbol{X}|^{\frac{1}{2}(\nu - K - 1)}
+ e^{-\frac{1}{2} \text{tr}(\boldsymbol{V}^{-1} \boldsymbol{X})}
+$$
+
