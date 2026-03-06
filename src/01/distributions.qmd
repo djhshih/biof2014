@@ -111,7 +111,7 @@ $$
   \exp\left(
    -\frac{1}{2} (\boldsymbol{x} - \boldsymbol{\mu})^\top
    \boldsymbol{\Lambda} (\boldsymbol{x} - \boldsymbol{\mu})
-  \right) ,
+  \right) .
 $$
 
 Given positive definite matrix $\boldsymbol{\Lambda} \in \mathcal{R}^{K \times
@@ -121,6 +121,6 @@ $$
  2^{-\frac{\nu K}{2}} |\boldsymbol{\Lambda}|^{-\frac{\nu}{2}}
  \Gamma_K\left(\frac{\nu}{2}\right)^{-1}
  |\boldsymbol{X}|^{\frac{1}{2}(\nu - K - 1)}
- e^{-\frac{1}{2} \text{tr}(\boldsymbol{V}^{-1} \boldsymbol{X})}
+ e^{-\frac{1}{2} \text{tr}(\boldsymbol{V}^{-1} \boldsymbol{X})} .
 $$
 
