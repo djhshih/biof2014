@@ -92,6 +92,17 @@ $$
   \exp\left( -\frac{1}{2} \tau (x - \mu)^2 \right) .
 $$
 
+For $\nu > 0$,
+$$
+\text{StudentT}\left( x \mid \mu, \nu \right)  =
+  \frac{ \Gamma\left( \frac{\nu + 1}{2} \right) }
+       { \Gamma\left( \frac{\nu}{2} \right) }
+  (\pi \nu)^{-\frac{1}{2}}
+  \left(
+   1 + \frac{(x - \mu)^2}{\nu}
+  \right)^{- \frac{\nu + 1}{2}} .
+$$
+
 For $\boldsymbol{x}, \boldsymbol{\mu} \in \mathcal{R}^K$ and
 inverse covariance matrix $\boldsymbol{\Lambda} \in \mathcal{R}^{K \times K}$,
 $$
